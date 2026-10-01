@@ -1,0 +1,3 @@
+# Wersja demonstracyjna (portfolio) – fikcyjne dane, nie indeksować.
+User-agent: *
+Disallow: /

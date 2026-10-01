@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pl"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szalone auto – projekt marki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;100,600;112,700;112,800;125,800&family=Saira:wdth,wght@100,500;112,700&family=Bodoni+Moda:ital,wght@0,700;1,600&family=Hanken+Grotesk:wght@400;500;700&display=swap">
+<style>
+/* Układ: dokument-prezentacja dla klienta; jasne plansze z logo, grafitowe pasy przy rekomendacjach. Świadomie jeden (jasny) wygląd – logo ocenia się na białym i grafitowym tle. */
+:root{
+  --grafit:#15171C; --grafit-2:#22252C; --mosiadz:#C9A35B; --mosiadz-c:#8A6A2E;
+  --stal:#EEF0F3; --bialy:#FFFFFF; --tekst:#15171C; --tekst-2:#4F5560; --linia:#D5D9DF;
+  --f-d:"Archivo","Arial Black",Arial,sans-serif; --f-b:"Hanken Grotesk","Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bialy);color:var(--tekst);font-family:var(--f-b);font-size:16.5px;line-height:1.6}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--f-d);font-stretch:112%;line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0;max-width:68ch}
+a{color:var(--mosiadz-c)}
+.lbl{font-family:var(--f-d);font-stretch:112%;font-weight:600;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mosiadz-c);display:inline-flex;gap:.6rem;align-items:center}
+.lbl::before{content:"";width:26px;height:3px;border-radius:3px;background:currentColor}
+.ciemna .lbl{color:var(--mosiadz)}
+header.top{background:var(--grafit);color:#E7E9EC}
+header.top .wrap{padding-block:clamp(40px,7vw,80px);display:grid;gap:1.1rem}
+header.top h1{color:#fff}
+header.top p{color:#C4C8CF;font-size:1.08rem}
+nav.spis{display:flex;flex-wrap:wrap;gap:.4rem}
+nav.spis a{color:#E7E9EC;text-decoration:none;border:1px solid #2E323B;border-radius:99px;padding:.35rem .8rem;font-size:.9rem}
+nav.spis a:hover{border-color:var(--mosiadz);color:var(--mosiadz)}
+section{padding-block:clamp(44px,7vw,80px)}
+section+section{border-top:1px solid var(--linia)}
+.stal{background:var(--stal)}
+.ciemna{background:var(--grafit);color:#E7E9EC;border-top:0!important}
+.ciemna h2,.ciemna h3{color:#fff}
+.stack{display:grid;gap:1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+.grid2>*{min-width:0}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.koncepcja{display:grid;gap:1.6rem;padding-block:clamp(36px,5vw,56px);border-top:1px solid var(--linia)}
+.koncepcja:first-of-type{border-top:0;padding-top:0}
+.plansze{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:12px}
+.plansza{border:1px solid var(--linia);border-radius:6px;display:grid;place-items:center;padding:1.4rem;min-height:150px;background:#fff;min-width:0}
+.plansza svg{width:100%;height:auto;max-height:110px}
+.plansza.ikona svg{width:72px;max-height:72px}
+.plansza.ciem{background:var(--grafit);border-color:var(--grafit)}
+.plansza.bordo{background:#5C1A2B;border-color:#5C1A2B}
+.plansza.granat{background:#102A43;border-color:#102A43}
+.plansza.full{padding:0;overflow:hidden}
+.plansza.full svg{max-height:none}
+@media(max-width:820px){.plansze{grid-template-columns:1fr 1fr}.plansze .plansza:first-child{grid-column:span 2}}
+dl.opis{display:grid;grid-template-columns:200px 1fr;gap:.2rem 1.4rem;margin:0}
+dl.opis dt{font-weight:700;padding-top:.75rem;border-top:1px solid var(--linia)}
+dl.opis dd{margin:0;padding-top:.75rem;border-top:1px solid var(--linia);min-width:0}
+dl.opis dd p+p{margin-top:.5rem}
+@media(max-width:700px){dl.opis{grid-template-columns:1fr}dl.opis dd{border-top:0;padding-top:.1rem}}
+.paleta{display:flex;flex-wrap:wrap;gap:8px;margin-block:.3rem .5rem}
+.kolor{display:grid;grid-template-rows:56px auto;width:132px;border:1px solid var(--linia);border-radius:6px;overflow:hidden;font-size:.82rem}
+.kolor b{display:block}
+.kolor span{padding:.4rem .55rem;line-height:1.35}
+code,pre{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.84rem}
+pre{background:var(--grafit);color:#E7E9EC;padding:1rem;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0}
+details summary{cursor:pointer;font-weight:700;color:var(--mosiadz-c)}
+details[open] summary{margin-bottom:.6rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;padding:.6rem .7rem;border-top:1px solid var(--linia);vertical-align:top}
+thead th{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tekst-2);border-top:0;background:var(--stal)}
+.tw{overflow-x:auto;border:1px solid var(--linia);border-radius:6px;background:#fff}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:#1F5F4A;font-weight:700}.zle{color:#9B2C2C;font-weight:700}
+.rek{background:var(--grafit);color:#E7E9EC;border-radius:6px;padding:clamp(20px,3vw,32px);display:grid;gap:.8rem}
+.rek h3{color:#fff}
+.rek .lbl{color:var(--mosiadz)}
+.hasla{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.hasla{grid-template-columns:1fr}}
+.grupa{display:grid;gap:.8rem;align-content:start}
+.haslo{border:1px solid var(--linia);border-radius:6px;padding:1rem 1.1rem;display:grid;gap:.35rem;background:#fff}
+.haslo q{font-family:var(--f-d);font-stretch:108%;font-weight:700;font-size:1.08rem;quotes:"„" "”"}
+.haslo span{color:var(--tekst-2);font-size:.92rem}
+.haslo.top{border-color:var(--mosiadz-c);box-shadow:inset 0 0 0 1px var(--mosiadz-c)}
+.haslo.top q::after{content:""}
+.top-tag{justify-self:start;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--mosiadz);color:var(--grafit);padding:.15rem .5rem;border-radius:99px}
+.mapa-stron{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:900px){.mapa-stron{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.mapa-stron{grid-template-columns:1fr}}
+.podstrona{border:1px solid var(--linia);border-radius:6px;background:#fff;padding:1rem;display:grid;gap:.5rem;align-content:start}
+.podstrona h3{font-size:1rem}
+.podstrona ol{margin:0;padding-left:1.1rem;font-size:.9rem;color:var(--tekst-2)}
+.podstrona small{font-family:ui-monospace,Menlo,monospace;color:var(--mosiadz-c)}
+ul.l{margin:0;padding-left:1.1rem;display:grid;gap:.35rem}
+.uzup{background:#FFF4D6;color:#5A4310;font-weight:700;font-size:.8rem;padding:.1rem .4rem;border-radius:4px;white-space:nowrap}
+.typo{display:grid;gap:.6rem;border:1px solid var(--linia);border-radius:6px;padding:1.2rem;background:#fff}
+.typo .d{font-family:var(--f-d);font-stretch:112%;font-weight:800;font-size:2rem;line-height:1.1}
+.typo .b{font-family:var(--f-b);font-size:1.05rem}
+footer.st{background:var(--grafit);color:#A3A9B3;font-size:.9rem}
+footer.st .wrap{padding-block:28px}
+:focus-visible{outline:3px solid var(--mosiadz);outline-offset:2px}
+</style>
+
+<header class="top"><div class="wrap">
+  <span class="lbl">Projekt marki i strony · 1 października 2026</span>
+  <h1>Szalone auto</h1>
+  <p>Logo, hasło firmowe i projekt strony internetowej dla warsztatu samochodowego we Wrocławiu. Dane, których nie było w briefie, zostały wymyślone na potrzeby projektu i są wypisane na końcu dokumentu do weryfikacji.</p>
+  <nav class="spis" aria-label="Spis treści">
+    <a href="#mysl">Myśl przewodnia</a><a href="#logo">Logo – 3 koncepcje</a><a href="#rekomendacja">Rekomendacja</a><a href="#hasla">Hasła</a><a href="#strona">Projekt strony</a><a href="#zdjecia">Zdjęcia</a><a href="#braki">Do uzupełnienia</a>
+  </nav>
+</div></header>
+
+<section id="mysl"><div class="wrap grid2">
+  <div class="stack">
+    <span class="lbl">Punkt wyjścia</span>
+    <h2>Szaleni na punkcie aut, poważni w pracy</h2>
+    <p>Nazwa „Szalone auto” jest zabawna i łatwo ją zapamiętać, a napis w logo „Pełen profesjonalizm” mówi coś przeciwnego. Ten kontrast to najmocniejszy zasób marki. Szaleństwo zostaje w nazwie i w pasji do motoryzacji, a wszystko, co klient widzi i dostaje, jest spokojne, precyzyjne i uczciwe.</p>
+    <p>Dlatego identyfikacja jest stonowana i elegancka (nowoczesna, z nutą luksusu, o którą prosi brief), a humor pojawia się tylko w jednym miejscu – w haśle.</p>
+  </div>
+  <div class="stack">
+    <span class="lbl">Od kogo się odróżniamy</span>
+    <ul class="l">
+      <li><strong>Od „garażowych” warsztatów</strong> – brak cennika, niejasne koszty, części na próbę. My: diagnoza przed naprawą, przedziały cen na stronie, wycena do akceptacji.</li>
+      <li><strong>Od serwisów autoryzowanych (ASO)</strong> – wysokie ceny i dystans. My: wiedza o BMW, Audi i Toyocie na poziomie ASO, rozliczenie jak w warsztacie niezależnym, rozmowa z właścicielem.</li>
+    </ul>
+    <p><strong>Grupa docelowa:</strong> kierowcy prywatni (głównie mężczyźni, właściciele aut premium i Toyot, w tym hybryd) oraz firmy z flotą. Oczekują fachowości, przewidywalnych kosztów i szybkiego terminu. Zwracamy się do nich oficjalnie: „Pan / Pani”.</p>
+    <p><strong>Wartości z briefu:</strong> zaufanie i uczciwość · doświadczenie i fachowość · przystępna cena · jakość i staranność.</p>
+  </div>
+</div></section>
+
+<section id="logo" class="stal"><div class="wrap stack">
+  <span class="lbl">Zadanie 1</span>
+  <h2>Logo – trzy koncepcje</h2>
+  <p>Każda koncepcja ma znak i napis „SZALONE AUTO” z podpisem „PEŁEN PROFESJONALIZM”. Pominięte zostały najbardziej ograne symbole branży: klucz, zębatka, tłok, kierownica, sylwetka auta z „pędem”. Wersje robocze poniżej to SVG z tekstem – w wersji finalnej napisy trzeba zamienić na krzywe w edytorze (Figma, Inkscape, Illustrator).</p>
+  <p style="font-size:.92rem;color:var(--tekst-2)">Uwaga do briefu: jako napis w logo podano „Pełen profesjonalizm”. Przyjęto, że to stały podpis pod nazwą firmy. Jeśli w logo ma być wyłącznie ten napis (bez nazwy), układy wystarczy przestawić – <span class="uzup">DO POTWIERDZENIA</span> z klientem.</p>
+
+  <!-- A -->
+  <article class="koncepcja">
+    <div class="stack"><span class="lbl">Koncepcja A · polecana</span><h3 style="font-size:1.5rem">„Linia” – jedna precyzyjna kreska</h3></div>
+    <div class="plansze">
+      <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 72" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(4 4) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#15171C"/><path d="M50 8H56" stroke="#C9A35B"/></g><text x="84" y="38" text-anchor="start" font-family="Archivo, 'Arial Black', sans-serif" font-stretch="125%" font-weight="800" font-size="30" letter-spacing="0.5" fill="#15171C">SZALONE AUTO</text><text x="84" y="61.400000000000006" text-anchor="start" font-family="Archivo, Arial, sans-serif" font-stretch="100%" font-weight="500" font-size="11.1" letter-spacing="5.1" fill="#8A6A2E">PEŁEN PROFESJONALIZM</text></svg></div>
+      <div class="plansza ikona"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(0 0) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#15171C"/><path d="M50 8H56" stroke="#C9A35B"/></g></svg></div>
+      <div class="plansza ikona"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Szalone auto"><title>Szalone auto</title><rect width="64" height="64" rx="12" fill="#15171C"/><g transform="translate(8 8) scale(0.75)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#FFFFFF"/><path d="M50 8H56" stroke="#C9A35B"/></g></svg></div>
+    </div>
+    <div class="plansze">
+      <div class="plansza ciem full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 92" role="img" aria-label="Szalone auto"><title>Szalone auto</title><rect width="100%" height="100%" fill="#15171C"/><g transform="translate(14 14) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#FFFFFF"/><path d="M50 8H56" stroke="#C9A35B"/></g><text x="94" y="48" text-anchor="start" font-family="Archivo, 'Arial Black', sans-serif" font-stretch="125%" font-weight="800" font-size="30" letter-spacing="0.5" fill="#FFFFFF">SZALONE AUTO</text><text x="94" y="71.4" text-anchor="start" font-family="Archivo, Arial, sans-serif" font-stretch="100%" font-weight="500" font-size="11.1" letter-spacing="5.1" fill="#C9A35B">PEŁEN PROFESJONALIZM</text></svg></div>
+      <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(110 2) scale(1.25)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#15171C"/><path d="M50 8H56" stroke="#C9A35B"/></g><text x="150" y="114" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-stretch="125%" font-weight="800" font-size="30" letter-spacing="0.5" fill="#15171C">SZALONE AUTO</text><text x="150" y="137.4" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-stretch="100%" font-weight="500" font-size="11.1" letter-spacing="5.1" fill="#8A6A2E">PEŁEN PROFESJONALIZM</text></svg></div>
+      <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 72" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(4 4) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#000"/><path d="M50 8H56" stroke="#000"/></g><text x="84" y="38" text-anchor="start" font-family="Archivo, 'Arial Black', sans-serif" font-stretch="125%" font-weight="800" font-size="30" letter-spacing="0.5" fill="#000">SZALONE AUTO</text><text x="84" y="61.400000000000006" text-anchor="start" font-family="Archivo, Arial, sans-serif" font-stretch="100%" font-weight="500" font-size="11.1" letter-spacing="5.1" fill="#000">PEŁEN PROFESJONALIZM</text></svg></div>
+    </div>
+    <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 104" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(4 4) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#15171C"/><path d="M50 8H56" stroke="#C9A35B"/></g><text x="84" y="38" text-anchor="start" font-family="Archivo, 'Arial Black', sans-serif" font-stretch="125%" font-weight="800" font-size="30" letter-spacing="0.5" fill="#15171C">SZALONE AUTO</text><text x="84" y="61.400000000000006" text-anchor="start" font-family="Archivo, Arial, sans-serif" font-stretch="100%" font-weight="500" font-size="11.1" letter-spacing="5.1" fill="#8A6A2E">PEŁEN PROFESJONALIZM</text><line x1="84" y1="74" x2="396" y2="74" stroke="#C9A35B" stroke-width="1"/><text x="84" y="95" font-family="Archivo, Arial, sans-serif" font-weight="500" font-size="14" fill="#15171C">Naprawiamy porządnie. Rozliczamy uczciwie.</text></svg></div>
+    <dl class="opis">
+      <dt>1. Idea</dt><dd><p>Litera „S” narysowana jedną ciągłą linią o stałej grubości – jak tor jazdy przez dwa zakręty albo przebieg przewodu w komorze silnika. Kształt jest dynamiczny („szalony”), ale linia jest równa, zamknięta i kontrolowana – to profesjonalizm. Mosiężny odcinek na końcu linii to „meta”: robota skończona, auto oddane w terminie.</p><p>Łączy myśl przewodnią (pasja pod kontrolą) z wartościami: staranność (jedna linia bez poprawek), jakość (szlachetny mosiądz), zaufanie (prosty, czytelny znak).</p></dd>
+      <dt>2. Rodzaj i kompozycja</dt><dd>Znak + logotyp (combination mark). Znak kwadratowy 1:1; w wersji poziomej napis zaczyna się w odległości 0,25 wysokości znaku, wysokość wersalików ≈ 0,4 wysokości znaku. Podpis „PEŁEN PROFESJONALIZM” rozstrzelony tak, by zrównał się szerokością z nazwą. Proporcje wersji poziomej ok. 5,5:1, pionowej ok. 2:1.</dd>
+      <dt>3. Typografia</dt><dd><strong>Archivo</strong> (Omnibus-Type, SIL Open Font License – darmowa także do użytku komercyjnego, Google Fonts): nazwa w odmianie Expanded ExtraBold (szerokość 125%, waga 800), podpis Medium z rozstrzeleniem ok. 0,45 em. Szeroki, grotesk o „motoryzacyjnym” charakterze, bez imitowania liternictwa marek samochodowych.</dd>
+      <dt>4. Paleta</dt><dd>
+        <div class="paleta">
+          <div class="kolor"><b style="background:#15171C"></b><span><strong>Grafit</strong><br>#15171C</span></div>
+          <div class="kolor"><b style="background:#C9A35B"></b><span><strong>Mosiądz</strong><br>#C9A35B</span></div>
+          <div class="kolor"><b style="background:#8A6A2E"></b><span><strong>Mosiądz ciemny</strong><br>#8A6A2E</span></div>
+          <div class="kolor"><b style="background:#EEF0F3"></b><span><strong>Stal</strong><br>#EEF0F3</span></div>
+        </div>
+        <p>Grafit zamiast czerni – głęboki, „lakierowany”, kojarzy się z autami premium i warsztatem. Mosiądz daje nutę luksusu bez krzykliwego złota. Chłodna stal jako tło stron. Kontrasty (WCAG 2.1): grafit/biel <span class="ok">17,9:1</span> · mosiądz na graficie <span class="ok">7,6:1</span> · mosiądz ciemny na bieli <span class="ok">5,0:1</span> · mosiądz jasny na bieli <span class="zle">2,4:1 – tylko elementy graficzne, nie tekst</span>. Na jasnym tle tekst akcentowy zawsze w odcieniu #8A6A2E.</p></dd>
+      <dt>5. Warianty</dt><dd>Poziomy (nagłówek strony, wizytówka) · pionowy (szyld kwadratowy, naklejka) · sam znak (ikona, favicon, haft na odzieży) · jednokolorowy czarny (pieczątka, faktura, grawer) · odwrócony na grafitowym tle (strona, oklejenie ciemnego auta) · z hasłem pod kreską (ulotki, reklama). Wszystkie pokazane powyżej.</dd>
+      <dt>6. Mały rozmiar</dt><dd>Znak to jedna gruba linia bez detali – w ikonie 32 px kreska ma ok. 4 px i pozostaje wyraźna; w ikonie stosujemy grubszą linię (wariant „ikona”) na grafitowym kwadracie. Zdjęcie profilowe FB/IG: sam znak na grafitowym tle, mieści się w okręgu. Szyld: wersja pozioma odwrócona, podświetlana linia S. Oklejenie auta: duży znak S na drzwiach + logotyp na tylnej klapie; prosty kształt łatwo wyciąć z folii (folia mosiężna metalik + biała).</dd>
+      <dt>7. Prompt do AI</dt><dd><pre>Flat vector logo mark on a pure white background: a single continuous rounded line of constant thickness forming a stylized letter S, made of two straight horizontal segments joined by two smooth semicircular turns, like a race track seen from above. Dark graphite color #15171C, with a short separate segment at the top right end in muted brass #C9A35B. Minimalist, geometric, modern, premium automotive feel, centered, generous white space, no text, no letters other than the S shape, no gradients, no shadows, no 3D, no car, no wrench, no gear.</pre></dd>
+      <dt>8. SVG roboczy</dt><dd><details><summary>Pokaż kod SVG (wersja pozioma)</summary><pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 400 72&quot; role=&quot;img&quot; aria-label=&quot;Szalone auto&quot;&gt;&lt;title&gt;Szalone auto&lt;/title&gt;&lt;style&gt;@import url(&#x27;https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;125,800&amp;amp;display=swap&#x27;);&lt;/style&gt;&lt;g transform=&quot;translate(4 4) scale(1)&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;7&quot;&gt;&lt;path d=&quot;M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40&quot; stroke=&quot;#15171C&quot;/&gt;&lt;path d=&quot;M50 8H56&quot; stroke=&quot;#C9A35B&quot;/&gt;&lt;/g&gt;&lt;text x=&quot;84&quot; y=&quot;38&quot; text-anchor=&quot;start&quot; font-family=&quot;Archivo, &#x27;Arial Black&#x27;, sans-serif&quot; font-stretch=&quot;125%&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; letter-spacing=&quot;0.5&quot; fill=&quot;#15171C&quot;&gt;SZALONE AUTO&lt;/text&gt;&lt;text x=&quot;84&quot; y=&quot;61.400000000000006&quot; text-anchor=&quot;start&quot; font-family=&quot;Archivo, Arial, sans-serif&quot; font-stretch=&quot;100%&quot; font-weight=&quot;500&quot; font-size=&quot;11.1&quot; letter-spacing=&quot;5.1&quot; fill=&quot;#8A6A2E&quot;&gt;PEŁEN PROFESJONALIZM&lt;/text&gt;&lt;/svg&gt;</pre></details></dd>
+    </dl>
+  </article>
+
+  <!-- B -->
+  <article class="koncepcja">
+    <div class="stack"><span class="lbl">Koncepcja B</span><h3 style="font-size:1.5rem">„Złącze” – diagnoza, od której zaczyna się naprawa</h3></div>
+    <div class="plansze">
+      <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 72" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(2 4) scale(1)"><path d="M7 16H57L51 48H13Z" fill="none" stroke="#102A43" stroke-width="5.5" stroke-linejoin="round"/><circle cx="19" cy="27" r="3.2" fill="#102A43"/><circle cx="27" cy="27" r="3.2" fill="#102A43"/><circle cx="37" cy="27" r="3.2" fill="#102A43"/><circle cx="45" cy="27" r="3.2" fill="#102A43"/><circle cx="23" cy="37" r="3.2" fill="#102A43"/><circle cx="32" cy="37" r="3.6" fill="#E8590C"/><circle cx="41" cy="37" r="3.2" fill="#102A43"/></g><text x="80" y="38" font-family="Saira, 'Arial Narrow', sans-serif" font-stretch="112%" font-weight="700" font-size="32" fill="#102A43">SZALONE<tspan fill="#C2410C">/</tspan>AUTO</text><text x="81" y="60" font-family="Saira, Arial, sans-serif" font-weight="500" font-size="11.5" letter-spacing="4.2" fill="#102A43">PEŁEN PROFESJONALIZM</text></svg></div>
+      <div class="plansza ikona"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(0 0) scale(1)"><path d="M7 16H57L51 48H13Z" fill="none" stroke="#102A43" stroke-width="5.5" stroke-linejoin="round"/><circle cx="19" cy="27" r="3.2" fill="#102A43"/><circle cx="27" cy="27" r="3.2" fill="#102A43"/><circle cx="37" cy="27" r="3.2" fill="#102A43"/><circle cx="45" cy="27" r="3.2" fill="#102A43"/><circle cx="23" cy="37" r="3.2" fill="#102A43"/><circle cx="32" cy="37" r="3.6" fill="#E8590C"/><circle cx="41" cy="37" r="3.2" fill="#102A43"/></g></svg></div>
+      <div class="plansza granat full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 92" role="img" aria-label="Szalone auto"><title>Szalone auto</title><rect width="100%" height="100%" fill="#102A43"/><g transform="translate(12 14) scale(1)"><path d="M7 16H57L51 48H13Z" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linejoin="round"/><circle cx="19" cy="27" r="3.2" fill="#FFFFFF"/><circle cx="27" cy="27" r="3.2" fill="#FFFFFF"/><circle cx="37" cy="27" r="3.2" fill="#FFFFFF"/><circle cx="45" cy="27" r="3.2" fill="#FFFFFF"/><circle cx="23" cy="37" r="3.2" fill="#FFFFFF"/><circle cx="32" cy="37" r="3.6" fill="#E8590C"/><circle cx="41" cy="37" r="3.2" fill="#FFFFFF"/></g><text x="90" y="48" font-family="Saira, 'Arial Narrow', sans-serif" font-stretch="112%" font-weight="700" font-size="32" fill="#FFFFFF">SZALONE<tspan fill="#E8590C">/</tspan>AUTO</text><text x="91" y="70" font-family="Saira, Arial, sans-serif" font-weight="500" font-size="11.5" letter-spacing="4.2" fill="#FFFFFF">PEŁEN PROFESJONALIZM</text></svg></div>
+    </div>
+    <dl class="opis">
+      <dt>1. Idea</dt><dd>Uproszczony kształt gniazda diagnostycznego – trapez z rzędami pinów. Jeden pin świeci na pomarańczowo: usterka znaleziona. Mówi o fachowości i nowoczesności (diagnostyka komputerowa, elektronika BMW/Audi) i o uczciwości: „najpierw sprawdzamy, potem naprawiamy”. Ukośnik w nazwie „SZALONE/AUTO” nawiązuje do zapisu technicznego.</dd>
+      <dt>2. Rodzaj i kompozycja</dt><dd>Znak + logotyp, poziomo. Znak 1:1 (trapez ok. 0,8 × 0,5 pola), napis w jednej linii, podpis pod spodem. Wersja pionowa: znak nad napisem, centrowanie.</dd>
+      <dt>3. Typografia</dt><dd><strong>Saira</strong> (Omnibus-Type, SIL OFL, Google Fonts) – techniczny, lekko kwadratowy grotesk przypominający napisy na przyrządach; nazwa SemiExpanded Bold, podpis Medium.</dd>
+      <dt>4. Paleta</dt><dd>
+        <div class="paleta">
+          <div class="kolor"><b style="background:#102A43"></b><span><strong>Granat</strong><br>#102A43</span></div>
+          <div class="kolor"><b style="background:#E8590C"></b><span><strong>Sygnał</strong><br>#E8590C</span></div>
+          <div class="kolor"><b style="background:#C2410C"></b><span><strong>Sygnał ciemny</strong><br>#C2410C</span></div>
+          <div class="kolor"><b style="background:#F1F4F8"></b><span><strong>Mgła</strong><br>#F1F4F8</span></div>
+        </div>
+        <p>Granat – zaufanie i technika; pomarańcz – kontrolka, uwaga, energia. Kontrasty: granat/biel <span class="ok">14,6:1</span> · pomarańcz na granacie <span class="ok">4,1:1 (duży tekst)</span> · pomarańcz na bieli <span class="zle">3,6:1 – tekst tylko w odcieniu #C2410C (5,2:1)</span>.</p></dd>
+      <dt>5. Warianty</dt><dd>Poziomy, pionowy, sam znak, jednokolorowy (piny jako wycięcia), odwrócony na granacie (pokazany), z hasłem pod podpisem.</dd>
+      <dt>6. Mały rozmiar</dt><dd>W 32 px zostają trapez i 3 piny (uproszczona wersja ikony), świecący pin dalej widoczny. Na szyldzie i aucie dobrze działa podświetlany pomarańczowy pin. Słabszy punkt: kształt jest mniej rozpoznawalny dla osób, które nie znają gniazda OBD.</dd>
+      <dt>7. Prompt do AI</dt><dd><pre>Flat vector logo icon on a white background: a simple rounded trapezoid outline, wider at the top, resembling a car diagnostic connector, with two rows of small round pins inside; one pin in the center of the lower row is bright orange #E8590C, all other shapes deep navy #102A43. Minimalist, geometric, technical and trustworthy, thick even strokes, centered, no text, no gradients, no shadows, no 3D, no car silhouette, no wrench.</pre></dd>
+      <dt>8. SVG roboczy</dt><dd><details><summary>Pokaż kod SVG</summary><pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 380 72&quot; role=&quot;img&quot; aria-label=&quot;Szalone auto&quot;&gt;&lt;title&gt;Szalone auto&lt;/title&gt;&lt;style&gt;@import url(&#x27;https://fonts.googleapis.com/css2?family=Saira:wdth,wght@100,500;112,700&amp;amp;display=swap&#x27;);&lt;/style&gt;&lt;g transform=&quot;translate(2 4) scale(1)&quot;&gt;&lt;path d=&quot;M7 16H57L51 48H13Z&quot; fill=&quot;none&quot; stroke=&quot;#102A43&quot; stroke-width=&quot;5.5&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;circle cx=&quot;19&quot; cy=&quot;27&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;circle cx=&quot;27&quot; cy=&quot;27&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;circle cx=&quot;37&quot; cy=&quot;27&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;circle cx=&quot;45&quot; cy=&quot;27&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;circle cx=&quot;23&quot; cy=&quot;37&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;circle cx=&quot;32&quot; cy=&quot;37&quot; r=&quot;3.6&quot; fill=&quot;#E8590C&quot;/&gt;&lt;circle cx=&quot;41&quot; cy=&quot;37&quot; r=&quot;3.2&quot; fill=&quot;#102A43&quot;/&gt;&lt;/g&gt;&lt;text x=&quot;80&quot; y=&quot;38&quot; font-family=&quot;Saira, &#x27;Arial Narrow&#x27;, sans-serif&quot; font-stretch=&quot;112%&quot; font-weight=&quot;700&quot; font-size=&quot;32&quot; fill=&quot;#102A43&quot;&gt;SZALONE&lt;tspan fill=&quot;#C2410C&quot;&gt;/&lt;/tspan&gt;AUTO&lt;/text&gt;&lt;text x=&quot;81&quot; y=&quot;60&quot; font-family=&quot;Saira, Arial, sans-serif&quot; font-weight=&quot;500&quot; font-size=&quot;11.5&quot; letter-spacing=&quot;4.2&quot; fill=&quot;#102A43&quot;&gt;PEŁEN PROFESJONALIZM&lt;/text&gt;&lt;/svg&gt;</pre></details></dd>
+    </dl>
+  </article>
+
+  <!-- C -->
+  <article class="koncepcja">
+    <div class="stack"><span class="lbl">Koncepcja C</span><h3 style="font-size:1.5rem">„Pieczęć” – znak jakości</h3></div>
+    <div class="plansze">
+      <div class="plansza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(2 4) scale(1)"><polygon points="19.6,2 44.4,2 62,19.6 62,44.4 44.4,62 19.6,62 2,44.4 2,19.6" fill="#5C1A2B"/><polygon points="21.2,6.5 42.8,6.5 57.5,21.2 57.5,42.8 42.8,57.5 21.2,57.5 6.5,42.8 6.5,21.2" fill="none" stroke="#C9A35B" stroke-width="1.3"/><text x="32" y="42" text-anchor="middle" font-family="'Bodoni Moda', Didot, Georgia, serif" font-weight="700" font-size="27" fill="#EFE6D8">S<tspan font-style="italic" font-weight="600" fill="#C9A35B">a</tspan></text></g><text x="82" y="38" font-family="'Bodoni Moda', Didot, Georgia, serif" font-weight="700" font-size="32" fill="#5C1A2B">Szalone <tspan font-style="italic" font-weight="600">Auto</tspan></text><text x="83" y="60" font-family="Archivo, Arial, sans-serif" font-weight="500" font-size="11" letter-spacing="4.4" fill="#8A6A2E">PEŁEN PROFESJONALIZM</text></svg></div>
+      <div class="plansza ikona"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Szalone auto"><title>Szalone auto</title><g transform="translate(0 0) scale(1)"><polygon points="19.6,2 44.4,2 62,19.6 62,44.4 44.4,62 19.6,62 2,44.4 2,19.6" fill="#5C1A2B"/><polygon points="21.2,6.5 42.8,6.5 57.5,21.2 57.5,42.8 42.8,57.5 21.2,57.5 6.5,42.8 6.5,21.2" fill="none" stroke="#C9A35B" stroke-width="1.3"/><text x="32" y="42" text-anchor="middle" font-family="'Bodoni Moda', Didot, Georgia, serif" font-weight="700" font-size="27" fill="#EFE6D8">S<tspan font-style="italic" font-weight="600" fill="#C9A35B">a</tspan></text></g></svg></div>
+      <div class="plansza bordo full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 92" role="img" aria-label="Szalone auto"><title>Szalone auto</title><rect width="100%" height="100%" fill="#5C1A2B"/><g transform="translate(12 14) scale(1)"><polygon points="19.6,2 44.4,2 62,19.6 62,44.4 44.4,62 19.6,62 2,44.4 2,19.6" fill="#15171C"/><polygon points="21.2,6.5 42.8,6.5 57.5,21.2 57.5,42.8 42.8,57.5 21.2,57.5 6.5,42.8 6.5,21.2" fill="none" stroke="#C9A35B" stroke-width="1.3"/><text x="32" y="42" text-anchor="middle" font-family="'Bodoni Moda', Didot, Georgia, serif" font-weight="700" font-size="27" fill="#EFE6D8">S<tspan font-style="italic" font-weight="600" fill="#C9A35B">a</tspan></text></g><text x="92" y="48" font-family="'Bodoni Moda', Didot, Georgia, serif" font-weight="700" font-size="32" fill="#EFE6D8">Szalone <tspan font-style="italic" font-weight="600">Auto</tspan></text><text x="93" y="70" font-family="Archivo, Arial, sans-serif" font-weight="500" font-size="11" letter-spacing="4.4" fill="#C9A35B">PEŁEN PROFESJONALIZM</text></svg></div>
+    </div>
+    <dl class="opis">
+      <dt>1. Idea</dt><dd>Ośmiokątna plakietka z monogramem „Sa” – jak tabliczka znamionowa albo pieczęć odbioru jakości. Najbardziej „luksusowa” z trzech propozycji: kojarzy się z rzemiosłem, tradycją i gwarancją. Kursywne „a” wnosi odrobinę fantazji z nazwy.</dd>
+      <dt>2. Rodzaj i kompozycja</dt><dd>Emblemat (monogram w figurze) + logotyp szeryfowy. Znak 1:1, napis w jednej linii, podpis pod spodem wersalikami.</dd>
+      <dt>3. Typografia</dt><dd><strong>Bodoni Moda</strong> (indestructible type*, SIL OFL, Google Fonts) – kontrastowy krój szeryfowy dla nazwy i monogramu; <strong>Archivo</strong> Medium dla podpisu.</dd>
+      <dt>4. Paleta</dt><dd>
+        <div class="paleta">
+          <div class="kolor"><b style="background:#5C1A2B"></b><span><strong>Bordo</strong><br>#5C1A2B</span></div>
+          <div class="kolor"><b style="background:#C9A35B"></b><span><strong>Mosiądz</strong><br>#C9A35B</span></div>
+          <div class="kolor"><b style="background:#EFE6D8"></b><span><strong>Kość</strong><br>#EFE6D8</span></div>
+        </div>
+        <p>Bordo i mosiądz – elegancja, skóra, wnętrza aut premium. Kontrasty: bordo/biel <span class="ok">12,8:1</span> · kość na bordo <span class="ok">10,4:1</span> · mosiądz na bordo <span class="ok">5,4:1</span>.</p></dd>
+      <dt>5. Warianty</dt><dd>Poziomy, pionowy (pieczęć nad napisem), sam znak, jednokolorowy (kontur ośmiokąta + monogram), odwrócony na bordo (pokazany), z hasłem.</dd>
+      <dt>6. Mały rozmiar</dt><dd>Ośmiokąt dobrze wypełnia okrągłe zdjęcie profilowe. W 32 px cienka wewnętrzna ramka znika – w ikonie trzeba ją pominąć. Ryzyka: krój szeryfowy jest mniej czytelny z daleka na oklejeniu auta, a „luksusowy” charakter może sugerować wysokie ceny (brief: przystępna cena).</dd>
+      <dt>7. Prompt do AI</dt><dd><pre>Flat vector emblem logo on a white background: a regular octagon plaque filled with deep burgundy #5C1A2B, with a thin inner octagon outline in muted brass #C9A35B, leaving an empty center for a monogram to be added later. Elegant, premium, craftsmanship feel, symmetrical, centered, no text, no letters, no gradients, no shadows, no 3D, no car, no wrench, no laurel, no crown.</pre></dd>
+      <dt>8. SVG roboczy</dt><dd><details><summary>Pokaż kod SVG</summary><pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 360 72&quot; role=&quot;img&quot; aria-label=&quot;Szalone auto&quot;&gt;&lt;title&gt;Szalone auto&lt;/title&gt;&lt;style&gt;@import url(&#x27;https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;1,600&amp;amp;family=Archivo:wdth,wght@100,500&amp;amp;display=swap&#x27;);&lt;/style&gt;&lt;g transform=&quot;translate(2 4) scale(1)&quot;&gt;&lt;polygon points=&quot;19.6,2 44.4,2 62,19.6 62,44.4 44.4,62 19.6,62 2,44.4 2,19.6&quot; fill=&quot;#5C1A2B&quot;/&gt;&lt;polygon points=&quot;21.2,6.5 42.8,6.5 57.5,21.2 57.5,42.8 42.8,57.5 21.2,57.5 6.5,42.8 6.5,21.2&quot; fill=&quot;none&quot; stroke=&quot;#C9A35B&quot; stroke-width=&quot;1.3&quot;/&gt;&lt;text x=&quot;32&quot; y=&quot;42&quot; text-anchor=&quot;middle&quot; font-family=&quot;&#x27;Bodoni Moda&#x27;, Didot, Georgia, serif&quot; font-weight=&quot;700&quot; font-size=&quot;27&quot; fill=&quot;#EFE6D8&quot;&gt;S&lt;tspan font-style=&quot;italic&quot; font-weight=&quot;600&quot; fill=&quot;#C9A35B&quot;&gt;a&lt;/tspan&gt;&lt;/text&gt;&lt;/g&gt;&lt;text x=&quot;82&quot; y=&quot;38&quot; font-family=&quot;&#x27;Bodoni Moda&#x27;, Didot, Georgia, serif&quot; font-weight=&quot;700&quot; font-size=&quot;32&quot; fill=&quot;#5C1A2B&quot;&gt;Szalone &lt;tspan font-style=&quot;italic&quot; font-weight=&quot;600&quot;&gt;Auto&lt;/tspan&gt;&lt;/text&gt;&lt;text x=&quot;83&quot; y=&quot;60&quot; font-family=&quot;Archivo, Arial, sans-serif&quot; font-weight=&quot;500&quot; font-size=&quot;11&quot; letter-spacing=&quot;4.4&quot; fill=&quot;#8A6A2E&quot;&gt;PEŁEN PROFESJONALIZM&lt;/text&gt;&lt;/svg&gt;</pre></details></dd>
+    </dl>
+  </article>
+</div></section>
+
+<section id="rekomendacja"><div class="wrap">
+  <div class="rek">
+    <span class="lbl">Rekomendacja</span>
+    <h3 style="font-size:1.4rem">Polecam koncepcję A „Linia”</h3>
+    <p>Najlepiej łączy oba wymagania z briefu – nowoczesność i luksus – a jednocześnie nie podnosi „cenowej poprzeczki” tak mocno jak pieczęć C. Znak jest najprostszy, więc najlepiej działa w 32 px, na zdjęciu profilowym, w hafcie i w folii na aucie. Litera S zostaje w pamięci razem z nazwą, a linia daje motyw, który przenosi się na stronę (linie podziału, trasa dojazdu, przyciski). Na niej opiera się projekt strony poniżej.</p>
+  </div>
+</div></section>
+
+<section id="hasla" class="stal"><div class="wrap stack">
+  <span class="lbl">Zadanie 2</span>
+  <h2>Hasło firmowe – 10 propozycji</h2>
+  <p>Klient chce hasła krótkiego, łatwego do zapamiętania i rzeczowego – mówiącego, co robimy. Dlatego najwięcej propozycji jest rzeczowych. Hasła nie powtarzają słów „Pełen profesjonalizm” z logo, żeby się nie dublować.</p>
+  <div class="hasla">
+    <div class="grupa"><h3>Rzeczowe</h3>
+      <div class="haslo top"><span class="top-tag">Top 1 · główne hasło</span><q>Naprawiamy porządnie. Rozliczamy uczciwie.</q><span>Mówi, co robimy i jak – fachowość i uczciwa cena w czterech słowach.</span></div>
+      <div class="haslo"><q>Najpierw diagnoza, potem naprawa.</q><span>Prosta obietnica zasady pracy, która odróżnia od warsztatów „na próbę”.</span></div>
+      <div class="haslo"><q>Fachowy serwis BMW, Audi i Toyoty.</q><span>Wprost komunikuje specjalizację – dobre do reklam w wyszukiwarce.</span></div>
+      <div class="haslo top"><span class="top-tag">Top 3</span><q>Znana cena, pewna naprawa.</q><span>Odpowiada na największą obawę klienta mechanika: niespodziewany rachunek.</span></div>
+    </div>
+    <div class="grupa"><h3>Emocjonalne</h3>
+      <div class="haslo"><q>Auto w pewnych rękach.</q><span>Krótkie, ciepłe, buduje zaufanie; dobrze brzmi w reklamie radiowej.</span></div>
+      <div class="haslo"><q>Spokojna głowa za kierownicą.</q><span>Mówi o efekcie dla kierowcy, a nie o samej usłudze.</span></div>
+      <div class="haslo"><q>Szaleni na punkcie aut.</q><span>Zamienia nazwę w pasję zespołu; pasuje do sekcji „O nas” i social mediów.</span></div>
+    </div>
+    <div class="grupa"><h3>Z humorem</h3>
+      <div class="haslo top"><span class="top-tag">Top 2</span><q>Szalona nazwa. Poważna robota.</q><span>Rozbraja kontrast nazwy i profesjonalizmu – najbardziej zapamiętywalne; użyte jako nagłówek strony głównej.</span></div>
+      <div class="haslo"><q>Szaleństwo tylko w nazwie.</q><span>Krótka odpowiedź na pytanie „czy to poważna firma?”.</span></div>
+      <div class="haslo"><q>Szaleni na punkcie aut, nie cen.</q><span>Z przymrużeniem oka mówi o przystępnych cenach.</span></div>
+    </div>
+  </div>
+  <p><strong>Jak użyć:</strong> „Naprawiamy porządnie. Rozliczamy uczciwie.” jako oficjalne hasło (logo z hasłem, wizytówki, faktury); „Szalona nazwa. Poważna robota.” jako nagłówek strony, social media i oklejenie auta. Przed wdrożeniem warto sprawdzić hasła w wyszukiwarce i bazie znaków towarowych UPRP/EUIPO.</p>
+</div></section>
+
+<section id="strona"><div class="wrap stack">
+  <span class="lbl">Zadanie 3</span>
+  <h2>Projekt strony internetowej</h2>
+  <p>Cel strony: nowi klienci, którzy <strong>zadzwonią i przyjadą</strong>. Dlatego na każdej podstronie jest przycisk „Zadzwoń”, a na telefonie – stały dolny pasek: Zadzwoń · SMS · Dojazd. Rezerwacja tylko telefoniczna; formularz służy do zapytania o wycenę (marka i model są polami obowiązkowymi) i składa gotowego SMS-a lub e-maila.</p>
+
+  <h3 style="margin-top:1rem">Mapa podstron</h3>
+  <div class="mapa-stron">
+    <div class="podstrona"><small>index.html</small><h3>Start</h3><ol><li>Hero: hasło, telefon, dojazd</li><li>Dlaczego my (4 wyróżniki)</li><li>6 najczęstszych usług z cenami</li><li>Specjalizacja: BMW, Audi, Toyota</li><li>Jak wygląda wizyta (4 kroki)</li><li>Aktualności</li><li>Opinie + link do Google</li><li>Pas „Zadzwoń”</li></ol></div>
+    <div class="podstrona"><small>uslugi.html</small><h3>Usługi</h3><ol><li>10 usług w 5 kategoriach</li><li>Opis, cena od–do, „Promocja” / „Nowość”</li><li>Pakiety</li><li>Pas „Zadzwoń”</li></ol></div>
+    <div class="podstrona"><small>cennik.html</small><h3>Cennik</h3><ol><li>Tabele cen wg kategorii</li><li>Stawka roboczogodziny</li><li>Pakiety i oferta dla firm</li><li>Metody płatności</li><li>FAQ (8 pytań)</li></ol></div>
+    <div class="podstrona"><small>o-nas.html</small><h3>O nas</h3><ol><li>Historia i zasady pracy</li><li>Zespół (4 osoby)</li><li>Galeria</li><li>Części i produkty</li><li>Opinie klientów</li></ol></div>
+    <div class="podstrona"><small>kontakt.html</small><h3>Kontakt i dojazd</h3><ol><li>Telefon, SMS, e-mail</li><li>Godziny + status „otwarte teraz”</li><li>Mapa (ładowana po kliknięciu)</li><li>Parking i komunikacja</li><li>Formularz wyceny</li></ol></div>
+  </div>
+  <p style="font-size:.92rem;color:var(--tekst-2)">W stopce każdej strony: kontakt, godziny, Facebook i Instagram, zapis do newslettera „Przypomnienia sezonowe”, link do polityki prywatności.</p>
+
+  <div class="grid2" style="margin-top:1.5rem">
+    <div class="stack">
+      <h3>Styl wizualny</h3>
+      <ul class="l">
+        <li><strong>Kolory z logo A:</strong> grafitowe pasy (nagłówek, hero, specjalizacja, stopka) przeplatane białymi i stalowymi sekcjami treści. Mosiądz tylko w akcentach: przyciski „Zadzwoń”, etykiety sekcji, linie. Jedna kolorystyka strony niezależnie od trybu ciemnego w systemie – tak jak szyld.</li>
+        <li><strong>Motyw linii:</strong> mosiężna kreska z logo przed etykietami sekcji, górne krawędzie kroków wizyty, kropkowana trasa na mapie, duże „S” w tle hero.</li>
+        <li><strong>Charakter:</strong> nowoczesny i rzeczowy – ostre podziały, małe zaokrąglenia (6 px), dużo powietrza, ceny cyframi tabelarycznymi.</li>
+        <li><strong>Zdjęcia:</strong> prawdziwy warsztat, czysto i jasno, ludzie przy pracy; najlepiej ciepłe światło na grafitowym tle. Bez zdjęć stockowych z uśmiechniętym modelem w czystym kombinezonie.</li>
+        <li><strong>Ikony:</strong> własny zestaw liniowy 24 px, ta sama grubość co linia w znaku.</li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h3>Typografia strony</h3>
+      <div class="typo"><span class="d">Archivo – nagłówki</span><span class="b">Hanken Grotesk – tekst. Czytelny grotesk o otwartych kształtach, dobrze wyglądający w małych rozmiarach na telefonie. Obie rodziny: SIL Open Font License, Google Fonts.</span></div>
+      <h3 style="margin-top:.6rem">Dostępność, telefon, szybkość</h3>
+      <ul class="l">
+        <li>Kontrast tekstu min. 4,5:1 (WCAG 2.1 AA), widoczny fokus, link „Przejdź do treści”, opisy alt, poprawne nagłówki i etykiety pól.</li>
+        <li>Przyciski min. 44–52 px wysokości; dolny pasek kontaktu na telefonie; numer telefonu klikalny wszędzie.</li>
+        <li>Strona statyczna bez bibliotek: jeden plik CSS i ok. 4 kB JS. Zdjęcia w WebP/AVIF, maks. 200 kB, <code>loading="lazy"</code>. Mapa Google wczytuje się dopiero po kliknięciu (szybkość + brak ciasteczek Google bez zgody).</li>
+        <li>Ruch ograniczony i wyłączany przy <code>prefers-reduced-motion</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:1.5rem">
+    <div class="stack">
+      <h3>Panel do edycji treści</h3>
+      <p>Klient chce sam zmieniać teksty, zdjęcia, galerię, aktualności, zespół, promocje, godziny i cennik. Propozycja: strona statyczna na <strong>Cloudflare Pages</strong> + panel <strong>Decap CMS</strong> (lub Pages CMS) zapisujący zmiany w repozytorium GitHub. Brak opłat za hosting, brak bazy danych do utrzymania, logowanie do panelu pod adresem /admin. Treści edytowalne trafią do plików danych (cennik, godziny, aktualności, zespół).</p>
+    </div>
+    <div class="stack">
+      <h3>Integracje z briefu</h3>
+      <ul class="l">
+        <li><strong>Mapa Google</strong> – osadzenie po kliknięciu + przycisk „Wyznacz trasę”.</li>
+        <li><strong>Opinie Google</strong> – przycisk do wizytówki; po zebraniu opinii widżet lub cytaty za zgodą autorów.</li>
+        <li><strong>Newsletter</strong> – formularz w stopce do podłączenia np. pod MailerLite lub Brevo.</li>
+        <li><strong>Statystyki</strong> – Cloudflare Web Analytics (bez ciasteczek, bez banera zgody).</li>
+        <li><strong>SEO lokalne</strong> – tytuły „warsztat samochodowy Wrocław”, dane strukturalne AutoRepair, spójne NAP z wizytówką Google.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="zdjecia" class="stal"><div class="wrap stack">
+  <span class="lbl">Zdjęcia</span>
+  <h2>Lista zdjęć do podstawienia</h2>
+  <p>Na stronie w miejscach zdjęć są grafitowe pola z opisem kadru. Wystarczy wgrać plik o podanej nazwie do folderu <code>img/</code> – strona sama go wyświetli. Do czasu sesji w warsztacie można użyć zdjęć z bezpłatnych baz (Unsplash, Pexels – licencje pozwalają na użycie komercyjne bez podawania autora; Wikimedia Commons – tylko pliki CC0 / domena publiczna). Docelowo zdecydowanie lepiej sprawdzą się prawdziwe zdjęcia warsztatu i zespołu.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Plik</th><th>Gdzie</th><th>Kadr</th><th>Fraza do wyszukania</th></tr></thead>
+    <tbody>
+      <tr><td><code>hero.jpg</code></td><td>Start – hero</td><td>4:3,4 · 1400 px</td><td>car mechanic lift workshop</td></tr>
+      <tr><td><code>o-nas.jpg</code></td><td>O nas</td><td>4:5 · 1000 px</td><td>premium car service garage interior</td></tr>
+      <tr><td><code>zespol-*.jpg</code> (4)</td><td>O nas – zespół</td><td>4:5 · 600 px</td><td>auto mechanic portrait (docelowo własne zdjęcia!)</td></tr>
+      <tr><td><code>galeria-1.jpg</code></td><td>Galeria – duże</td><td>1:1 · 1200 px</td><td>clean car workshop</td></tr>
+      <tr><td><code>galeria-2.jpg</code></td><td>Galeria</td><td>4:3 · 800 px</td><td>car diagnostic OBD scanner</td></tr>
+      <tr><td><code>galeria-3.jpg</code></td><td>Galeria</td><td>4:3 · 800 px</td><td>car air conditioning service</td></tr>
+      <tr><td><code>galeria-4.jpg</code></td><td>Galeria</td><td>4:3 · 800 px</td><td>tire change machine</td></tr>
+      <tr><td><code>galeria-5.jpg</code></td><td>Galeria</td><td>4:3 · 800 px</td><td>wheel alignment</td></tr>
+      <tr><td><code>galeria-6.jpg</code></td><td>Galeria</td><td>4:3 · 800 px</td><td>car service reception customer</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="braki"><div class="wrap stack">
+  <span class="lbl">Weryfikacja</span>
+  <h2>Dane przykładowe i do uzupełnienia</h2>
+  <div class="grid2">
+    <div class="stack">
+      <h3>Wymyślone na potrzeby projektu – do potwierdzenia</h3>
+      <ul class="l">
+        <li>Adres: ul. Przykładowa 12, 50-000 Wrocław (celowo fikcyjny)</li>
+        <li>Godziny: pon.–pt. 8:00–18:00, sob. 9:00–14:00</li>
+        <li>Wszystkie ceny, stawka roboczogodziny (150–190 zł) i pakiety (229 zł, 299 zł, od 150 zł netto/rbh)</li>
+        <li>Promocja klimatyzacji od 199 zł, „Nowość” – przeglądy LPG</li>
+        <li>Zespół: Tomasz, Łukasz, Krzysztof i ich zakresy prac</li>
+        <li>Aktualności (3 wpisy) i opisy specjalizacji przy markach</li>
+        <li>Metody płatności: gotówka i przelew (w briefie tylko karta)</li>
+        <li>Bezpłatny parking dla klientów</li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h3>Brakuje w briefie</h3>
+      <ul class="l">
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> opinie klientów – na stronie są oznaczone miejsca, nie wymyślono żadnej opinii</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> okres i warunki gwarancji</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> rok założenia, historia, liczba stanowisk</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> marki części, olejów, sprzętu diagnostycznego</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> linki do Facebooka, Instagrama i wizytówki Google</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> przystanek i linie komunikacji miejskiej</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> pełna nazwa firmy i NIP (polityka prywatności)</li>
+        <li><span class="uzup">DO UZUPEŁNIENIA</span> domena (np. szaloneauto.pl – sprawdzić dostępność)</li>
+        <li><span class="uzup">DO POTWIERDZENIA</span> czy w logo ma być nazwa firmy, czy tylko napis „Pełen profesjonalizm”</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<footer class="st"><div class="wrap">Projekt: Strony AI Wrocław · Materiał roboczy dla firmy Szalone auto · Kontakt z klientem: Piotr Zmyślony</div></footer>

@@ -1,0 +1,1 @@
+Tu wgraj zdjęcia strony (np. o-nas.jpg, hero.jpg). Wskażesz je w panelu jako adres: img/nazwa.jpg

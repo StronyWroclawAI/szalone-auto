@@ -1,0 +1,2234 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Szalone auto – warsztat samochodowy Wrocław</title>
+<meta name="description" content="Niezależny warsztat samochodowy we Wrocławiu: mechanika, klimatyzacja, diagnostyka komputerowa, opony, LPG. Specjalizacja BMW, Audi, Toyota.">
+<meta name="theme-color" content="#15171C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2315171C'/%3E%3Cg transform='translate(8 8) scale(.75)' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='9'%3E%3Cpath d='M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40' stroke='%23fff'/%3E%3Cpath d='M50 8H56' stroke='%23C9A35B'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;100,600;100,700;108,700;112,600;112,700;112,800;125,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Szalone auto — styl strony
+   Układ: grafitowe pasy (hero, CTA, stopka) przeplatane jasnymi, stalowymi sekcjami treści;
+   mosiężna linia z logo prowadzi wzrok od nagłówka do przycisku „Zadzwoń”. */
+:root {
+  --grafit: #15171C;
+  --grafit-2: #22252C;
+  --grafit-3: #2E323B;
+  --mosiadz: #C9A35B;        /* akcent na ciemnym tle (kontrast 7.6:1) */
+  --mosiadz-ciemny: #8A6A2E; /* akcent/tekst na jasnym tle (5.0:1) */
+  --stal: #EEF0F3;
+  --bialy: #FFFFFF;
+  --tekst: #15171C;
+  --tekst-2: #4F5560;
+  --linia: #D5D9DF;
+  --na-ciemnym: #E7E9EC;
+  --na-ciemnym-2: #A3A9B3;
+  --promo: #8A6A2E;
+  --nowosc: #1F5F4A;
+
+  --f-display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Hanken Grotesk", "Segoe UI", Roboto, Arial, sans-serif;
+
+  --r: 6px;
+  --max: 1160px;
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--tekst);
+  background: var(--bialy);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mosiadz); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 112%; line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5.4vw, 3.9rem); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 800; }
+h3 { font-size: 1.2rem; font-weight: 700; font-stretch: 105%; }
+p { margin: 0; max-width: 65ch; }
+
+.skip { position: absolute; left: -9999px; top: 0; background: var(--mosiadz); color: var(--grafit); padding: .6rem 1rem; z-index: 100; font-weight: 700; }
+.skip:focus { left: 1rem; top: 1rem; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.sekcja { padding-block: clamp(56px, 8vw, 104px); }
+.sekcja--stal { background: var(--stal); }
+.sekcja--ciemna { background: var(--grafit); color: var(--na-ciemnym); }
+.sekcja--ciemna h2, .sekcja--ciemna h3 { color: var(--bialy); }
+
+.etykieta {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--f-display); font-stretch: 112%; font-weight: 600;
+  font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--mosiadz-ciemny);
+}
+.etykieta::before { content: ""; width: 28px; height: 3px; border-radius: 3px; background: currentColor; }
+.sekcja--ciemna .etykieta, .hero .etykieta, .podhero .etykieta { color: var(--mosiadz); }
+
+.naglowek-sekcji { display: grid; gap: .9rem; margin-bottom: clamp(28px, 4vw, 48px); }
+.naglowek-sekcji p { color: var(--tekst-2); }
+.sekcja--ciemna .naglowek-sekcji p { color: var(--na-ciemnym-2); }
+
+/* Przyciski */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  min-height: 48px; padding: .75rem 1.3rem; border-radius: var(--r);
+  font-family: var(--f-display); font-stretch: 108%; font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s, transform .15s;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn--glowny { background: var(--mosiadz); color: var(--grafit); }
+.btn--glowny:hover { background: #D8B672; }
+.btn--obrys { border-color: currentColor; color: inherit; background: transparent; }
+.btn--obrys:hover { background: rgba(201,163,91,.12); }
+.btn--ciemny { background: var(--grafit); color: var(--bialy); }
+.btn--ciemny:hover { background: var(--grafit-3); }
+.btn:active { transform: translateY(1px); }
+
+/* Nagłówek */
+.topbar { background: var(--grafit); color: var(--na-ciemnym-2); font-size: .875rem; }
+.topbar .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1.5rem; padding-block: .45rem; }
+.topbar a { color: var(--na-ciemnym); text-decoration: none; }
+.topbar a:hover { color: var(--mosiadz); }
+.status { display: inline-flex; align-items: center; gap: .5rem; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--na-ciemnym-2); }
+.status[data-otwarte="tak"] i { background: #5FBF8F; box-shadow: 0 0 0 3px rgba(95,191,143,.2); }
+
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(21,23,28,.97); color: var(--bialy); border-bottom: 1px solid var(--grafit-3); }
+.header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; }
+.logo { display: inline-flex; text-decoration: none; }
+.logo svg { height: 44px; width: auto; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .25rem; }
+.nav a { display: block; padding: .6rem .8rem; text-decoration: none; font-weight: 600; color: var(--na-ciemnym); border-radius: var(--r); }
+.nav a:hover { color: var(--bialy); background: var(--grafit-2); }
+.nav a[aria-current="page"] { color: var(--mosiadz); }
+.header .btn { min-height: 44px; padding: .55rem 1rem; }
+.menu-btn { display: none; background: none; border: 1px solid var(--grafit-3); color: var(--bialy); border-radius: var(--r); width: 48px; height: 48px; cursor: pointer; }
+.menu-btn svg { width: 24px; height: 24px; margin: auto; }
+
+@media (max-width: 1100px) {
+  .menu-btn { display: grid; }
+  .header .btn--glowny { display: none; }
+  .nav { position: absolute; left: 0; right: 0; top: 100%; background: var(--grafit); border-bottom: 1px solid var(--grafit-3); display: none; }
+  .nav.otwarte { display: block; }
+  .nav ul { flex-direction: column; padding: .5rem var(--gutter) 1rem; }
+  .nav a { padding: .9rem .5rem; border-bottom: 1px solid var(--grafit-2); border-radius: 0; }
+}
+
+/* Hero */
+.hero { background: var(--grafit); color: var(--na-ciemnym); position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; padding-block: clamp(44px, 7vw, 88px); }
+.hero h1 { color: var(--bialy); }
+.hero h1 em { font-style: normal; color: var(--mosiadz); display: block; }
+.hero__tekst { display: grid; gap: 1.4rem; min-width: 0; }
+.hero__lead { font-size: 1.15rem; color: var(--na-ciemnym); }
+.hero__cta { display: flex; flex-wrap: wrap; gap: .8rem; }
+.hero__fakty { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; padding: 0; margin: .4rem 0 0; list-style: none; font-size: .95rem; color: var(--na-ciemnym-2); }
+.hero__fakty li { display: inline-flex; align-items: center; gap: .45rem; }
+.hero__fakty svg { width: 18px; height: 18px; color: var(--mosiadz); flex: none; }
+.hero__foto { position: relative; min-width: 0; }
+.hero__foto .foto { aspect-ratio: 4 / 3.4; border-radius: var(--r); }
+.hero__karta {
+  position: absolute; left: -18px; bottom: -18px; background: var(--bialy); color: var(--tekst);
+  border-radius: var(--r); padding: .9rem 1.1rem; display: grid; gap: .1rem; box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  max-width: 260px;
+}
+.hero__karta strong { font-family: var(--f-display); font-stretch: 112%; font-size: 1.05rem; }
+.hero__karta span { font-size: .9rem; color: var(--tekst-2); }
+.hero__linia { position: absolute; right: -80px; top: -60px; width: 420px; opacity: .08; pointer-events: none; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero__karta { left: 12px; bottom: 12px; }
+}
+
+.podhero { background: var(--grafit); color: var(--na-ciemnym); }
+.podhero .wrap { padding-block: clamp(40px, 6vw, 72px); display: grid; gap: 1rem; }
+.podhero h1 { color: var(--bialy); font-size: clamp(2rem, 4.6vw, 3.2rem); }
+.podhero p { color: var(--na-ciemnym); font-size: 1.1rem; }
+.okruszki { font-size: .875rem; color: var(--na-ciemnym-2); }
+.okruszki a { color: var(--na-ciemnym-2); }
+
+/* Placeholdery zdjęć: <img> zakrywa tło, gdy plik istnieje */
+.foto {
+  position: relative; overflow: hidden; margin: 0; background-color: var(--grafit-2);
+  background-image:
+    radial-gradient(120% 80% at 80% 10%, rgba(201,163,91,.18), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 2px, transparent 2px 14px);
+  max-width: 100%;
+}
+.foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.foto figcaption {
+  position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 0;
+  font-size: .78rem; line-height: 1.35; color: var(--na-ciemnym-2);
+  display: flex; gap: .5rem; align-items: flex-start;
+}
+.foto figcaption::before { content: ""; flex: none; width: 16px; height: 12px; margin-top: 2px; border: 1.5px solid var(--mosiadz); border-radius: 2px; }
+
+/* Wyróżniki */
+.wyrozniki { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--linia); border: 1px solid var(--linia); border-radius: var(--r); overflow: hidden; }
+.wyroznik { background: var(--bialy); padding: 1.6rem 1.4rem; display: grid; gap: .6rem; align-content: start; }
+.wyroznik svg { width: 30px; height: 30px; color: var(--mosiadz-ciemny); }
+.wyroznik p { color: var(--tekst-2); font-size: .98rem; }
+@media (max-width: 900px) { .wyrozniki { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .wyrozniki { grid-template-columns: 1fr; } }
+
+/* Usługi */
+.uslugi-siatka { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.usluga {
+  background: var(--bialy); border: 1px solid var(--linia); border-radius: var(--r);
+  padding: 1.4rem; display: grid; grid-template-rows: auto auto 1fr auto; gap: .7rem; min-width: 0;
+  text-decoration: none; transition: border-color .15s, transform .15s;
+}
+a.usluga:hover { border-color: var(--mosiadz-ciemny); transform: translateY(-2px); }
+.usluga__gora { display: flex; justify-content: space-between; align-items: center; gap: .6rem; }
+.usluga__ikona { width: 44px; height: 44px; border-radius: var(--r); display: grid; place-items: center; background: var(--grafit); color: var(--mosiadz); }
+.usluga__ikona svg { width: 24px; height: 24px; }
+.usluga p { color: var(--tekst-2); font-size: .98rem; }
+.usluga__cena { font-family: var(--f-display); font-stretch: 108%; font-weight: 700; font-variant-numeric: tabular-nums; border-top: 1px solid var(--linia); padding-top: .8rem; display: flex; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+.usluga__cena small { font-family: var(--f-body); font-weight: 500; color: var(--tekst-2); font-size: .85rem; }
+.znaczek { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .25rem .55rem; border-radius: 99px; white-space: nowrap; }
+.znaczek--promo { background: var(--promo); color: var(--bialy); }
+.znaczek--nowosc { background: var(--nowosc); color: var(--bialy); }
+
+.kategoria { display: grid; gap: 1.2rem; padding-block: 2rem; border-top: 1px solid var(--linia); }
+.kategoria:first-of-type { border-top: 0; padding-top: 0; }
+.kategoria__opis { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: .5rem 2rem; }
+.kategoria__opis p { color: var(--tekst-2); }
+
+/* Marki */
+.marki { display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.marki li { flex: 1 1 180px; border: 1px solid var(--grafit-3); border-radius: var(--r); padding: 1.1rem 1.2rem; display: grid; gap: .2rem; }
+.marki strong { font-family: var(--f-display); font-stretch: 125%; font-size: 1.35rem; color: var(--bialy); letter-spacing: .04em; }
+.marki span { color: var(--na-ciemnym-2); font-size: .92rem; }
+
+/* Kroki wizyty (prawdziwa kolejność) */
+.kroki { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: k; padding: 0; margin: 0; list-style: none; }
+.kroki li { counter-increment: k; display: grid; gap: .5rem; align-content: start; padding-top: 1rem; border-top: 3px solid var(--mosiadz); }
+.kroki li::before { content: "Krok " counter(k); font-family: var(--f-display); font-stretch: 112%; font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mosiadz); }
+.kroki p { color: var(--na-ciemnym-2); font-size: .98rem; }
+@media (max-width: 860px) { .kroki { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .kroki { grid-template-columns: 1fr; } }
+
+/* Dwie kolumny */
+.dwie { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.dwie > * { min-width: 0; }
+@media (max-width: 860px) { .dwie { grid-template-columns: 1fr; } }
+.lista-check { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.lista-check li { display: grid; grid-template-columns: 22px 1fr; gap: .6rem; }
+.lista-check svg { width: 20px; height: 20px; margin-top: 3px; color: var(--mosiadz-ciemny); }
+.sekcja--ciemna .lista-check svg { color: var(--mosiadz); }
+
+/* Aktualności */
+.aktualnosci { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.wpis { display: grid; gap: .5rem; padding: 1.3rem; background: var(--bialy); border-radius: var(--r); border: 1px solid var(--linia); align-content: start; }
+.wpis time { font-size: .85rem; color: var(--mosiadz-ciemny); font-weight: 700; font-variant-numeric: tabular-nums; }
+.wpis p { color: var(--tekst-2); font-size: .98rem; }
+@media (max-width: 860px) { .aktualnosci { grid-template-columns: 1fr; } }
+
+/* Opinie */
+.opinie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.opinia { border: 1px dashed var(--linia); border-radius: var(--r); padding: 1.3rem; display: grid; gap: .7rem; background: var(--bialy); align-content: start; }
+.opinia p { color: var(--tekst-2); }
+.opinia footer { font-size: .88rem; font-weight: 700; }
+.uzupelnij { background: #FFF4D6; color: #5A4310; font-size: .8rem; font-weight: 700; padding: .15rem .45rem; border-radius: 4px; display: inline-block; }
+@media (max-width: 860px) { .opinie { grid-template-columns: 1fr; } }
+
+/* Zespół i galeria */
+.zespol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.osoba { display: grid; gap: .6rem; align-content: start; }
+.osoba .foto { aspect-ratio: 4 / 5; border-radius: var(--r); }
+.osoba span { color: var(--tekst-2); font-size: .95rem; }
+@media (max-width: 900px) { .zespol { grid-template-columns: repeat(2, 1fr); } }
+.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.galeria .foto { aspect-ratio: 4 / 3; border-radius: var(--r); }
+.galeria .foto--duze { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 260px; }
+@media (max-width: 640px) { .galeria { grid-template-columns: 1fr 1fr; } .galeria .foto--duze { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; } }
+
+/* Cennik */
+.tabela-wrap { overflow-x: auto; border: 1px solid var(--linia); border-radius: var(--r); background: var(--bialy); }
+table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+caption { text-align: left; padding: 1rem 1.2rem; font-family: var(--f-display); font-stretch: 112%; font-weight: 700; font-size: 1.1rem; background: var(--grafit); color: var(--bialy); }
+th, td { text-align: left; padding: .85rem 1.2rem; border-top: 1px solid var(--linia); vertical-align: top; }
+thead th { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tekst-2); border-top: 0; background: var(--stal); }
+td.kwota, th.kwota { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 700; }
+td small { display: block; color: var(--tekst-2); font-size: .88rem; }
+.cennik-tabele { display: grid; gap: 20px; }
+.przypis { font-size: .92rem; color: var(--tekst-2); }
+
+/* Pakiety */
+.pakiety { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.pakiet { border: 1px solid var(--linia); border-radius: var(--r); padding: 1.5rem; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: .9rem; background: var(--bialy); }
+.pakiet--wyrozniony { background: var(--grafit); color: var(--na-ciemnym); border-color: var(--grafit); }
+.pakiet--wyrozniony h3 { color: var(--bialy); }
+.pakiet--wyrozniony .lista-check svg { color: var(--mosiadz); }
+.pakiet__cena { font-family: var(--f-display); font-stretch: 112%; font-size: 1.9rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.pakiet__cena small { font-family: var(--f-body); font-size: .9rem; font-weight: 500; color: var(--tekst-2); }
+.pakiet--wyrozniony .pakiet__cena small { color: var(--na-ciemnym-2); }
+.pakiet > p { font-size: .98rem; color: var(--tekst-2); }
+.pakiet--wyrozniony > p { color: var(--na-ciemnym-2); }
+@media (max-width: 900px) { .pakiety { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+.faq details { border: 1px solid var(--linia); border-radius: var(--r); background: var(--bialy); }
+.faq summary { cursor: pointer; padding: 1.1rem 1.2rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-display); font-size: 1.4rem; line-height: 1; color: var(--mosiadz-ciemny); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { padding: 0 1.2rem 1.2rem; color: var(--tekst-2); }
+
+/* Kontakt */
+.kontakt-siatka { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.kafel { border: 1px solid var(--linia); border-radius: var(--r); padding: 1.4rem; display: grid; gap: .7rem; align-content: start; background: var(--bialy); min-width: 0; }
+.kafel--ciemny { background: var(--grafit); color: var(--na-ciemnym); border-color: var(--grafit); }
+.kafel--ciemny h3 { color: var(--bialy); }
+.duzy-numer { font-family: var(--f-display); font-stretch: 112%; font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; color: var(--bialy); text-decoration: none; font-variant-numeric: tabular-nums; }
+.akcje { display: flex; flex-wrap: wrap; gap: .6rem; }
+.godziny { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.godziny td, .godziny th { border-top: 1px solid var(--linia); padding: .55rem 0; font-size: 1rem; }
+.godziny th { font-weight: 500; }
+.godziny td { text-align: right; font-weight: 700; }
+.godziny tr.dzis th, .godziny tr.dzis td { color: var(--mosiadz-ciemny); }
+.godziny tr:first-child th, .godziny tr:first-child td { border-top: 0; }
+@media (max-width: 760px) { .kontakt-siatka { grid-template-columns: 1fr; } }
+
+.mapa { position: relative; border-radius: var(--r); overflow: hidden; background: var(--grafit-2); min-height: 340px; display: grid; place-items: center; color: var(--na-ciemnym); }
+.mapa svg.trasa { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mapa__info { position: relative; z-index: 1; display: grid; gap: .8rem; justify-items: center; text-align: center; padding: 1.5rem; }
+.mapa__info strong { font-family: var(--f-display); font-stretch: 112%; font-size: 1.2rem; color: var(--bialy); }
+.mapa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 2; }
+
+/* Formularze */
+.formularz { display: grid; gap: 1rem; }
+.pola { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .pola { grid-template-columns: 1fr; } }
+.pole { display: grid; gap: .35rem; min-width: 0; }
+.pole label { font-weight: 700; font-size: .95rem; }
+.pole .pomoc { font-size: .85rem; color: var(--tekst-2); }
+input, select, textarea {
+  font: inherit; font-size: 1rem; color: var(--tekst); background: var(--bialy);
+  border: 1.5px solid #B9BFC8; border-radius: var(--r); padding: .7rem .8rem; min-height: 48px; width: 100%;
+}
+textarea { min-height: 120px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 3px solid rgba(201,163,91,.55); border-color: var(--mosiadz-ciemny); }
+.zgoda { display: grid; grid-template-columns: 22px 1fr; gap: .6rem; font-size: .9rem; color: var(--tekst-2); }
+.zgoda input { min-height: 0; width: 20px; height: 20px; margin-top: 2px; }
+.komunikat { padding: .9rem 1rem; border-radius: var(--r); background: #E6F2EC; color: #1F5F4A; font-weight: 600; }
+
+/* Pas CTA */
+.pas-cta { background: var(--grafit-2); color: var(--na-ciemnym); }
+.pas-cta .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: clamp(40px, 6vw, 64px); }
+.pas-cta h2 { color: var(--bialy); }
+.pas-cta p { color: var(--na-ciemnym-2); margin-top: .5rem; }
+
+/* Stopka */
+.stopka { background: var(--grafit); color: var(--na-ciemnym-2); font-size: .95rem; padding-bottom: 88px; }
+.stopka .wrap { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.3fr; gap: 32px; padding-block: 56px 32px; }
+.stopka h3 { color: var(--bialy); font-size: 1rem; margin-bottom: .8rem; }
+.stopka ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+.stopka a { color: var(--na-ciemnym); text-decoration: none; }
+.stopka a:hover { color: var(--mosiadz); text-decoration: underline; }
+.stopka .logo svg { height: 40px; }
+.stopka__dol { border-top: 1px solid var(--grafit-3); }
+.stopka__dol .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem; padding-block: 1.2rem; grid-template-columns: none; font-size: .85rem; }
+.social { display: flex; gap: .6rem; }
+.social a { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--grafit-3); border-radius: var(--r); }
+.social svg { width: 20px; height: 20px; }
+.newsletter { display: flex; gap: .5rem; flex-wrap: wrap; }
+.newsletter input { flex: 1 1 180px; background: var(--grafit-2); color: var(--bialy); border-color: var(--grafit-3); }
+.newsletter input::placeholder { color: var(--na-ciemnym-2); }
+.newsletter .komunikat { flex-basis: 100%; }
+@media (max-width: 900px) { .stopka .wrap { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .stopka .wrap { grid-template-columns: 1fr; } }
+@media (min-width: 1101px) { .stopka { padding-bottom: 0; } }
+
+/* Dolny pasek na telefonie */
+.pasek-mobilny {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+  background: var(--grafit); border-top: 1px solid var(--grafit-3);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px)); gap: 8px;
+}
+.pasek-mobilny a { min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: var(--r); text-decoration: none; font-weight: 700; font-size: .82rem; color: var(--bialy); background: var(--grafit-2); }
+.pasek-mobilny a:first-child { background: var(--mosiadz); color: var(--grafit); flex-direction: row; gap: .5rem; font-size: 1rem; }
+.pasek-mobilny svg { width: 20px; height: 20px; }
+@media (min-width: 1101px) { .pasek-mobilny { display: none; } }
+
+.notka-demo { font-size: .85rem; color: var(--tekst-2); margin-top: 1rem; }
+.mt { margin-top: clamp(28px, 4vw, 44px); }
+.centr { display: flex; flex-wrap: wrap; gap: .8rem; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* poprawki po przeglądzie */
+blockquote.opinia { margin: 0; }
+.hero__foto figcaption { top: 12px; bottom: auto; }
+.mapa__info { background: rgba(21,23,28,.86); border-radius: var(--r); margin: 16px; }
+@media (max-width: 600px) { .topbar__adres { display: none; } }
+
+/* ===== Elementy dynamiczne ===== */
+.acc { font-style: normal; color: var(--mosiadz-ciemny); }
+.hero .acc, .podhero .acc, .sekcja--ciemna .acc { color: var(--mosiadz); }
+.tekst-bogaty { display: grid; gap: .9rem; }
+
+/* Pasek komunikatów */
+.topbar .wrap { align-items: center; }
+.ticker { display: flex; align-items: center; gap: .6rem; min-width: 0; flex: 1 1 320px; }
+.ticker__licz { font-variant-numeric: tabular-nums; font-size: .75rem; color: var(--na-ciemnym-2); border: 1px solid var(--grafit-3); border-radius: 99px; padding: .05rem .45rem; flex: none; }
+.ticker__okno { position: relative; overflow: hidden; height: 1.5em; flex: 1; min-width: 0; }
+.ticker__el { position: absolute; inset: 0; display: flex; gap: .5rem; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transform: translateY(110%); opacity: 0; transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s; }
+.ticker__el.on { transform: none; opacity: 1; }
+.ticker__el.off { transform: translateY(-110%); opacity: 0; }
+.ticker__el b { color: var(--mosiadz); font-weight: 700; }
+.ticker__el a { color: var(--bialy); text-decoration: underline; text-underline-offset: 2px; overflow: hidden; text-overflow: ellipsis; }
+.status { white-space: nowrap; }
+.status i { width: 8px; height: 8px; border-radius: 50%; flex: none; background: #D9776B; }
+.status[data-stan="otwarte"] i { background: #5FBF8F; animation: puls 2s infinite; }
+.status[data-stan="wkrotce"] i { background: #E0B347; animation: puls 2s infinite; }
+@keyframes puls { 0% { box-shadow: 0 0 0 0 rgba(95,191,143,.55); } 70% { box-shadow: 0 0 0 7px rgba(95,191,143,0); } 100% { box-shadow: 0 0 0 0 rgba(95,191,143,0); } }
+.status-duzy { display: inline-flex; align-items: center; gap: .6rem; padding: .5rem .9rem; border-radius: 99px; font-weight: 700; font-size: .95rem; background: #FBE9E6; color: #8E2F22; }
+.status-duzy i { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.status-duzy[data-stan="otwarte"] { background: #E3F3EA; color: #1F6B45; }
+.status-duzy[data-stan="otwarte"] i { animation: puls 2s infinite; }
+.status-duzy[data-stan="wkrotce"] { background: #FCF1D6; color: #7A5A0E; }
+
+/* Slider w nagłówku */
+.slider { position: relative; aspect-ratio: 4 / 3.4; border-radius: var(--r); overflow: hidden; background: var(--grafit-2); max-width: 100%; }
+.slajd { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+.slajd.on { opacity: 1; z-index: 1; }
+.slajd > img, .slajd > .bp { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.0); transition: transform 7s ease-out; }
+.slajd.on > img, .slajd.on > .bp { transform: scale(1.07); }
+.slajd figcaption { position: absolute; left: 14px; bottom: 14px; z-index: 2; font-size: .82rem; color: var(--na-ciemnym); background: rgba(21,23,28,.72); padding: .3rem .6rem; border-radius: 4px; max-width: calc(100% - 28px); }
+.kropki { position: absolute; right: 14px; bottom: 14px; z-index: 3; display: flex; gap: 4px; }
+.kropki button { width: 28px; height: 28px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+.kropki button::after { content: ""; width: 9px; height: 9px; border-radius: 99px; background: rgba(255,255,255,.45); transition: width .3s, background .3s; }
+.kropki button[aria-current="true"]::after { width: 22px; background: var(--mosiadz); }
+
+/* Grafiki techniczne (rysunki SVG w stylu dokumentacji serwisowej) */
+.bp { display: block; background: #191C22; }
+.bp .l { fill: none; stroke: #C9A35B; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bp .l2 { fill: none; stroke: #6E7480; stroke-width: 1.2; stroke-linecap: round; }
+.bp .siatka { stroke: #262A32; stroke-width: 1; }
+.bp .wym { fill: none; stroke: #8C929C; stroke-width: 1; }
+.bp text { font-family: var(--f-display); font-size: 13px; fill: #8C929C; letter-spacing: .08em; }
+.bp .hl { fill: none; stroke: #FFFFFF; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.bp .rys { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.slajd.on .bp .rys, .bp.anim .rys { animation: rysuj 2.6s cubic-bezier(.4,.1,.2,1) both; }
+@keyframes rysuj { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.bp .skan { animation: skan 3.2s ease-in-out infinite alternate; }
+@keyframes skan { from { transform: translateX(0); } to { transform: translateX(var(--skan, 300px)); } }
+.bp .obrot { transform-box: fill-box; transform-origin: center; animation: obrot 8s linear infinite; }
+@keyframes obrot { to { transform: rotate(360deg); } }
+.bp .przeplyw { stroke-dasharray: 6 10; animation: przeplyw 1.4s linear infinite; }
+@keyframes przeplyw { to { stroke-dashoffset: -32; } }
+.bp .migaj { animation: migaj 1.6s ease-in-out infinite; }
+@keyframes migaj { 50% { opacity: .25; } }
+
+/* Hero – animacja linii S */
+.hero__linia path { stroke-dasharray: 140; animation: rysuj-s 2.4s .2s cubic-bezier(.5,0,.2,1) both; }
+@keyframes rysuj-s { from { stroke-dashoffset: 140; } to { stroke-dashoffset: 0; } }
+.hero__linia { opacity: .1; }
+.hero__karta { animation: unies 5s ease-in-out infinite alternate; z-index: 4; }
+@keyframes unies { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+
+/* Odsłanianie przy przewijaniu: tylko przesunięcie, treść zawsze widoczna */
+.odslon { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.odslon.czeka { transform: translateY(18px); }
+
+/* Karty – mikrointerakcje */
+.usluga, .wpis, .pakiet, .promo { position: relative; }
+.usluga::after, .wpis::after { content: ""; position: absolute; left: 1.4rem; right: 1.4rem; bottom: -1px; height: 2px; background: var(--mosiadz-ciemny); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.usluga:hover::after, .wpis:hover::after, .usluga:focus-within::after { transform: scaleX(1); }
+.usluga:hover .usluga__ikona svg { animation: drgnij .5s ease; }
+@keyframes drgnij { 30% { transform: rotate(-10deg); } 60% { transform: rotate(8deg); } }
+.usluga__foto { aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; margin: -.4rem -.4rem 0; background: var(--grafit-2); }
+.usluga__foto img, .usluga__foto .bp { width: 100%; height: 100%; object-fit: cover; }
+.usluga__akcje { display: flex; flex-wrap: wrap; gap: .5rem; }
+.usluga__akcje .btn { min-height: 40px; padding: .45rem .8rem; font-size: .9rem; }
+.usluga__meta { font-size: .88rem; color: var(--tekst-2); display: flex; gap: .3rem 1rem; flex-wrap: wrap; }
+.znaczki { display: flex; gap: .35rem; flex-wrap: wrap; justify-content: flex-end; }
+.znaczek--wlasny { background: var(--grafit); color: var(--mosiadz); }
+.znaczek--promo { animation: blysk 3s ease-in-out infinite; }
+@keyframes blysk { 50% { box-shadow: 0 0 0 4px rgba(138,106,46,.18); } }
+
+/* Promocje */
+.promocje { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+.promo { background: var(--grafit); color: var(--na-ciemnym); border-radius: var(--r); overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.promo__foto { aspect-ratio: 16 / 8; position: relative; background: var(--grafit-2); }
+.promo__foto img, .promo__foto .bp { width: 100%; height: 100%; object-fit: cover; }
+.promo__plak { position: absolute; left: 14px; top: 14px; background: var(--mosiadz); color: var(--grafit); font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: 1.15rem; padding: .3rem .7rem; border-radius: 4px; }
+.promo__tresc { padding: 1.3rem; display: grid; gap: .8rem; align-content: start; }
+.promo__tresc h3 { color: var(--bialy); font-size: 1.25rem; }
+.promo__tresc p { color: var(--na-ciemnym-2); }
+.promo__termin { display: grid; gap: .45rem; font-size: .9rem; }
+.promo__termin div { display: flex; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+.promo__termin strong { color: var(--bialy); font-variant-numeric: tabular-nums; }
+.postep { height: 6px; background: var(--grafit-3); border-radius: 99px; overflow: hidden; }
+.postep i { display: block; height: 100%; background: linear-gradient(90deg, var(--mosiadz-ciemny), var(--mosiadz)); border-radius: 99px; transform-origin: left; animation: wypelnij 1.4s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes wypelnij { from { transform: scaleX(0); } }
+
+/* Galeria: filtry i lightbox */
+.filtry { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+.filtr { min-height: 40px; padding: .4rem .9rem; border-radius: 99px; border: 1.5px solid var(--linia); background: var(--bialy); font: inherit; font-weight: 600; font-size: .92rem; cursor: pointer; color: var(--tekst); }
+.filtr[aria-pressed="true"] { background: var(--grafit); color: var(--bialy); border-color: var(--grafit); }
+.galeria button.foto { border: 0; padding: 0; cursor: zoom-in; width: 100%; display: block; text-align: left; font: inherit; }
+.galeria .foto .bp, .galeria .foto img { transition: transform .5s ease; }
+.galeria button.foto:hover .bp, .galeria button.foto:hover img { transform: scale(1.04); }
+.galeria .foto figcaption, .galeria .foto .podpis { z-index: 2; }
+.galeria .podpis { position: absolute; left: 0; right: 0; bottom: 0; padding: .7rem .9rem; font-size: .85rem; color: var(--bialy); background: linear-gradient(transparent, rgba(21,23,28,.85)); }
+.lightbox { position: fixed; inset: 0; z-index: 900; background: rgba(12,13,16,.94); display: grid; grid-template-rows: auto 1fr auto; padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(16px, env(safe-area-inset-bottom, 0px)); color: var(--na-ciemnym); }
+.lightbox__gora { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.lightbox__obraz { display: grid; place-items: center; min-height: 0; position: relative; }
+.lightbox__obraz img, .lightbox__obraz .bp { max-width: min(1100px, 100%); max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 4px; }
+.lightbox__obraz .bp { width: min(1000px, 100%); aspect-ratio: 4 / 3; height: auto; }
+.lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--grafit-3); background: rgba(21,23,28,.8); color: var(--bialy); cursor: pointer; display: grid; place-items: center; }
+.lightbox__nav svg { width: 22px; height: 22px; }
+.lightbox__nav--l { left: 0; } .lightbox__nav--l svg { transform: rotate(180deg); }
+.lightbox__nav--p { right: 0; }
+.lightbox__x { width: 48px; height: 48px; border-radius: var(--r); border: 1px solid var(--grafit-3); background: none; color: var(--bialy); font-size: 1.6rem; cursor: pointer; }
+.lightbox__dol { text-align: center; padding-top: .8rem; }
+
+/* Monogram w miejsce zdjęcia osoby */
+.monogram { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--f-display); font-stretch: 125%; font-weight: 800; font-size: 2.6rem; color: var(--mosiadz); letter-spacing: .04em; }
+
+/* Kroki wizyty: linia postępu */
+.kroki li { position: relative; border-top-color: var(--linia); }
+.kroki li::after { content: ""; position: absolute; top: -3px; left: 0; height: 3px; width: 100%; background: var(--mosiadz); transform: scaleX(1); transform-origin: left; transition: transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * .25s); }
+.kroki.czeka li::after { transform: scaleX(0); }
+.sekcja--ciemna .kroki li { border-top-color: var(--grafit-3); }
+
+/* Sygnał diagnostyczny w tle sekcji specjalizacji */
+.sygnal { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .55; }
+.z-sygnalem { position: relative; overflow: hidden; }
+.z-sygnalem > .wrap { position: relative; z-index: 1; }
+.marki li { background: rgba(21,23,28,.6); backdrop-filter: blur(2px); transition: border-color .2s, transform .2s; }
+.marki li:hover { border-color: var(--mosiadz); transform: translateY(-2px); }
+
+/* Mapa – animowana trasa */
+.mapa .trasa-anim { stroke-dasharray: 2 10; animation: przeplyw 1.6s linear infinite; }
+.mapa .pinezka { animation: unies 1.6s ease-in-out infinite alternate; transform-box: fill-box; }
+
+/* Zmiany w godzinach */
+.zmiany { display: grid; gap: .5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--linia); }
+.zmiany h4 { margin: 0; font-family: var(--f-display); font-stretch: 112%; font-size: 1rem; }
+.zmiany li { display: flex; justify-content: space-between; gap: 1rem; font-size: .95rem; }
+.zmiany ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.zmiany time { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Opinie: podsumowanie */
+.oceny { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-bottom: 1.5rem; }
+.oceny__srednia { font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: 2.6rem; line-height: 1; }
+.gwiazdki { display: inline-flex; gap: 2px; color: var(--mosiadz); }
+.gwiazdki svg { width: 18px; height: 18px; }
+.gwiazdki .pusta { color: var(--linia); }
+.opinia--prawdziwa { border-style: solid; }
+.brak-opinii { border: 1px dashed var(--linia); border-radius: var(--r); padding: 1.5rem; display: grid; gap: .8rem; justify-items: start; background: var(--bialy); }
+
+/* Widoki (podstrony w jednym pliku) */
+.widok-wejscie { animation: wejscie .45s ease both; }
+@keyframes wejscie { from { opacity: .4; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Kłódka panelu */
+.cms-klodka { position: fixed; left: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 70; height: 40px; min-width: 40px; padding: 0 .7rem; border-radius: 99px; border: 1px solid var(--grafit-3); background: rgba(21,23,28,.86); color: var(--na-ciemnym-2); display: inline-flex; align-items: center; justify-content: center; gap: .4rem; cursor: pointer; font: 600 .85rem var(--f-body); }
+.cms-klodka svg { width: 18px; height: 18px; }
+.cms-klodka:hover { color: var(--mosiadz); border-color: var(--mosiadz); }
+@media (max-width: 1100px) { .cms-klodka { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
+
+@media (max-width: 600px) { .ticker { flex-basis: 100%; order: 2; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__el { transition: none; }
+  .slajd { transition: none; }
+  .slajd.on > img, .slajd.on > .bp { transform: none; }
+  .bp .rys, .bp .skan, .bp .obrot, .bp .przeplyw, .bp .migaj, .hero__linia path, .hero__karta, .postep i, .znaczek--promo, .status i, .status-duzy i, .mapa .trasa-anim, .mapa .pinezka { animation: none !important; }
+  .odslon.czeka, .kroki.czeka li::after { transform: none; }
+  .sygnal { display: none; }
+}
+
+/* uzupełnienia */
+.usluga { display: flex; flex-direction: column; }
+.usluga__cena { margin-top: auto; }
+.usluga__meta svg, .ik-mala { width: 16px; height: 16px; flex: none; }
+.usluga__meta { align-items: center; }
+td.czas { white-space: nowrap; color: var(--tekst-2); font-size: .92rem; }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--na-ciemnym); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.link-btn:hover { color: var(--mosiadz); }
+.hero__lead p { color: var(--na-ciemnym); }
+.hero__lead { display: grid; gap: .6rem; }
+.faq details p { padding: 0 1.2rem 1.2rem; }
+.osoba .foto { background-color: var(--grafit); }
+
+.nav a { white-space: nowrap; padding: .6rem .65rem; }
+.header .btn { white-space: nowrap; }
+@media (max-width: 1240px) and (min-width: 1101px) { .nav a { padding: .6rem .5rem; font-size: .95rem; } .logo svg { height: 38px; } }
+
+/* ===== PANEL ADMINISTRATORA (prefiks .cmsp-) ===== */
+.cmsp, .cmsp *, .cmsp-login, .cmsp-login *, .cmsp-modal-tlo, .cmsp-modal-tlo * { box-sizing: border-box; }
+.cmsp {
+  --p-grafit: #15171C; --p-grafit-2: #22252C; --p-mosiadz: #C9A35B; --p-mosiadz-c: #8A6A2E;
+  --p-tlo: #F3F4F6; --p-karta: #FFFFFF; --p-tekst: #15171C; --p-tekst-2: #565C66; --p-linia: #DCDFE4;
+  --p-ok: #2F8F5B; --p-ok-tlo: #E3F3EA; --p-plan: #B7860F; --p-plan-tlo: #FCF1D6; --p-szary: #8A909A; --p-szary-tlo: #ECEEF1; --p-blad: #B3261E; --p-blad-tlo: #FBE9E6;
+  position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-rows: auto 1fr; background: var(--p-tlo); color: var(--p-tekst);
+  font: 15px/1.5 var(--f-body); padding-top: env(safe-area-inset-top, 0px);
+}
+.cmsp-login, .cmsp-modal-tlo { --p-grafit: #15171C; --p-mosiadz: #C9A35B; --p-mosiadz-c: #8A6A2E; --p-tekst: #15171C; --p-tekst-2: #565C66; --p-linia: #DCDFE4; --p-blad: #B3261E; --p-blad-tlo: #FBE9E6; font: 15px/1.5 var(--f-body); color: var(--p-tekst); }
+.cmsp h1, .cmsp h2, .cmsp h3, .cmsp-modal h2, .cmsp-login h2 { font-family: var(--f-display); font-stretch: 108%; margin: 0; line-height: 1.2; }
+.cmsp button, .cmsp input, .cmsp select, .cmsp textarea, .cmsp-modal-tlo button, .cmsp-modal-tlo input, .cmsp-modal-tlo select, .cmsp-modal-tlo textarea, .cmsp-login input, .cmsp-login button { font: inherit; }
+.cmsp :focus-visible, .cmsp-modal-tlo :focus-visible, .cmsp-login :focus-visible { outline: 3px solid var(--p-mosiadz); outline-offset: 2px; }
+
+.cmsp-top { background: var(--p-grafit); color: #E7E9EC; display: flex; align-items: center; gap: .8rem 1.2rem; padding: .6rem 1rem; flex-wrap: wrap; }
+.cmsp-marka { display: flex; align-items: center; gap: .7rem; margin-right: auto; min-width: 0; }
+.cmsp-marka svg { width: 34px; height: 34px; flex: none; }
+.cmsp-marka strong { display: block; color: #fff; font-family: var(--f-display); font-stretch: 112%; font-size: 1rem; line-height: 1.1; }
+.cmsp-marka span { font-size: .8rem; color: #A3A9B3; }
+.cmsp-zapis { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; color: #C4C8CF; white-space: nowrap; }
+.cmsp-zapis i { width: 8px; height: 8px; border-radius: 50%; background: #5FBF8F; }
+.cmsp-zapis[data-stan="trwa"] i { background: #E0B347; animation: puls 1s infinite; }
+.cmsp-zapis[data-stan="blad"] i { background: #E06B5F; }
+.cmsp-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 40px; padding: .45rem .9rem; border-radius: 6px; border: 1.5px solid var(--p-linia); background: var(--p-karta, #fff); color: var(--p-tekst); font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.cmsp-btn svg { width: 18px; height: 18px; }
+.cmsp-btn:hover { border-color: var(--p-mosiadz-c); }
+.cmsp-btn--gl { background: var(--p-mosiadz); border-color: var(--p-mosiadz); color: var(--p-grafit); }
+.cmsp-btn--gl:hover { background: #D8B672; }
+.cmsp-btn--ciem { background: var(--p-grafit); border-color: var(--p-grafit); color: #fff; }
+.cmsp-btn--duch { background: transparent; border-color: #3A3F49; color: #E7E9EC; }
+.cmsp-btn--duch:hover { border-color: var(--p-mosiadz); color: var(--p-mosiadz); }
+.cmsp-btn--mini { min-height: 34px; padding: .25rem .6rem; font-size: .85rem; }
+.cmsp-btn--ikon { width: 34px; min-height: 34px; padding: 0; }
+.cmsp-btn--usun { color: var(--p-blad); }
+.cmsp-btn--usun.cmsp-potw { background: var(--p-blad); border-color: var(--p-blad); color: #fff; }
+.cmsp-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.cmsp-cialo { display: grid; grid-template-columns: 250px 1fr; min-height: 0; }
+.cmsp-nav { background: #fff; border-right: 1px solid var(--p-linia); overflow-y: auto; padding: .8rem .6rem 2rem; }
+.cmsp-nav h3 { font-family: var(--f-display); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--p-tekst-2); margin: 1rem .6rem .35rem; font-weight: 600; }
+.cmsp-nav h3:first-child { margin-top: .2rem; }
+.cmsp-nav button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: .5rem; text-align: left; padding: .5rem .7rem; border: 0; border-radius: 6px; background: none; color: var(--p-tekst); cursor: pointer; font-weight: 500; }
+.cmsp-nav button:hover { background: var(--p-tlo); }
+.cmsp-nav button[aria-current="page"] { background: var(--p-grafit); color: #fff; }
+.cmsp-licz { font-size: .74rem; font-variant-numeric: tabular-nums; border-radius: 99px; padding: .05rem .45rem; background: var(--p-szary-tlo); color: var(--p-tekst-2); font-weight: 700; }
+.cmsp-licz--ok { background: var(--p-ok-tlo); color: #1F6B45; }
+.cmsp-nav button[aria-current="page"] .cmsp-licz { background: #3A3F49; color: #fff; }
+.cmsp-nav button[aria-current="page"] .cmsp-licz--ok { background: var(--p-ok); }
+.cmsp-liczniki { display: inline-flex; gap: .25rem; }
+
+.cmsp-main { overflow-y: auto; padding: 1.6rem clamp(16px, 3vw, 40px) 5rem; min-width: 0; }
+.cmsp-glowa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.4rem; }
+.cmsp-glowa h1 { font-size: 1.6rem; }
+.cmsp-glowa p { color: var(--p-tekst-2); margin: .3rem 0 0; max-width: 70ch; }
+.cmsp-karta { background: var(--p-karta); border: 1px solid var(--p-linia); border-radius: 8px; padding: 1.2rem; display: grid; gap: 1rem; min-width: 0; }
+.cmsp-karta + .cmsp-karta { margin-top: 1rem; }
+.cmsp-karta h2 { font-size: 1.1rem; }
+.cmsp-karta > p.cmsp-op { color: var(--p-tekst-2); margin: -.6rem 0 0; font-size: .92rem; }
+
+/* Pola formularzy */
+.cmsp-pola { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1rem; }
+.cmsp-pole { display: grid; gap: .3rem; min-width: 0; align-content: start; }
+.cmsp-pole--pelne { grid-column: 1 / -1; }
+.cmsp-pole label, .cmsp-pole .cmsp-et { font-weight: 700; font-size: .88rem; }
+.cmsp-pole small { color: var(--p-tekst-2); font-size: .8rem; }
+.cmsp-pole input[type=text], .cmsp-pole input[type=email], .cmsp-pole input[type=tel], .cmsp-pole input[type=url], .cmsp-pole input[type=date], .cmsp-pole input[type=time], .cmsp-pole input[type=number], .cmsp-pole select, .cmsp-pole textarea, .cmsp-login input, .cmsp textarea.cmsp-json {
+  width: 100%; min-height: 42px; padding: .5rem .65rem; border: 1.5px solid #BFC4CC; border-radius: 6px; background: #fff; color: var(--p-tekst); min-width: 0;
+}
+.cmsp-pole textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+.cmsp-pole input:focus, .cmsp-pole select:focus, .cmsp-pole textarea:focus { border-color: var(--p-mosiadz-c); outline: 3px solid rgba(201,163,91,.4); }
+.cmsp-check { display: flex; align-items: center; gap: .55rem; font-weight: 600; font-size: .92rem; cursor: pointer; min-height: 42px; }
+.cmsp-check input { width: 20px; height: 20px; accent-color: var(--p-grafit); flex: none; }
+.cmsp-jezyk { font-size: .68rem; font-weight: 700; letter-spacing: .08em; background: var(--p-szary-tlo); color: var(--p-tekst-2); padding: .05rem .35rem; border-radius: 4px; margin-left: .35rem; vertical-align: 1px; }
+.cmsp-foto { display: grid; grid-template-columns: 132px 1fr; gap: .8rem; align-items: start; }
+.cmsp-foto__podglad { width: 132px; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: #191C22 repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 12px); display: grid; place-items: center; color: #8C929C; font-size: .75rem; text-align: center; }
+.cmsp-foto__podglad img, .cmsp-foto__podglad svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cmsp-foto__akcje { display: grid; gap: .45rem; min-width: 0; }
+.cmsp-foto__akcje > div { display: flex; flex-wrap: wrap; gap: .4rem; }
+.cmsp-plik { position: relative; overflow: hidden; }
+.cmsp-plik input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.cmsp-plik:focus-within { outline: 3px solid var(--p-mosiadz); outline-offset: 2px; }
+.cmsp-pomoc-fmt { font-size: .8rem; color: var(--p-tekst-2); }
+.cmsp-pomoc-fmt code { background: var(--p-szary-tlo); padding: 0 .25rem; border-radius: 3px; }
+
+/* Listy (kolekcje) */
+.cmsp-lista { display: grid; gap: 6px; }
+.cmsp-wiersz { display: grid; grid-template-columns: auto 52px 1fr auto auto; gap: .7rem; align-items: center; background: #fff; border: 1px solid var(--p-linia); border-radius: 8px; padding: .5rem .6rem; min-width: 0; }
+.cmsp-wiersz.cmsp-ukryta { background: #F7F8F9; }
+.cmsp-wiersz.cmsp-ukryta .cmsp-wiersz__tekst, .cmsp-wiersz.cmsp-ukryta .cmsp-mini { opacity: .5; }
+.cmsp-strzalki { display: grid; gap: 2px; }
+.cmsp-strzalki button { width: 30px; height: 22px; border: 1px solid var(--p-linia); background: #fff; border-radius: 4px; cursor: pointer; font-size: .7rem; line-height: 1; color: var(--p-tekst-2); }
+.cmsp-strzalki button:hover:not(:disabled) { border-color: var(--p-mosiadz-c); color: var(--p-tekst); }
+.cmsp-strzalki button:disabled { opacity: .3; cursor: default; }
+.cmsp-mini { width: 52px; height: 40px; border-radius: 5px; overflow: hidden; background: var(--p-grafit); color: var(--p-mosiadz); display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; font-size: .9rem; }
+.cmsp-mini img, .cmsp-mini svg.bp { width: 100%; height: 100%; object-fit: cover; }
+.cmsp-mini svg:not(.bp) { width: 22px; height: 22px; }
+.cmsp-wiersz__tekst { min-width: 0; }
+.cmsp-wiersz__tekst strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmsp-wiersz__tekst span { display: block; font-size: .84rem; color: var(--p-tekst-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmsp-akcje { display: flex; gap: .3rem; flex-wrap: wrap; justify-content: flex-end; }
+.cmsp-plak { font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 99px; white-space: nowrap; background: var(--p-szary-tlo); color: var(--p-tekst-2); justify-self: end; }
+.cmsp-plak--aktywna, .cmsp-plak--widoczna { background: var(--p-ok-tlo); color: #1F6B45; }
+.cmsp-plak--zaplanowana { background: var(--p-plan-tlo); color: #7A5A0E; }
+.cmsp-plak--zakonczona, .cmsp-plak--wstrzymana, .cmsp-plak--ukryta { background: var(--p-szary-tlo); color: #555B65; }
+.cmsp-pusto { padding: 1.4rem; border: 1.5px dashed var(--p-linia); border-radius: 8px; text-align: center; color: var(--p-tekst-2); background: #fff; }
+.cmsp-filtry { display: flex; flex-wrap: wrap; gap: .4rem; }
+.cmsp-filtry button { min-height: 36px; border-radius: 99px; border: 1.5px solid var(--p-linia); background: #fff; padding: .25rem .8rem; cursor: pointer; font-weight: 600; font-size: .88rem; display: inline-flex; gap: .4rem; align-items: center; }
+.cmsp-filtry button[aria-pressed="true"] { background: var(--p-grafit); color: #fff; border-color: var(--p-grafit); }
+.cmsp-filtry button span { font-variant-numeric: tabular-nums; opacity: .75; }
+.cmsp-pasek-listy { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; align-items: center; }
+
+/* Pulpit */
+.cmsp-szybkie { display: flex; flex-wrap: wrap; gap: .5rem; }
+.cmsp-kafle { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 12px; }
+.cmsp-kafel { text-align: left; background: #fff; border: 1px solid var(--p-linia); border-radius: 8px; padding: 1rem; display: grid; gap: .25rem; cursor: pointer; color: var(--p-tekst); transition: border-color .15s, transform .15s; }
+.cmsp-kafel:hover { border-color: var(--p-mosiadz-c); transform: translateY(-1px); }
+.cmsp-kafel span { font-size: .8rem; color: var(--p-tekst-2); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.cmsp-kafel strong { font-family: var(--f-display); font-stretch: 112%; font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.cmsp-kafel small { color: var(--p-tekst-2); font-size: .84rem; }
+.cmsp-kafel--stan strong { font-size: 1.3rem; display: flex; align-items: center; gap: .5rem; }
+.cmsp-kafel--stan strong i { width: 10px; height: 10px; border-radius: 50%; background: var(--p-blad); flex: none; }
+.cmsp-kafel--stan[data-stan="otwarte"] strong i { background: var(--p-ok); animation: puls 2s infinite; }
+.cmsp-kafel--stan[data-stan="wkrotce"] strong i { background: #E0B347; }
+.cmsp-gantt { overflow-x: auto; }
+.cmsp-gantt svg { display: block; min-width: 680px; width: 100%; height: auto; font-family: var(--f-body); }
+.cmsp-legenda { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; font-size: .85rem; color: var(--p-tekst-2); }
+.cmsp-legenda span { display: inline-flex; align-items: center; gap: .4rem; }
+.cmsp-legenda i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+.cmsp-terminy { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.cmsp-terminy li { display: grid; grid-template-columns: 74px auto 1fr; gap: .8rem; align-items: center; padding: .55rem 0; border-top: 1px solid var(--p-linia); }
+.cmsp-terminy li:first-child { border-top: 0; }
+.cmsp-terminy time { font-weight: 700; font-variant-numeric: tabular-nums; }
+.cmsp-dwie { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; align-items: start; }
+.cmsp-dwie > * { min-width: 0; }
+.cmsp-dwie > .cmsp-karta + .cmsp-karta { margin-top: 0; }
+
+/* Godziny */
+.cmsp-godziny { display: grid; gap: 6px; }
+.cmsp-godz { display: grid; grid-template-columns: 130px 150px 1fr 1fr; gap: .7rem; align-items: center; padding: .4rem 0; border-top: 1px solid var(--p-linia); }
+.cmsp-godz:first-child { border-top: 0; }
+.cmsp-godz input[type=time] { min-height: 40px; padding: .35rem .5rem; border: 1.5px solid #BFC4CC; border-radius: 6px; width: 100%; }
+.cmsp-godz input:disabled { background: #F1F2F4; color: #A3A9B3; }
+.cmsp-ostrz { color: var(--p-blad); font-size: .85rem; font-weight: 600; grid-column: 1 / -1; }
+.cmsp-podglad-stan { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .9rem; border-radius: 99px; font-weight: 700; background: var(--p-blad-tlo); color: #8E2F22; justify-self: start; }
+.cmsp-podglad-stan i { width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+.cmsp-podglad-stan[data-stan="otwarte"] { background: var(--p-ok-tlo); color: #1F6B45; }
+.cmsp-podglad-stan[data-stan="otwarte"] i { animation: puls 2s infinite; }
+.cmsp-podglad-stan[data-stan="wkrotce"] { background: var(--p-plan-tlo); color: #7A5A0E; }
+
+/* Sekcje */
+.cmsp-sekcje { display: grid; gap: 6px; }
+.cmsp-sekcja { background: #fff; border: 1px solid var(--p-linia); border-radius: 8px; }
+.cmsp-sekcja__wiersz { display: grid; grid-template-columns: auto 1fr auto auto; gap: .8rem; align-items: center; padding: .6rem .8rem; }
+.cmsp-sekcja__pola { padding: 0 .8rem .9rem; border-top: 1px solid var(--p-linia); padding-top: .9rem; }
+.cmsp-przel { position: relative; width: 44px; height: 26px; flex: none; }
+.cmsp-przel input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; z-index: 1; }
+.cmsp-przel span { position: absolute; inset: 0; border-radius: 99px; background: #C4C8CF; transition: background .2s; }
+.cmsp-przel span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.cmsp-przel input:checked + span { background: var(--p-ok); }
+.cmsp-przel input:checked + span::after { transform: translateX(18px); }
+.cmsp-przel input:focus-visible + span { outline: 3px solid var(--p-mosiadz); outline-offset: 2px; }
+.cmsp-widok-et { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--p-tekst-2); margin: .8rem 0 .2rem; }
+
+/* Modal */
+.cmsp-modal-tlo { position: fixed; inset: 0; z-index: 1100; background: rgba(12,13,16,.55); display: grid; place-items: center; padding: 16px; overflow-y: auto; }
+.cmsp-modal { background: #fff; border-radius: 10px; width: min(720px, 100%); max-height: calc(100vh - 32px); display: grid; grid-template-rows: auto 1fr auto; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.cmsp-modal__glowa { padding: 1rem 1.2rem; border-bottom: 1px solid var(--p-linia); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.cmsp-modal__cialo { padding: 1.2rem; overflow-y: auto; display: grid; gap: 1rem; }
+.cmsp-modal__stopka { padding: .9rem 1.2rem; border-top: 1px solid var(--p-linia); display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; }
+.cmsp-modal__stopka .cmsp-btn--usun { margin-right: auto; }
+.cmsp-blad { background: var(--p-blad-tlo); color: #8E2F22; border-radius: 6px; padding: .6rem .8rem; font-weight: 600; font-size: .9rem; }
+.cmsp-x { width: 40px; height: 40px; border-radius: 6px; border: 1px solid var(--p-linia); background: #fff; cursor: pointer; font-size: 1.4rem; line-height: 1; color: var(--p-tekst); }
+
+/* Logowanie */
+.cmsp-login { position: fixed; inset: 0; z-index: 1200; background: rgba(12,13,16,.7); display: grid; place-items: center; padding: 16px; }
+.cmsp-login form { background: #fff; border-radius: 10px; width: min(380px, 100%); padding: 1.6rem; display: grid; gap: .9rem; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+.cmsp-login .cmsp-login__znak { display: flex; align-items: center; gap: .7rem; }
+.cmsp-login .cmsp-login__znak svg { width: 40px; height: 40px; }
+.cmsp-login label { font-weight: 700; font-size: .88rem; display: grid; gap: .3rem; }
+.cmsp-login .cmsp-btny { display: flex; gap: .5rem; justify-content: flex-end; }
+.cmsp-login .cmsp-btn { border: 1.5px solid var(--p-linia); background: #fff; color: var(--p-tekst); }
+.cmsp-login .cmsp-btn--ciem { background: var(--p-grafit); color: #fff; border-color: var(--p-grafit); }
+.cmsp-login .cmsp-podp { font-size: .8rem; color: var(--p-tekst-2); text-align: center; border-top: 1px solid var(--p-linia); padding-top: .8rem; }
+.cmsp-login .cmsp-blad { display: block; }
+
+/* Toasty */
+.cmsp-toasty { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 1300; display: grid; gap: 8px; justify-items: center; pointer-events: none; width: min(460px, calc(100% - 32px)); }
+.cmsp-toast { background: #15171C; color: #fff; padding: .7rem 1rem; border-radius: 8px; font: 600 .92rem/1.4 var(--f-body); box-shadow: 0 10px 30px rgba(0,0,0,.3); display: flex; gap: .6rem; align-items: center; animation: toast-in .25s ease both; border-left: 4px solid var(--p-mosiadz, #C9A35B); }
+.cmsp-toast--blad { border-left-color: #E06B5F; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* Telefon */
+@media (max-width: 860px) {
+  .cmsp-cialo { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .cmsp-nav { display: flex; overflow-x: auto; overflow-y: hidden; padding: .5rem; gap: .3rem; border-right: 0; border-bottom: 1px solid var(--p-linia); scrollbar-width: thin; }
+  .cmsp-nav h3 { display: none; }
+  .cmsp-nav button { width: auto; flex: none; white-space: nowrap; border: 1px solid var(--p-linia); }
+  .cmsp-pola { grid-template-columns: 1fr; }
+  .cmsp-dwie { grid-template-columns: 1fr; }
+  .cmsp-wiersz { grid-template-columns: auto 44px 1fr; }
+  .cmsp-wiersz .cmsp-plak { grid-column: 3; justify-self: start; grid-row: 2; }
+  .cmsp-wiersz .cmsp-akcje { grid-column: 1 / -1; justify-content: flex-start; }
+  .cmsp-mini { width: 44px; height: 36px; }
+  .cmsp-godz { grid-template-columns: 1fr 1fr; }
+  .cmsp-godz > strong { grid-column: 1 / -1; }
+  .cmsp-foto { grid-template-columns: 96px 1fr; }
+  .cmsp-foto__podglad { width: 96px; }
+  .cmsp-top { padding: .5rem .8rem; }
+  .cmsp-marka span { display: none; }
+  .cmsp-zapis { order: 3; width: 100%; }
+  .cmsp-sekcja__wiersz { grid-template-columns: auto 1fr auto; }
+  .cmsp-sekcja__wiersz .cmsp-plak { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .cmsp *, .cmsp-toast { animation: none !important; transition: none !important; } }
+@media (max-width: 860px) { .cmsp-top .cmsp-btn { min-height: 36px; padding: .3rem .65rem; font-size: .88rem; } .cmsp-top { gap: .5rem; } .cmsp-marka strong { font-size: .92rem; } }
+
+</style>
+</head>
+<body>
+<div id="app"><p style="padding:2rem;font-family:sans-serif">Wczytywanie strony…</p></div>
+<button type="button" class="cms-klodka" id="cms-klodka" aria-label="Panel administratora"></button>
+<noscript><p style="padding:1rem">Strona wymaga włączonego JavaScriptu. Telefon: 601 601 601.</p></noscript>
+<script>
+/* =====================================================================
+   SZALONE AUTO – strona + panel administracyjny (CMS) w jednym pliku
+   ---------------------------------------------------------------------
+   WERSJA DEMONSTRACYJNA / PORTFOLIO:
+   - wszystkie treści są w obiekcie STATE (wartości początkowe poniżej),
+   - zmiany z panelu zapisują się WYŁĄCZNIE w przeglądarce osoby edytującej
+     (IndexedDB, awaryjnie localStorage) – inni odwiedzający ich nie widzą,
+   - login i hasło panelu są wpisane w kod (CMS_LOGIN / CMS_HASLO) –
+     to nie jest zabezpieczenie produkcyjne.
+   Wersja produkcyjna: zapis danych na serwerze (np. Cloudflare Workers + KV)
+   i prawdziwe logowanie.
+   Kolejność kodu: 1) dane początkowe, 2) renderowanie strony, 3) panel.
+   ===================================================================== */
+"use strict";
+
+var CMS_LOGIN = "admin";
+var CMS_HASLO = "warsztat";          // demo – hasło jawne w kodzie
+var APP_ID = "szalone-auto-cms";
+var APP_WERSJA = 1;
+
+/* ---------- daty ---------- */
+function dzisISO(d) { d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function zISO(s) { var p = String(s).split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+function dodajDni(iso, n) { var d = zISO(iso); d.setDate(d.getDate() + n); return dzisISO(d); }
+var MIESIACE_D = ["stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia"];
+var MIESIACE_K = ["sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"];
+var DNI = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+var DNI_W = ["w poniedziałek", "we wtorek", "w środę", "w czwartek", "w piątek", "w sobotę", "w niedzielę"];
+function dataSlownie(iso) { if (!iso) return ""; var d = zISO(iso); return d.getDate() + " " + MIESIACE_D[d.getMonth()] + " " + d.getFullYear(); }
+function dataKrotko(iso) { var d = zISO(iso); return d.getDate() + "." + String(d.getMonth() + 1).padStart(2, "0"); }
+function uid() { return Math.random().toString(36).slice(2, 9); }
+
+/* ---------- ikony (liniowe 24 px, grubość jak linia w logo) ---------- */
+var IKONY = {
+  tel: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  sms: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  pin: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  zegar: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  tarcza: '<path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6z"/><path d="m8.8 12 2.3 2.3 4.3-4.6"/>',
+  faktura: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/>',
+  karta: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/>',
+  olej: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  chip: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
+  piorun: '<path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/>',
+  sniezka: '<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/>',
+  kolo: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/>',
+  geometria: '<path d="M7 4 5 20M19 4l-2 16"/><path d="M3 12h18" stroke-dasharray="2 2.5"/>',
+  karoseria: '<path d="M3 15v-3l2.5-5h9L18 11l3 1v3"/><circle cx="7" cy="16" r="2"/><circle cx="17" cy="16" r="2"/><path d="M9 16h6"/>',
+  lpg: '<rect x="4" y="8" width="16" height="10" rx="5"/><path d="M12 8V5M10 5h4"/>',
+  szyba: '<path d="M4 17 6 7h12l2 10z"/><path d="m9 14 4-4M12 15l3-3"/>',
+  hamulec: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M17 5.5a9 9 0 0 1 2.5 6.5"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  strzalka: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  fb: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8z"/>',
+  ig: '<rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".6"/>',
+  parking: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/>',
+  gwiazda: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  klodka: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  dostep: '<circle cx="12" cy="5" r="2"/><path d="M5 9h14M12 9v6m0 0-3 6m3-6 3 6"/>',
+  megafon: '<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>',
+  kalendarz: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>'
+};
+function ico(n, cls) { return '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (IKONY[n] || IKONY.check) + "</svg>"; }
+var IKONY_USLUG = [["olej", "Kropla (płyny)"], ["check", "Haczyk (mechanika)"], ["hamulec", "Tarcza hamulcowa"], ["lpg", "Butla LPG"], ["chip", "Układ scalony (diagnostyka)"], ["piorun", "Piorun (elektryka)"], ["sniezka", "Śnieżka (klimatyzacja)"], ["kolo", "Koło"], ["geometria", "Geometria"], ["karoseria", "Nadwozie"], ["szyba", "Szyba"], ["tarcza", "Tarcza (gwarancja)"], ["faktura", "Dokument"], ["karta", "Karta płatnicza"], ["zegar", "Zegar"], ["parking", "Parking"]];
+
+/* ---------- grafiki techniczne (wbudowane zamiast zdjęć, wartość "bp:nazwa") ---------- */
+var GRAFIKI = { auto: "Auto – rysunek techniczny", diagnoza: "Diagnostyka – sygnał", kolo: "Geometria kół", klima: "Klimatyzacja – obieg powietrza", hamulce: "Układ hamulcowy", warsztat: "Auto na podnośniku" };
+function bpAuto(dx, dy, s, rys) {
+  var r = rys ? ' pathLength="1"' : "";
+  var c = rys ? "l rys" : "l";
+  return '<g transform="translate(' + dx + " " + dy + ") scale(" + s + ')">' +
+    '<path class="' + c + '"' + r + ' d="M120 470L112 430Q110 400 140 392L215 382Q265 318 330 300L470 298Q520 300 565 340L610 378L690 392Q720 398 722 425L718 470H652A62 62 0 0 0 528 470H292A62 62 0 0 0 168 470Z"/>' +
+    '<path class="' + c + '"' + r + ' d="M238 382Q280 330 335 316L395 314V382Z"/>' +
+    '<path class="' + c + '"' + r + ' d="M410 314H465Q505 318 545 358L555 382H410Z"/>' +
+    '<path class="l2" d="M402 388V462M350 404h22M452 404h22M692 404l20 5M118 408l14 2"/>' +
+    '<g class="obrot"><circle class="' + c + '"' + r + ' cx="230" cy="470" r="50"/><circle class="l2" cx="230" cy="470" r="22"/><path class="l2" d="M230 448v-20M230 492v20M208 470h-20M252 470h20"/></g>' +
+    '<g class="obrot"><circle class="' + c + '"' + r + ' cx="590" cy="470" r="50"/><circle class="l2" cx="590" cy="470" r="22"/><path class="l2" d="M590 448v-20M590 492v20M568 470h-20M612 470h20"/></g></g>';
+}
+function grafika(nazwa, klasa) {
+  var siatka = "";
+  for (var x = 40; x < 800; x += 40) siatka += "M" + x + " 0V680";
+  for (var y = 40; y < 680; y += 40) siatka += "M0 " + y + "H800";
+  var w = '<svg class="bp ' + (klasa || "") + '" viewBox="0 0 800 680" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + (GRAFIKI[nazwa] || "Grafika") + '"><rect width="800" height="680" fill="#191C22"/><path class="siatka" d="' + siatka + '"/>';
+  var t = "";
+  if (nazwa === "auto") {
+    t = bpAuto(0, 0, 1, true) +
+      '<path class="wym" d="M60 530H740M168 590H652M168 580v20M652 580v20M300 250H560M300 240v20M560 240v20"/>' +
+      '<text x="410" y="620" text-anchor="middle">ROZSTAW OSI</text><text x="430" y="232" text-anchor="middle">DACH</text>' +
+      '<text x="40" y="60">RYS. 01 · KONTROLA OGÓLNA</text><text x="760" y="60" text-anchor="end">SZALONE AUTO</text>';
+  } else if (nazwa === "diagnoza") {
+    var p = "M60 360";
+    for (var i = 0; i <= 680; i += 8) { var v = Math.sin(i / 28) * 46 + Math.sin(i / 9) * 14 * (i % 160 < 40 ? 1 : .2); p += "L" + (60 + i) + " " + (360 - v).toFixed(1); }
+    t = '<path class="wym" d="M60 250H740M60 470H740M60 360H740" stroke-dasharray="4 6"/>' +
+      '<path class="l rys" pathLength="1" d="' + p + '"/>' +
+      '<g class="skan" style="--skan:600px"><path class="hl" d="M80 230V490" opacity=".7"/><circle cx="80" cy="360" r="6" fill="#C9A35B"/></g>' +
+      '<path class="l rys" pathLength="1" d="M300 540H500L486 610H314Z"/>' +
+      '<g fill="#6E7480"><circle cx="340" cy="562" r="5"/><circle cx="370" cy="562" r="5"/><circle cx="400" cy="562" r="5"/><circle cx="430" cy="562" r="5"/><circle cx="460" cy="562" r="5"/><circle cx="355" cy="588" r="5"/><circle cx="415" cy="588" r="5"/><circle cx="445" cy="588" r="5"/></g><circle class="migaj" cx="385" cy="588" r="6" fill="#C9A35B"/>' +
+      '<text x="40" y="60">RYS. 02 · DIAGNOSTYKA KOMPUTEROWA</text><text x="760" y="60" text-anchor="end">ODCZYT NA ŻYWO</text><text x="60" y="235">SYGNAŁ CZUJNIKA</text>';
+  } else if (nazwa === "kolo") {
+    t = '<g transform="rotate(-4 400 360)"><rect class="l rys" pathLength="1" x="300" y="160" width="200" height="400" rx="40"/><rect class="l2" x="330" y="190" width="140" height="340" rx="24"/><path class="l2" d="M300 230h200M300 300h200M300 420h200M300 490h200"/></g>' +
+      '<path class="wym" d="M400 110V610" stroke-dasharray="6 6"/><path class="hl" d="M414 130L386 590"/>' +
+      '<path class="l rys" pathLength="1" d="M400 170A190 190 0 0 1 413 171"/><path class="wym" d="M150 360H650"/>' +
+      '<text x="430" y="150">KĄT POCHYLENIA</text><text x="150" y="350">OŚ KOŁA</text>' +
+      '<text x="40" y="60">RYS. 03 · GEOMETRIA KÓŁ</text><text x="760" y="60" text-anchor="end">POMIAR · REGULACJA</text>';
+  } else if (nazwa === "klima") {
+    t = bpAuto(0, 30, 1, true) +
+      '<path class="l przeplyw" d="M560 380C500 350 430 345 360 350C300 355 260 370 240 400"/><path class="l przeplyw" d="M560 400C510 385 450 380 380 384"/>' +
+      '<g transform="translate(400 170)"><path class="hl" d="M0-46V46M-40-23 40 23M-40 23 40-23M-10-38 0-28 10-38M-10 38 0 28 10 38"/></g>' +
+      '<text x="40" y="60">RYS. 04 · KLIMATYZACJA</text><text x="760" y="60" text-anchor="end">OBIEG POWIETRZA</text><text x="400" y="250" text-anchor="middle">NAWIEW</text>';
+  } else if (nazwa === "hamulce") {
+    var otw = "";
+    for (var k = 0; k < 12; k++) { var a = k / 12 * Math.PI * 2; otw += '<circle class="l2" cx="' + (400 + Math.cos(a) * 140).toFixed(1) + '" cy="' + (360 + Math.sin(a) * 140).toFixed(1) + '" r="8"/>'; }
+    t = '<g class="obrot"><circle class="l rys" pathLength="1" cx="400" cy="360" r="200"/><circle class="l2" cx="400" cy="360" r="110"/>' + otw + '<circle class="l rys" pathLength="1" cx="400" cy="360" r="40"/></g>' +
+      '<path class="hl" d="M540 190Q640 250 640 360Q640 470 540 530L510 500Q590 450 590 360Q590 270 510 220Z"/>' +
+      '<text x="40" y="60">RYS. 05 · UKŁAD HAMULCOWY</text><text x="760" y="60" text-anchor="end">TARCZA · ZACISK</text><text x="660" y="365">ZACISK</text>';
+  } else {
+    t = '<path class="l rys" pathLength="1" d="M90 620H710M150 620V200M650 620V200M130 200h40M630 200h40"/><path class="l2" d="M150 430H300M650 430H520"/>' +
+      bpAuto(70, 0, .82, true) +
+      '<path class="wym" d="M110 300V600M100 300h20M100 600h20"/><text x="96" y="460" text-anchor="end">1,8 m</text>' +
+      '<text x="40" y="60">RYS. 06 · PODNOŚNIK</text><text x="760" y="60" text-anchor="end">STANOWISKO 1</text>';
+  }
+  return w + t + "</svg>";
+}
+
+/* ---------- dane początkowe ---------- */
+function daneStartowe() {
+  var D = dzisISO();
+  var it = function (o) { o.id = o.id || uid(); o.ukryta = !!o.ukryta; return o; };
+  var kat = [
+    it({ id: "k1", nazwa: "Silnik, płyny i LPG", opis: "Bieżąca obsługa i naprawy, które decydują o trwałości auta." }),
+    it({ id: "k2", nazwa: "Diagnostyka i elektronika", opis: "Najpierw diagnoza, potem naprawa. Bez wymiany części „na próbę”." }),
+    it({ id: "k3", nazwa: "Klimatyzacja", opis: "Serwis przez cały rok – czysty i sprawny układ to też zdrowie kierowcy." }),
+    it({ id: "k4", nazwa: "Koła i opony", opis: "Wymiana, wyważenie, przechowanie i geometria." }),
+    it({ id: "k5", nazwa: "Nadwozie i szyby", opis: "Drobne naprawy blacharskie i szyby bez wizyt w kilku miejscach." })
+  ];
+  var u = function (id, k, ik, nazwa, opis, czas, cena, glowna, extra) { return it(Object.assign({ id: id, kategoria: k, ikona: ik, nazwa: nazwa, opis: opis, czas: czas, cena: cena, glowna: glowna, nowosc: false, plakietka: "", zdjecie: "", przycisk: "zadzwon" }, extra || {})); };
+  return {
+    _app: APP_ID, _v: APP_WERSJA,
+    firma: { nazwa: "Szalone auto", podpis: "Pełen profesjonalizm", haslo: "Naprawiamy porządnie. Rozliczamy uczciwie." },
+    kontakt: { telefon: "601 601 601", sms: "601 601 601", email: "piotrzmyslony@wpp.pl", adres: "ul. Przykładowa 12", kod: "50-000", miasto: "Wrocław", dzielnica: "", facebook: "", instagram: "", googleOpinie: "" },
+    start: {
+      nadtytul: "Warsztat samochodowy · Wrocław",
+      tytul: "Szalona nazwa. *Poważna robota.*",
+      wstep: "Naprawiamy porządnie i rozliczamy uczciwie. Mechanika, klimatyzacja, diagnostyka i elektronika – ze szczególnym doświadczeniem w autach **BMW, Audi i Toyota**.",
+      kartaTytul: "Wycena przed naprawą",
+      kartaOpis: "Naprawę zaczynamy dopiero po Pana/Pani akceptacji kosztów."
+    },
+    onas: {
+      nadtytul: "O firmie",
+      tytul: "Szaleni na punkcie aut. *Poważni w pracy.*",
+      wstep: "Skąd nazwa? Z pasji do motoryzacji. W pracy obowiązuje jedna zasada: pełen profesjonalizm.",
+      naglowek: "Warsztat, do którego wraca się z kolejnym autem",
+      tekst: "Szalone auto to niezależny warsztat samochodowy we Wrocławiu. Zajmujemy się mechaniką, klimatyzacją, diagnostyką komputerową, elektryką, oponami, geometrią, blacharstwem, instalacjami LPG i szybami. Obsługujemy kierowców prywatnych i firmy.\n\nStawiamy na **fachowość i dobrej jakości części**. Każdą naprawę poprzedza diagnoza i wycena, a wymienione części oddajemy do wglądu. Wiemy, że zaufanie do mechanika buduje się latami, a traci w jeden dzień.",
+      zdjecie1: "bp:warsztat", zdjecie2: "img/o-nas.jpg"
+    },
+    info: {
+      parking: "Bezpłatne miejsca dla klientów przed warsztatem.",
+      komunikacja: "[DO UZUPEŁNIENIA] najbliższy przystanek i linie tramwajowe/autobusowe.",
+      platnosci: "Karta płatnicza (także zbliżeniowo i telefonem), gotówka, przelew dla firm. Do każdej usługi paragon lub faktura VAT.",
+      dostepnosc: "Wjazd do biura bez progów. Na prośbę odbierzemy auto sprzed drzwi.",
+      gwarancja: "Na wykonane usługi udzielamy gwarancji – okres i warunki są opisane na fakturze. [DO UZUPEŁNIENIA: okres gwarancji]",
+      odbior: "Auto zostawione rano można odebrać do 18:00 w dni robocze."
+    },
+    cennikUwaga: "Ceny orientacyjne, brutto, z robocizną. Ceny części ustalamy indywidualnie. Stawka roboczogodziny: 150–190 zł brutto, zależnie od rodzaju prac.",
+    godziny: [
+      { otwarte: true, od: "08:00", do: "18:00" }, { otwarte: true, od: "08:00", do: "18:00" }, { otwarte: true, od: "08:00", do: "18:00" },
+      { otwarte: true, od: "08:00", do: "18:00" }, { otwarte: true, od: "08:00", do: "18:00" }, { otwarte: true, od: "09:00", do: "14:00" },
+      { otwarte: false, od: "09:00", do: "14:00" }
+    ],
+    sekcje: SEKCJE_DOMYSLNE.map(function (s) { return Object.assign({}, s); }),
+    slider: [
+      it({ zdjecie: "bp:auto", podpis: "Kontrola ogólna przed każdą naprawą" }),
+      it({ zdjecie: "bp:diagnoza", podpis: "Diagnostyka komputerowa BMW, Audi, Toyota" }),
+      it({ zdjecie: "bp:klima", podpis: "Serwis klimatyzacji przez cały rok" })
+    ],
+    atuty: [it({ ikona: "tarcza", tekst: "Gwarancja na usługi" }), it({ ikona: "faktura", tekst: "Faktury VAT" }), it({ ikona: "karta", tekst: "Płatność kartą" })],
+    wyrozniki: [
+      it({ ikona: "chip", tytul: "Najpierw diagnoza", opis: "Szukamy przyczyny usterki, a nie wymieniamy części na próbę. Wynik pokazujemy i tłumaczymy." }),
+      it({ ikona: "faktura", tytul: "Koszty przed naprawą", opis: "Podajemy przedział ceny przed rozpoczęciem pracy. Każdą dodatkową czynność uzgadniamy telefonicznie." }),
+      it({ ikona: "olej", tytul: "Sprawdzone części", opis: "Montujemy części i płyny dobrej jakości, zgodne z normami producenta auta. Stare części oddajemy do wglądu." }),
+      it({ ikona: "tarcza", tytul: "Gwarancja", opis: "Na wykonane usługi udzielamy gwarancji. Warunki znajdzie Pan/Pani na fakturze i w FAQ." })
+    ],
+    kategorie: kat,
+    uslugi: [
+      u("u1", "k1", "olej", "Wymiana oleju i płynów eksploatacyjnych", "Olej z filtrem, płyn chłodniczy, hamulcowy i do wspomagania. Płyny zgodne z normą producenta auta.", "ok. 1 h", "120–280 zł", true),
+      u("u2", "k1", "hamulec", "Mechanika: hamulce, zawieszenie, rozrząd", "Klocki i tarcze, amortyzatory, wahacze, rozrząd. Przed naprawą podajemy kosztorys i czas realizacji.", "od 1 h", "180–1600 zł", true, { przycisk: "wycena" }),
+      u("u3", "k1", "lpg", "Instalacje LPG – przegląd i regulacja", "Wymiana filtrów fazy lotnej i ciekłej, regulacja, diagnostyka sterownika gazu.", "ok. 1,5 h", "150–320 zł", false, { nowosc: true }),
+      u("u4", "k2", "chip", "Diagnostyka komputerowa", "Odczyt i analiza błędów, parametry na żywo, kodowanie. Wynik omawiamy przed naprawą.", "30–60 min", "100–200 zł", true, { zdjecie: "bp:diagnoza" }),
+      u("u5", "k2", "piorun", "Elektryka i elektronika", "Rozruszniki, alternatory, oświetlenie, czujniki, usterki instalacji elektrycznej.", "od 1 h", "150–650 zł", true, { przycisk: "wycena" }),
+      u("u6", "k3", "sniezka", "Serwis klimatyzacji", "Odgrzybianie, kontrola szczelności, napełnienie czynnikiem, wymiana filtra kabinowego.", "ok. 1 h", "199–350 zł", true),
+      u("u7", "k4", "kolo", "Wymiana opon i przechowalnia", "Wymiana z wyważeniem kompletu kół, przechowanie opon w suchym magazynie przez sezon.", "ok. 45 min", "100–250 zł", true),
+      u("u8", "k4", "geometria", "Geometria kół", "Pomiar i ustawienie zbieżności. Wydruk wyników przed i po regulacji.", "ok. 1 h", "150–250 zł", false, { zdjecie: "bp:kolo" }),
+      u("u9", "k5", "karoseria", "Blacharstwo", "Naprawy po drobnych kolizjach, usuwanie korozji, przygotowanie do lakierowania.", "wg wyceny", "300–2500 zł", false, { przycisk: "wycena" }),
+      u("u10", "k5", "szyba", "Szyby samochodowe", "Wymiana i naprawa szyb, kalibracja kamery asystenta po wymianie szyby czołowej.", "2–4 h", "150–2200 zł", false, { przycisk: "wycena" })
+    ],
+    cennik: [
+      ["k1", "Wymiana oleju silnikowego z filtrem", "z olejem do 5 l", "ok. 45 min", "od 120 zł"],
+      ["k1", "Wymiana płynu hamulcowego", "", "ok. 45 min", "120–160 zł"],
+      ["k1", "Wymiana klocków hamulcowych – oś", "", "ok. 1 h", "180–250 zł"],
+      ["k1", "Wymiana tarcz i klocków – oś", "", "1–1,5 h", "250–450 zł"],
+      ["k1", "Wymiana rozrządu", "zależnie od silnika", "3–8 h", "600–1600 zł"],
+      ["k1", "Przegląd instalacji LPG", "z wymianą filtrów", "ok. 1,5 h", "150–320 zł"],
+      ["k2", "Diagnostyka komputerowa", "z raportem błędów", "30–60 min", "100–200 zł"],
+      ["k2", "Wymiana akumulatora z kodowaniem", "bez ceny akumulatora", "ok. 30 min", "80–150 zł"],
+      ["k2", "Naprawa elektryki", "wg diagnozy", "od 1 h", "150–650 zł"],
+      ["k3", "Serwis klimatyzacji", "odgrzybianie + napełnienie", "ok. 1 h", "199–350 zł"],
+      ["k4", "Wymiana kompletu kół z wyważeniem", "felgi stalowe / aluminiowe", "ok. 45 min", "100–200 zł"],
+      ["k4", "Przechowanie opon – sezon", "z myciem kół", "", "150–250 zł"],
+      ["k4", "Geometria kół", "z wydrukiem", "ok. 1 h", "150–250 zł"],
+      ["k5", "Naprawa blacharska", "wycena po oględzinach", "", "od 300 zł"],
+      ["k5", "Wymiana szyby czołowej", "z kalibracją kamery", "2–4 h", "od 600 zł"]
+    ].map(function (r) { return it({ kategoria: r[0], nazwa: r[1], dopisek: r[2], czas: r[3], cena: r[4] }); }),
+    pakiety: [
+      it({ nazwa: "Pakiet Sezon", cena: "229 zł", dopisek: "brutto / sezon", opis: "Dla osób, które nie chcą trzymać opon w piwnicy.", punkty: "Wymiana kompletu kół z wyważeniem\nPrzechowanie opon do następnego sezonu\nKontrola płynów i oświetlenia", wyrozniony: false }),
+      it({ nazwa: "Pakiet Przed Trasą", cena: "299 zł", dopisek: "brutto", opis: "Przed wakacjami lub dłuższym wyjazdem.", punkty: "Diagnostyka komputerowa\nPrzegląd hamulców i zawieszenia\nKontrola klimatyzacji i płynów\nPisemny raport stanu auta", wyrozniony: true }),
+      it({ nazwa: "Pakiet Firma", cena: "od 150 zł", dopisek: "netto / rbh", opis: "Dla firm z flotą od 3 samochodów.", punkty: "Stała stawka roboczogodziny\nPierwszeństwo terminów\nFaktura zbiorcza z odroczonym terminem płatności", wyrozniony: false })
+    ],
+    marki: [
+      it({ nazwa: "BMW", opis: "diagnostyka i kodowanie, układy chłodzenia, zawieszenie" }),
+      it({ nazwa: "AUDI", opis: "skrzynie S tronic – obsługa, rozrząd, elektronika" }),
+      it({ nazwa: "TOYOTA", opis: "hybrydy – przeglądy, klimatyzacja, układ hamulcowy" })
+    ],
+    kroki: [
+      it({ tytul: "Telefon", opis: "Dzwoni Pan/Pani do nas. Prosimy podać markę, model i opis problemu – ustalimy termin." }),
+      it({ tytul: "Przyjazd i diagnoza", opis: "Przyjmujemy auto, sprawdzamy usterkę i przygotowujemy kosztorys." }),
+      it({ tytul: "Akceptacja kosztów", opis: "Dzwonimy z wyceną. Naprawiamy dopiero po Pana/Pani zgodzie." }),
+      it({ tytul: "Odbiór i gwarancja", opis: "Oddajemy auto z fakturą, opisem prac i wymienionymi częściami do wglądu." })
+    ],
+    promocje: [
+      it({ tytul: "Serwis klimatyzacji od 199 zł", opis: "Odgrzybianie, kontrola szczelności i napełnienie układu w promocyjnej cenie. Proszę zadzwonić i podać markę i model auta.", plakietka: "od 199 zł", zdjecie: "bp:klima", usluga: "u6", naPasku: true, od: dodajDni(D, -16), do: dodajDni(D, 30), wstrzymana: false }),
+      it({ tytul: "Wymiana opon + przechowalnia −15%", opis: "Przy wymianie kół z przechowaniem opon do wiosny – 15% taniej. Liczba terminów w listopadzie jest ograniczona.", plakietka: "−15%", zdjecie: "bp:kolo", usluga: "u7", naPasku: true, od: D, do: dodajDni(D, 45), wstrzymana: false }),
+      it({ tytul: "Zimowy test akumulatora gratis", opis: "Przy każdej wymianie oleju sprawdzimy akumulator i ładowanie przed mrozami.", plakietka: "Gratis", zdjecie: "", usluga: "u1", naPasku: false, od: dodajDni(D, 40), do: dodajDni(D, 80), wstrzymana: false }),
+      it({ tytul: "Diagnostyka przed wakacjami −20%", opis: "Promocja letnia.", plakietka: "−20%", zdjecie: "bp:diagnoza", usluga: "u4", naPasku: false, od: dodajDni(D, -75), do: dodajDni(D, -20), wstrzymana: false })
+    ],
+    aktualnosci: [
+      it({ tytul: "Ruszyły zapisy na wymianę opon", tresc: "Sezon zimowy zaczyna się szybko. Proszę zadzwonić wcześniej – w listopadzie terminy kończą się w kilka dni.", data: D, zdjecie: "", naPasku: true, od: D, do: dodajDni(D, 40), wstrzymana: false }),
+      it({ tytul: "Nowość: przeglądy instalacji LPG", tresc: "Wymiana filtrów i regulacja instalacji gazowej na miejscu, bez dodatkowej wizyty w innym serwisie.", data: dodajDni(D, -30), zdjecie: "", naPasku: false, od: dodajDni(D, -30), do: dodajDni(D, 30), wstrzymana: false }),
+      it({ tytul: "11 listopada warsztat nieczynny", tresc: "W Narodowe Święto Niepodległości warsztat będzie zamknięty. Zapraszamy w czwartek od 8:00.", data: dodajDni(D, 20), zdjecie: "", naPasku: true, od: dodajDni(D, 20), do: "2026-11-11", wstrzymana: false })
+    ],
+    galeria: [
+      it({ zdjecie: "bp:warsztat", podpis: "Stanowisko z podnośnikiem", kategoria: "Warsztat" }),
+      it({ zdjecie: "bp:diagnoza", podpis: "Odczyt parametrów na żywo", kategoria: "Diagnostyka" }),
+      it({ zdjecie: "bp:klima", podpis: "Serwis klimatyzacji", kategoria: "Klimatyzacja" }),
+      it({ zdjecie: "bp:kolo", podpis: "Pomiar geometrii kół", kategoria: "Koła i opony" }),
+      it({ zdjecie: "bp:hamulce", podpis: "Wymiana tarcz i klocków", kategoria: "Warsztat" }),
+      it({ zdjecie: "bp:auto", podpis: "Kontrola przed odbiorem auta", kategoria: "Warsztat" })
+    ],
+    zespol: [
+      it({ imie: "Piotr Zmyślony", rola: "Właściciel, mechanik", opis: "Odpowiada za wyceny i kontakt z klientami.", zdjecie: "" }),
+      it({ imie: "Tomasz", rola: "Diagnosta", opis: "Diagnostyka komputerowa i elektronika BMW oraz Audi.", zdjecie: "" }),
+      it({ imie: "Łukasz", rola: "Mechanik", opis: "Klimatyzacja, instalacje LPG, geometria kół.", zdjecie: "" }),
+      it({ imie: "Krzysztof", rola: "Blacharz", opis: "Blacharstwo i wymiana szyb.", zdjecie: "" })
+    ],
+    opinie: [],
+    faq: [
+      ["Czy muszę umówić wizytę wcześniej?", "Tak, wizyty umawiamy telefonicznie. Dzięki temu nie czeka Pan/Pani na miejscu, a my rezerwujemy stanowisko i części."],
+      ["Jakie informacje przygotować do rozmowy?", "Markę i model auta, rok produkcji, a jeśli to możliwe – pojemność silnika lub numer VIN oraz krótki opis problemu."],
+      ["Skąd wiem, ile zapłacę?", "Ceny w cenniku są orientacyjne. Po diagnozie dzwonimy z kosztorysem i rozpoczynamy naprawę dopiero po Pana/Pani akceptacji."],
+      ["Czy mogę przywieźć własne części?", "Tak, po wcześniejszym uzgodnieniu. Gwarancja obejmuje wtedy wykonaną usługę, ale nie samą część."],
+      ["Jaka jest gwarancja na usługi?", "Na usługi udzielamy gwarancji – okres i warunki są opisane na fakturze."],
+      ["Czy wystawiacie faktury VAT dla firm?", "Tak. Dla firm z flotą oferujemy też Pakiet Firma ze stałą stawką i fakturą zbiorczą."],
+      ["Czy serwis u Państwa unieważnia gwarancję producenta?", "Nie. Zgodnie z przepisami UE serwis w niezależnym warsztacie nie unieważnia gwarancji producenta, jeśli używamy części odpowiedniej jakości i wpisujemy obsługę do książki serwisowej."]
+    ].map(function (r) { return it({ pytanie: r[0], odpowiedz: r[1] }); }),
+    czesci: [
+      it({ tekst: "Części oryginalne (OE) i zamienniki jakości OE" }),
+      it({ tekst: "Oleje i płyny z normami producentów aut" }),
+      it({ tekst: "[DO UZUPEŁNIENIA] marki części, olejów i sprzętu diagnostycznego" })
+    ],
+    dniSpecjalne: [
+      it({ data: "2026-11-01", nieczynne: true, od: "", do: "", opis: "Wszystkich Świętych" }),
+      it({ data: "2026-11-11", nieczynne: true, od: "", do: "", opis: "Narodowe Święto Niepodległości" }),
+      it({ data: "2026-12-24", nieczynne: false, od: "08:00", do: "12:00", opis: "Wigilia" }),
+      it({ data: "2026-12-25", nieczynne: true, od: "", do: "", opis: "Boże Narodzenie" }),
+      it({ data: "2026-12-26", nieczynne: true, od: "", do: "", opis: "Drugi dzień świąt" }),
+      it({ data: "2026-12-31", nieczynne: false, od: "08:00", do: "14:00", opis: "Sylwester" })
+    ]
+  };
+}
+
+/* Sekcje strony: widok (podstrona) + domyślne nagłówki */
+var SEKCJE_DOMYSLNE = [
+  { id: "hero", widok: "start", nazwa: "Nagłówek ze sliderem", widoczna: true, nadtytul: "", tytul: "", wstep: "" },
+  { id: "promocje", widok: "start", nazwa: "Promocje", widoczna: true, nadtytul: "Promocje", tytul: "Aktualne promocje", wstep: "Oferty ograniczone w czasie. Proszę zadzwonić i powołać się na promocję." },
+  { id: "wyrozniki", widok: "start", nazwa: "Dlaczego my", widoczna: true, nadtytul: "Dlaczego my", tytul: "Jakość serwisu autoryzowanego, rozliczenie jak w warsztacie niezależnym", wstep: "" },
+  { id: "polecane", widok: "start", nazwa: "Najczęściej wybierane usługi", widoczna: true, nadtytul: "Oferta", tytul: "Najczęściej wybierane usługi", wstep: "Ceny orientacyjne, brutto, z robocizną. Dokładną kwotę podajemy po rozmowie lub oględzinach." },
+  { id: "marki", widok: "start", nazwa: "Specjalizacja (marki)", widoczna: true, nadtytul: "Specjalizacja", tytul: "Znamy te auta od podszewki", wstep: "Naprawiamy samochody wszystkich marek. Najwięcej doświadczenia mamy z trzema – mamy do nich oprogramowanie diagnostyczne i znamy ich typowe usterki." },
+  { id: "kroki", widok: "start", nazwa: "Jak wygląda wizyta", widoczna: true, nadtytul: "Jak wygląda wizyta", tytul: "Od telefonu do odbioru auta", wstep: "" },
+  { id: "aktualnosci", widok: "start", nazwa: "Aktualności", widoczna: true, nadtytul: "Dla naszych klientów", tytul: "Aktualności", wstep: "" },
+  { id: "uslugi", widok: "uslugi", nazwa: "Usługi (wg kategorii)", widoczna: true, nadtytul: "Oferta", tytul: "Usługi warsztatu", wstep: "Usługi w podziale na kategorie. Przy każdej podajemy orientacyjny przedział ceny brutto." },
+  { id: "pakiety", widok: "uslugi", nazwa: "Pakiety", widoczna: true, nadtytul: "Pakiety", tytul: "Pakiety – kilka usług w jednej wizycie", wstep: "Taniej niż osobno i bez kilku przyjazdów." },
+  { id: "cennik", widok: "cennik", nazwa: "Cennik", widoczna: true, nadtytul: "Cennik", tytul: "Cennik usług", wstep: "Kwota zależy od modelu auta i stanu części – dokładną cenę podajemy przed naprawą." },
+  { id: "platnosci", widok: "cennik", nazwa: "Płatności i gwarancja", widoczna: true, nadtytul: "Płatności", tytul: "Płatności i gwarancja", wstep: "" },
+  { id: "faq", widok: "cennik", nazwa: "Najczęstsze pytania", widoczna: true, nadtytul: "FAQ", tytul: "Najczęstsze pytania", wstep: "" },
+  { id: "onas", widok: "o-nas", nazwa: "O firmie", widoczna: true, nadtytul: "", tytul: "", wstep: "" },
+  { id: "zespol", widok: "o-nas", nazwa: "Zespół", widoczna: true, nadtytul: "Zespół", tytul: "Ludzie, którzy zajmą się Pana/Pani autem", wstep: "" },
+  { id: "galeria", widok: "o-nas", nazwa: "Galeria", widoczna: true, nadtytul: "Galeria", tytul: "Warsztat od środka", wstep: "" },
+  { id: "czesci", widok: "o-nas", nazwa: "Części i produkty", widoczna: true, nadtytul: "Części i produkty", tytul: "Z czym pracujemy", wstep: "Montujemy części oryginalne lub zamienniki renomowanych producentów oraz oleje spełniające normy producenta auta." },
+  { id: "opinie", widok: "o-nas", nazwa: "Opinie klientów", widoczna: true, nadtytul: "Opinie", tytul: "Opinie klientów", wstep: "" },
+  { id: "kontakt", widok: "kontakt", nazwa: "Kontakt i godziny", widoczna: true, nadtytul: "Kontakt", tytul: "Zapraszamy do warsztatu", wstep: "Wizyty umawiamy telefonicznie. Prosimy podać markę i model auta." },
+  { id: "dojazd", widok: "kontakt", nazwa: "Mapa i dojazd", widoczna: true, nadtytul: "Mapa i dojazd", tytul: "", wstep: "" },
+  { id: "wycena", widok: "kontakt", nazwa: "Formularz wyceny", widoczna: true, nadtytul: "Zapytanie o wycenę", tytul: "Wycena przed wizytą", wstep: "Proszę opisać auto i problem. Formularz przygotuje gotową wiadomość SMS lub e-mail – po jej wysłaniu oddzwonimy z orientacyjną ceną i terminem." }
+];
+var WIDOKI = [["start", "Start"], ["uslugi", "Usługi"], ["cennik", "Cennik"], ["o-nas", "O nas"], ["kontakt", "Kontakt"]];
+/* =====================================================================
+   2) RENDEROWANIE STRONY Z DANYCH
+   ===================================================================== */
+var S = daneStartowe();        // bieżący stan (po wczytaniu – scalony z zapisem)
+var WIDOK = "start";
+var preselectUsluga = "";
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function fmtLinia(s) {
+  return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\*(.+?)\*/g, '<em class="acc">$1</em>')
+    .replace(/\[DO UZUPEŁNIENIA[^\]]*\]/g, function (m) { return '<span class="uzupelnij">' + m.slice(1, -1) + "</span>"; }).replace(/\n/g, "<br>");
+}
+function fmt(s) { return String(s || "").split(/\n\s*\n/).filter(function (p) { return p.trim(); }).map(function (p) { return "<p>" + fmtLinia(p.trim()) + "</p>"; }).join(""); }
+function cyfry(t) { return String(t || "").replace(/\D/g, ""); }
+function telHref() { var c = cyfry(S.kontakt.telefon); return "tel:" + (c.length === 9 ? "+48" + c : c); }
+function smsHref(body) { var c = cyfry(S.kontakt.sms || S.kontakt.telefon); return "sms:" + (c.length === 9 ? "+48" + c : c) + (body ? "?body=" + encodeURIComponent(body) : ""); }
+function adresPelny() { var k = S.kontakt; return k.adres + ", " + k.kod + " " + k.miasto; }
+function mapaLink() { return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(S.kontakt.adres + ", " + S.kontakt.miasto); }
+function widoczne(lista) { return (lista || []).filter(function (x) { return !x.ukryta; }); }
+
+function obraz(src, alt, cls) {
+  if (!src) return "";
+  if (String(src).indexOf("bp:") === 0) return grafika(src.slice(3), cls);
+  return '<img src="' + esc(src) + '" alt="' + esc(alt || "") + '" loading="lazy" decoding="async"' + (cls ? ' class="' + cls + '"' : "") + ' onerror="this.remove()">';
+}
+function foto(src, alt, opis, klasa, styl) {
+  return '<figure class="foto ' + (klasa || "") + '"' + (styl ? ' style="' + styl + '"' : "") + ">" + obraz(src, alt) + (opis ? "<figcaption>" + esc(opis) + "</figcaption>" : "") + "</figure>";
+}
+
+/* ---------- treści czasowe ---------- */
+function statusCzasowy(it, D) {
+  D = D || dzisISO();
+  if (it.wstrzymana) return "wstrzymana";
+  if (it.od && it.od > D) return "zaplanowana";
+  if (it.do && it.do < D) return "zakonczona";
+  return "aktywna";
+}
+function aktywne(lista) { return widoczne(lista).filter(function (x) { return statusCzasowy(x) === "aktywna"; }); }
+var STATUS_NAZWY = { aktywna: "Aktywna", zaplanowana: "Zaplanowana", zakonczona: "Zakończona", wstrzymana: "Wstrzymana" };
+
+/* ---------- godziny otwarcia ---------- */
+function minuty(hhmm) { if (!hhmm) return null; var p = hhmm.split(":"); return +p[0] * 60 + +p[1]; }
+function godz(hhmm) { return hhmm ? String(+hhmm.split(":")[0]) + ":" + hhmm.split(":")[1] : ""; }
+function dzienTyg(iso) { return (zISO(iso).getDay() + 6) % 7; } // 0 = poniedziałek
+function dzienSpecjalny(iso) { return widoczne(S.dniSpecjalne).filter(function (d) { return d.data === iso; })[0]; }
+function godzinyDnia(iso) {
+  var sp = dzienSpecjalny(iso);
+  if (sp) return sp.nieczynne ? { otwarte: false, specjalny: sp } : { otwarte: true, od: sp.od, do: sp.do, specjalny: sp };
+  var g = S.godziny[dzienTyg(iso)] || {};
+  return g.otwarte ? { otwarte: true, od: g.od, do: g.do } : { otwarte: false };
+}
+function stanOtwarcia(teraz) {
+  teraz = teraz || new Date();
+  var D = dzisISO(teraz), m = teraz.getHours() * 60 + teraz.getMinutes(), g = godzinyDnia(D);
+  if (g.otwarte && m >= minuty(g.od) && m < minuty(g.do)) {
+    var zostalo = minuty(g.do) - m;
+    return { stan: zostalo <= 60 ? "wkrotce" : "otwarte", tekst: (zostalo <= 60 ? "Otwarte · zamykamy o " : "Otwarte teraz · do ") + godz(g.do) };
+  }
+  if (g.otwarte && m < minuty(g.od)) return { stan: "zamkniete", tekst: "Zamknięte · otwieramy dziś o " + godz(g.od) };
+  for (var i = 1; i <= 14; i++) {
+    var d = dodajDni(D, i), gg = godzinyDnia(d);
+    if (gg.otwarte) return { stan: "zamkniete", tekst: "Zamknięte · otwieramy " + (i === 1 ? "jutro" : DNI_W[dzienTyg(d)]) + " o " + godz(gg.od) };
+  }
+  return { stan: "zamkniete", tekst: "Zamknięte" };
+}
+function nadchodzaceZmiany(dni) {
+  var D = dzisISO(), K = dodajDni(D, dni || 60);
+  return widoczne(S.dniSpecjalne).filter(function (d) { return d.data >= D && d.data <= K; }).sort(function (a, b) { return a.data < b.data ? -1 : 1; });
+}
+
+/* ---------- sekcje ---------- */
+function sek(id) { return S.sekcje.filter(function (s) { return s.id === id; })[0] || {}; }
+function sekWidoczna(id) { return sek(id).widoczna !== false; }
+function naglowek(id, extraP) {
+  var s = sek(id);
+  return '<div class="naglowek-sekcji">' + (s.nadtytul ? '<span class="etykieta">' + esc(s.nadtytul) + "</span>" : "") +
+    (s.tytul ? '<h2 id="h-' + id + '">' + fmtLinia(s.tytul) + "</h2>" : "") + (s.wstep ? "<p>" + fmtLinia(s.wstep) + "</p>" : "") + (extraP || "") + "</div>";
+}
+function sekcja(id, klasa, wnetrze) {
+  if (!sekWidoczna(id)) return "";
+  return '<section class="sekcja ' + (klasa || "") + '" id="sek-' + id + '" data-sek="' + id + '" aria-labelledby="h-' + id + '"><div class="wrap">' + wnetrze + "</div></section>";
+}
+
+/* ---------- logo ---------- */
+function logoSVG() {
+  return '<svg viewBox="0 0 330 64" role="img" aria-label="' + esc(S.firma.nazwa) + " – " + esc(S.firma.podpis) + '"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">' +
+    '<path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#FFFFFF"/><path d="M50 8H56" stroke="#C9A35B"/></g>' +
+    '<text x="76" y="34" font-family="Archivo, \'Arial Black\', sans-serif" font-stretch="125%" font-weight="800" font-size="25" fill="#FFFFFF">' + esc(S.firma.nazwa.toUpperCase()) + "</text>" +
+    '<text x="77" y="54" font-family="Archivo, Arial, sans-serif" font-weight="500" font-size="9.4" letter-spacing="4.2" fill="#C9A35B">' + esc(S.firma.podpis.toUpperCase()) + "</text></svg>";
+}
+
+/* ---------- elementy wspólne ---------- */
+function elementyPaska() {
+  var el = [];
+  aktywne(S.promocje).forEach(function (p) { if (p.naPasku && sekWidoczna("promocje")) el.push({ typ: "Promocja", tytul: p.tytul, cel: "promocje" }); });
+  aktywne(S.aktualnosci).forEach(function (a) { if (a.naPasku && sekWidoczna("aktualnosci")) el.push({ typ: "Aktualność", tytul: a.tytul, cel: "aktualnosci" }); });
+  return el;
+}
+function htmlTopbar() {
+  var el = elementyPaska(), st = stanOtwarcia();
+  var tick = el.length ? '<div class="ticker" aria-live="off"><span class="ticker__licz" data-ticker-licz>1/' + el.length + '</span><div class="ticker__okno">' +
+    el.map(function (e, i) { return '<div class="ticker__el' + (i === 0 ? " on" : "") + '"><b>' + e.typ + ':</b> <a href="#' + e.cel + '">' + esc(e.tytul) + "</a></div>"; }).join("") + "</div></div>" : "";
+  return '<div class="topbar"><div class="wrap"><span class="status" data-status data-stan="' + st.stan + '"><i></i><span>' + st.tekst + "</span></span>" + tick +
+    '<span><a href="' + telHref() + '">tel. ' + esc(S.kontakt.telefon) + '</a><span class="topbar__adres"> · ' + esc(adresPelny()) + "</span></span></div></div>";
+}
+function pozycjeMenu() {
+  var m = WIDOKI.map(function (w) { return { href: w[0], nazwa: w[1] }; });
+  if (sekWidoczna("promocje") && aktywne(S.promocje).length) m.splice(3, 0, { href: "promocje", nazwa: "Promocje" });
+  if (sekWidoczna("aktualnosci") && aktywne(S.aktualnosci).length) m.splice(m.length - 2, 0, { href: "aktualnosci", nazwa: "Aktualności" });
+  return m;
+}
+function htmlHeader() {
+  var li = pozycjeMenu().map(function (p) { return '<li><a href="#' + p.href + '"' + (p.href === WIDOK ? ' aria-current="page"' : "") + ">" + p.nazwa + "</a></li>"; }).join("");
+  return '<header class="header"><div class="wrap"><a class="logo" href="#start" aria-label="' + esc(S.firma.nazwa) + ' – strona główna">' + logoSVG() + "</a>" +
+    '<nav class="nav" id="nawigacja" aria-label="Menu główne"><ul>' + li + "</ul></nav>" +
+    '<a class="btn btn--glowny" href="' + telHref() + '">' + ico("tel") + '<span class="sr">Zadzwoń: </span>' + esc(S.kontakt.telefon) + "</a>" +
+    '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nawigacja"><span class="sr">Menu</span>' + ico("menu") + "</button></div></header>";
+}
+function htmlPasCta() {
+  return '<section class="pas-cta" aria-label="Umów wizytę"><div class="wrap"><div><h2>Proszę zadzwonić – umówimy termin</h2><p>Wizyty umawiamy telefonicznie. Przy rozmowie prosimy podać markę i model auta.</p></div>' +
+    '<div class="centr"><a class="btn btn--glowny" href="' + telHref() + '">' + ico("tel") + esc(S.kontakt.telefon) + '</a><a class="btn btn--obrys" href="' + smsHref() + '">' + ico("sms") + "Wyślij SMS</a></div></div></section>";
+}
+function htmlStopka() {
+  var k = S.kontakt, g = S.godziny;
+  var godzKrotko = [];
+  var pf = g.slice(0, 5).every(function (d) { return d.otwarte === g[0].otwarte && d.od === g[0].od && d.do === g[0].do; });
+  if (pf) godzKrotko.push("Pon.–pt. " + (g[0].otwarte ? godz(g[0].od) + "–" + godz(g[0].do) : "nieczynne"));
+  else g.slice(0, 5).forEach(function (d, i) { godzKrotko.push(DNI[i].slice(0, 3) + ". " + (d.otwarte ? godz(d.od) + "–" + godz(d.do) : "nieczynne")); });
+  godzKrotko.push("Sobota " + (g[5].otwarte ? godz(g[5].od) + "–" + godz(g[5].do) : "nieczynne"));
+  godzKrotko.push("Niedziela " + (g[6].otwarte ? godz(g[6].od) + "–" + godz(g[6].do) : "nieczynne"));
+  var social = (k.facebook ? '<a href="' + esc(k.facebook) + '" target="_blank" rel="noopener" aria-label="Facebook">' + ico("fb") + "</a>" : '<a href="#kontakt" aria-label="Facebook (link do uzupełnienia)">' + ico("fb") + "</a>") +
+    (k.instagram ? '<a href="' + esc(k.instagram) + '" target="_blank" rel="noopener" aria-label="Instagram">' + ico("ig") + "</a>" : '<a href="#kontakt" aria-label="Instagram (link do uzupełnienia)">' + ico("ig") + "</a>");
+  return '<footer class="stopka"><div class="wrap">' +
+    '<div style="display:grid;gap:1rem"><a class="logo" href="#start" aria-label="Strona główna">' + logoSVG() + "</a><p>" + fmtLinia(S.firma.haslo) + '</p><div class="social">' + social + "</div></div>" +
+    "<div><h3>Kontakt</h3><ul><li><a href=\"" + telHref() + '">tel. ' + esc(k.telefon) + '</a></li><li><a href="' + smsHref() + '">SMS: ' + esc(k.sms || k.telefon) + '</a></li><li><a href="mailto:' + esc(k.email) + '">' + esc(k.email) + "</a></li><li>" + esc(adresPelny()) + "</li></ul></div>" +
+    "<div><h3>Godziny</h3><ul>" + godzKrotko.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul><h3 style="margin-top:1.2rem">Strony</h3><ul>' + WIDOKI.slice(1).map(function (w) { return '<li><a href="#' + w[0] + '">' + w[1] + "</a></li>"; }).join("") + "</ul></div>" +
+    '<div><h3>Przypomnienia sezonowe</h3><p style="margin-bottom:.8rem">Raz w miesiącu: wymiana opon, serwis klimatyzacji, promocje. Bez spamu.</p><form class="newsletter" data-newsletter novalidate><label class="sr" for="nl-email">Adres e-mail</label><input id="nl-email" type="email" required placeholder="Pana/Pani e-mail" autocomplete="email"><button class="btn btn--glowny" type="submit">Zapisz się</button><p class="komunikat" role="status" hidden></p></form></div>' +
+    '</div><div class="stopka__dol"><div class="wrap"><span>© ' + new Date().getFullYear() + " " + esc(S.firma.nazwa) + ' · Faktury VAT · Płatność kartą · <button type="button" class="link-btn" data-cms-otworz>Panel administratora</button></span><span>Projekt i wykonanie: Strony AI Wrocław</span></div></div></footer>' +
+    '<nav class="pasek-mobilny" aria-label="Szybki kontakt"><a href="' + telHref() + '">' + ico("tel") + 'Zadzwoń</a><a href="' + smsHref() + '">' + ico("sms") + 'SMS</a><a href="' + mapaLink() + '" target="_blank" rel="noopener">' + ico("pin") + "Dojazd</a></nav>";
+}
+function podhero(okruszek, id) {
+  var s = sek(id);
+  return '<section class="podhero"><div class="wrap"><p class="okruszki"><a href="#start">Start</a> / ' + okruszek + "</p>" + (s.nadtytul ? '<span class="etykieta">' + esc(s.nadtytul) + "</span>" : "") +
+    "<h1>" + fmtLinia(s.tytul || okruszek) + "</h1>" + (s.wstep ? "<p>" + fmtLinia(s.wstep) + "</p>" : "") + "</div></section>";
+}
+
+/* ---------- karty ---------- */
+function promoDlaUslugi(id) { return aktywne(S.promocje).filter(function (p) { return p.usluga === id && sekWidoczna("promocje"); })[0]; }
+function kartaUslugi(u) {
+  var pr = promoDlaUslugi(u.id), zn = "";
+  if (pr) zn += '<span class="znaczek znaczek--promo">' + esc(pr.plakietka || "Promocja") + "</span>";
+  if (u.nowosc) zn += '<span class="znaczek znaczek--nowosc">Nowość</span>';
+  if (u.plakietka) zn += '<span class="znaczek znaczek--wlasny">' + esc(u.plakietka) + "</span>";
+  var przycisk = u.przycisk === "wycena" ? '<a class="btn btn--obrys" href="#wycena" data-usluga="' + u.id + '">Zapytaj o wycenę</a>' : '<a class="btn btn--ciemny" href="' + telHref() + '">' + ico("tel") + "Zadzwoń i umów</a>";
+  return '<article class="usluga odslon" id="usluga-' + u.id + '">' + (u.zdjecie ? '<div class="usluga__foto">' + obraz(u.zdjecie, u.nazwa) + "</div>" : "") +
+    '<div class="usluga__gora"><span class="usluga__ikona">' + ico(u.ikona) + '</span><span class="znaczki">' + zn + "</span></div>" +
+    "<h3>" + esc(u.nazwa) + "</h3><div style=\"display:grid;gap:.5rem;align-content:start\"><p>" + fmtLinia(u.opis) + "</p>" + (u.czas ? '<span class="usluga__meta">' + ico("zegar", "ik-mala") + esc(u.czas) + "</span>" : "") + "</div>" +
+    '<div class="usluga__cena"><span>' + esc(u.cena) + '</span><small>orientacyjnie, brutto</small></div><div class="usluga__akcje">' + przycisk + "</div></article>";
+}
+function pozostalo(doISO) {
+  if (!doISO) return "Bez terminu końca";
+  var koniec = zISO(doISO); koniec.setHours(23, 59, 59);
+  var ms = koniec - new Date(); if (ms <= 0) return "Kończy się dziś";
+  var dni = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), min = Math.floor(ms % 36e5 / 6e4);
+  return dni > 0 ? "Zostało " + dni + " " + (dni === 1 ? "dzień" : "dni") + " " + h + " h" : "Zostało " + h + " h " + min + " min";
+}
+function postepProc(od, doISO) {
+  if (!doISO) return 100;
+  var a = zISO(od || dzisISO()).getTime(), b = zISO(doISO); b.setHours(23, 59, 59);
+  return Math.max(2, Math.min(100, (Date.now() - a) / (b - a) * 100));
+}
+function kartaPromocji(p) {
+  var u = S.uslugi.filter(function (x) { return x.id === p.usluga && !x.ukryta; })[0];
+  return '<article class="promo odslon"><div class="promo__foto">' + (p.zdjecie ? obraz(p.zdjecie, p.tytul) : grafika("auto")) + (p.plakietka ? '<span class="promo__plak">' + esc(p.plakietka) + "</span>" : "") + "</div>" +
+    '<div class="promo__tresc"><h3>' + esc(p.tytul) + "</h3><p>" + fmtLinia(p.opis) + "</p>" +
+    '<div class="promo__termin"><div><span>' + (p.do ? "Ważne do " + dataSlownie(p.do).replace(/ \d{4}$/, "") : "Oferta stała") + '</span><strong data-odliczanie="' + (p.do || "") + '">' + pozostalo(p.do) + "</strong></div>" +
+    '<div class="postep" role="progressbar" aria-label="Czas trwania promocji" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(postepProc(p.od, p.do)) + '"><i style="width:' + postepProc(p.od, p.do).toFixed(1) + '%"></i></div></div>' +
+    '<div class="centr"><a class="btn btn--glowny" href="' + telHref() + '">' + ico("tel") + "Zadzwoń i umów</a>" + (u ? '<a class="btn btn--obrys" href="#usluga-' + u.id + '" data-do-uslugi="' + u.id + '">' + esc(u.nazwa.split(" – ")[0].split(":")[0]) + "</a>" : "") + "</div></div></article>";
+}
+function gwiazdki(n) { var h = ""; for (var i = 1; i <= 5; i++) h += ico("gwiazda", i <= n ? "" : "pusta"); return '<span class="gwiazdki" aria-label="Ocena ' + n + ' na 5">' + h.replace(/<svg/g, '<svg fill="currentColor"') + "</span>"; }
+function tabelaGodzin() {
+  var dzis = dzienTyg(dzisISO());
+  return '<table class="godziny"><caption class="sr">Godziny otwarcia</caption><tbody>' + S.godziny.map(function (g, i) {
+    return '<tr' + (i === dzis ? ' class="dzis" aria-current="date"' : "") + '><th scope="row">' + DNI[i] + (i === dzis ? " (dziś)" : "") + "</th><td>" + (g.otwarte ? godz(g.od) + " – " + godz(g.do) : "nieczynne") + "</td></tr>";
+  }).join("") + "</tbody></table>";
+}
+function htmlZmiany() {
+  var z = nadchodzaceZmiany(60);
+  if (!z.length) return "";
+  return '<div class="zmiany"><h4>Zmiany w godzinach</h4><ul>' + z.map(function (d) {
+    return '<li><span><time datetime="' + d.data + '">' + dataKrotko(d.data) + "</time> · " + esc(d.opis) + "</span><strong>" + (d.nieczynne ? "nieczynne" : godz(d.od) + "–" + godz(d.do)) + "</strong></li>";
+  }).join("") + "</ul></div>";
+}
+
+/* ---------- widoki ---------- */
+function widokStart() {
+  var st = S.start, h = "";
+  if (sekWidoczna("hero")) {
+    var sl = widoczne(S.slider);
+    var slajdy = sl.length ? sl.map(function (s, i) { return '<figure class="slajd' + (i === 0 ? " on" : "") + '">' + obraz(s.zdjecie, s.podpis) + (s.podpis ? "<figcaption>" + esc(s.podpis) + "</figcaption>" : "") + "</figure>"; }).join("") : '<figure class="slajd on">' + grafika("auto") + "</figure>";
+    var kropki = sl.length > 1 ? '<div class="kropki" role="group" aria-label="Wybór zdjęcia">' + sl.map(function (s, i) { return '<button type="button" data-slajd="' + i + '" aria-label="Zdjęcie ' + (i + 1) + " z " + sl.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>"; }).join("") + "</div>" : "";
+    h += '<section class="hero" id="sek-hero" data-sek="hero" aria-labelledby="h1"><svg class="hero__linia" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" fill="none" stroke="#C9A35B" stroke-width="5" stroke-linecap="round"/></svg><div class="wrap">' +
+      '<div class="hero__tekst"><span class="etykieta">' + esc(st.nadtytul) + '</span><h1 id="h1">' + fmtLinia(st.tytul).replace('class="acc"', 'class="acc" style="display:block"') + '</h1><div class="hero__lead">' + fmt(st.wstep) + "</div>" +
+      '<div class="hero__cta"><a class="btn btn--glowny" href="' + telHref() + '">' + ico("tel") + "Zadzwoń: " + esc(S.kontakt.telefon) + '</a><a class="btn btn--obrys" href="#dojazd">' + ico("pin") + "Jak dojechać</a></div>" +
+      '<ul class="hero__fakty">' + widoczne(S.atuty).map(function (a) { return "<li>" + ico(a.ikona) + esc(a.tekst) + "</li>"; }).join("") + "</ul></div>" +
+      '<div class="hero__foto"><div class="slider" aria-roledescription="karuzela" aria-label="Zdjęcia warsztatu">' + slajdy + kropki + "</div>" +
+      (st.kartaTytul ? '<div class="hero__karta"><strong>' + esc(st.kartaTytul) + "</strong><span>" + esc(st.kartaOpis) + "</span></div>" : "") + "</div></div></section>";
+  }
+  var pr = aktywne(S.promocje);
+  if (pr.length) h += sekcja("promocje", "sekcja--stal", naglowek("promocje") + '<div class="promocje">' + pr.map(kartaPromocji).join("") + "</div>");
+  h += sekcja("wyrozniki", "", naglowek("wyrozniki") + '<div class="wyrozniki">' + widoczne(S.wyrozniki).map(function (w) { return '<div class="wyroznik">' + ico(w.ikona) + "<h3>" + esc(w.tytul) + "</h3><p>" + fmtLinia(w.opis) + "</p></div>"; }).join("") + "</div>");
+  var pol = widoczne(S.uslugi).filter(function (u) { return u.glowna; });
+  h += sekcja("polecane", pr.length ? "" : "sekcja--stal", naglowek("polecane") + '<div class="uslugi-siatka">' + pol.map(kartaUslugi).join("") + '</div><div class="centr mt"><a class="btn btn--ciemny" href="#uslugi">Wszystkie usługi ' + ico("strzalka") + '</a><a class="btn btn--obrys" href="#cennik">Pełny cennik</a></div>');
+  if (sekWidoczna("marki")) {
+    var s = sek("marki");
+    h += '<section class="sekcja sekcja--ciemna z-sygnalem" id="sek-marki" data-sek="marki" aria-labelledby="h-marki"><canvas class="sygnal" aria-hidden="true"></canvas><div class="wrap dwie"><div class="naglowek-sekcji" style="margin:0">' +
+      (s.nadtytul ? '<span class="etykieta">' + esc(s.nadtytul) + "</span>" : "") + '<h2 id="h-marki">' + fmtLinia(s.tytul) + "</h2><p>" + fmtLinia(s.wstep) + '</p></div><ul class="marki">' +
+      widoczne(S.marki).map(function (m) { return "<li><strong>" + esc(m.nazwa) + "</strong><span>" + esc(m.opis) + "</span></li>"; }).join("") + "</ul></div></section>";
+  }
+  h += sekcja("kroki", "", naglowek("kroki") + '<ol class="kroki czeka">' + widoczne(S.kroki).map(function (k, i) { return '<li style="--i:' + i + '"><h3>' + esc(k.tytul) + '</h3><p style="color:var(--tekst-2)">' + fmtLinia(k.opis) + "</p></li>"; }).join("") + "</ol>");
+  var ak = aktywne(S.aktualnosci).sort(function (a, b) { return (b.data || b.od) > (a.data || a.od) ? 1 : -1; });
+  if (ak.length) h += sekcja("aktualnosci", "sekcja--stal", naglowek("aktualnosci") + '<div class="aktualnosci">' + ak.map(function (a) {
+    return '<article class="wpis odslon">' + (a.zdjecie ? '<div class="usluga__foto">' + obraz(a.zdjecie, a.tytul) + "</div>" : "") + '<time datetime="' + (a.data || a.od) + '">' + dataSlownie(a.data || a.od) + "</time><h3>" + esc(a.tytul) + "</h3>" + fmt(a.tresc) + "</article>";
+  }).join("") + "</div>");
+  return h + htmlPasCta();
+}
+function widokUslugi() {
+  var h = podhero("Usługi", "uslugi");
+  if (sekWidoczna("uslugi")) {
+    var kats = widoczne(S.kategorie).map(function (k) {
+      var lista = widoczne(S.uslugi).filter(function (u) { return u.kategoria === k.id; });
+      if (!lista.length) return "";
+      return '<div class="kategoria"><div class="kategoria__opis"><h2>' + esc(k.nazwa) + "</h2><p>" + esc(k.opis) + '</p></div><div class="uslugi-siatka">' + lista.map(kartaUslugi).join("") + "</div></div>";
+    }).join("");
+    h += '<section class="sekcja" id="sek-uslugi" data-sek="uslugi" aria-label="Lista usług"><div class="wrap">' + kats + "</div></section>";
+  }
+  h += sekcja("pakiety", "sekcja--stal", naglowek("pakiety") + htmlPakiety());
+  return h + htmlPasCta();
+}
+function htmlPakiety() {
+  return '<div class="pakiety">' + widoczne(S.pakiety).map(function (p) {
+    return '<article class="pakiet odslon' + (p.wyrozniony ? " pakiet--wyrozniony" : "") + '"><h3>' + esc(p.nazwa) + '</h3><div class="pakiet__cena">' + esc(p.cena) + " <small>" + esc(p.dopisek) + "</small></div><p>" + fmtLinia(p.opis) + '</p><ul class="lista-check">' +
+      String(p.punkty || "").split("\n").filter(Boolean).map(function (t) { return "<li>" + ico("check") + "<span>" + esc(t) + "</span></li>"; }).join("") +
+      '</ul><a class="btn ' + (p.wyrozniony ? "btn--glowny" : "btn--ciemny") + '" href="' + telHref() + '">Zamów telefonicznie</a></article>';
+  }).join("") + "</div>";
+}
+function widokCennik() {
+  var h = podhero("Cennik", "cennik");
+  if (sekWidoczna("cennik")) {
+    var tab = widoczne(S.kategorie).map(function (k) {
+      var w = widoczne(S.cennik).filter(function (c) { return c.kategoria === k.id; });
+      if (!w.length) return "";
+      return '<div class="tabela-wrap odslon"><table><caption>' + esc(k.nazwa) + '</caption><thead><tr><th scope="col">Usługa</th><th scope="col">Czas</th><th scope="col" class="kwota">Cena brutto</th></tr></thead><tbody>' +
+        w.map(function (c) { return '<tr><th scope="row">' + esc(c.nazwa) + (c.dopisek ? "<small>" + esc(c.dopisek) + "</small>" : "") + '</th><td class="czas">' + esc(c.czas || "–") + '</td><td class="kwota">' + esc(c.cena) + "</td></tr>"; }).join("") + "</tbody></table></div>";
+    }).join("");
+    h += '<section class="sekcja" id="sek-cennik" data-sek="cennik" aria-label="Cennik"><div class="wrap"><div class="cennik-tabele">' + tab + '</div><div class="przypis mt">' + fmt(S.cennikUwaga) + "</div></div></section>";
+  }
+  if (sekWidoczna("platnosci")) {
+    var s = sek("platnosci");
+    h += '<section class="sekcja sekcja--stal" id="sek-platnosci" data-sek="platnosci" aria-labelledby="h-platnosci"><div class="wrap dwie"><div class="naglowek-sekcji" style="margin:0"><span class="etykieta">' + esc(s.nadtytul) + '</span><h2 id="h-platnosci">' + fmtLinia(s.tytul) + "</h2>" + (s.wstep ? "<p>" + fmtLinia(s.wstep) + "</p>" : "") + '</div><ul class="lista-check">' +
+      "<li>" + ico("karta") + "<span><strong>Płatności:</strong> " + fmtLinia(S.info.platnosci) + "</span></li><li>" + ico("tarcza") + "<span><strong>Gwarancja:</strong> " + fmtLinia(S.info.gwarancja) + "</span></li></ul></div></section>";
+  }
+  h += sekcja("faq", "", naglowek("faq") + '<div class="faq">' + widoczne(S.faq).map(function (f) { return "<details><summary>" + esc(f.pytanie) + "</summary>" + fmt(f.odpowiedz).replace(/<p>/g, "<p>") + "</details>"; }).join("") + "</div>");
+  return h + htmlPasCta();
+}
+function widokONas() {
+  var o = S.onas, h = "";
+  h += '<section class="podhero"><div class="wrap"><p class="okruszki"><a href="#start">Start</a> / O nas</p><span class="etykieta">' + esc(o.nadtytul) + "</span><h1>" + fmtLinia(o.tytul) + "</h1><p>" + fmtLinia(o.wstep) + "</p></div></section>";
+  if (sekWidoczna("onas")) h += '<section class="sekcja" id="sek-onas" data-sek="onas" aria-labelledby="h-onas"><div class="wrap dwie"><div style="display:grid;gap:1.1rem"><span class="etykieta">Nasza historia</span><h2 id="h-onas">' + fmtLinia(o.naglowek) + '</h2><div class="tekst-bogaty">' + fmt(o.tekst) + "</div></div>" +
+    '<div style="display:grid;gap:12px">' + foto(o.zdjecie1, "Warsztat Szalone auto", o.zdjecie1 ? "" : "Miejsce na zdjęcie warsztatu", "", "aspect-ratio:4/3;border-radius:6px") + foto(o.zdjecie2, "Wnętrze warsztatu", "Zdjęcie: wnętrze warsztatu (img/o-nas.jpg)", "", "aspect-ratio:16/9;border-radius:6px") + "</div></div></section>";
+  h += sekcja("zespol", "sekcja--stal", naglowek("zespol") + '<div class="zespol">' + widoczne(S.zespol).map(function (z) {
+    var ini = z.imie.split(" ").map(function (x) { return x[0]; }).join("").slice(0, 2);
+    return '<div class="osoba odslon"><figure class="foto">' + (z.zdjecie ? obraz(z.zdjecie, "Portret: " + z.imie) : "") + '<span class="monogram" aria-hidden="true">' + esc(ini) + "</span></figure><h3>" + esc(z.imie) + '</h3><strong style="font-size:.9rem;color:var(--mosiadz-ciemny)">' + esc(z.rola) + "</strong><span>" + esc(z.opis) + "</span></div>";
+  }).join("") + "</div>");
+  if (sekWidoczna("galeria")) {
+    var g = widoczne(S.galeria), kat = [];
+    g.forEach(function (x) { if (x.kategoria && kat.indexOf(x.kategoria) < 0) kat.push(x.kategoria); });
+    var filtry = kat.length > 1 ? '<div class="filtry" role="group" aria-label="Filtruj galerię"><button type="button" class="filtr" data-filtr="" aria-pressed="true">Wszystkie</button>' + kat.map(function (k) { return '<button type="button" class="filtr" data-filtr="' + esc(k) + '" aria-pressed="false">' + esc(k) + "</button>"; }).join("") + "</div>" : "";
+    h += sekcja("galeria", "", naglowek("galeria") + filtry + '<div class="galeria">' + g.map(function (x, i) {
+      return '<button type="button" class="foto' + (i === 0 ? " foto--duze" : "") + '" data-kat="' + esc(x.kategoria || "") + '" data-lb="' + i + '" aria-label="Powiększ: ' + esc(x.podpis || "zdjęcie " + (i + 1)) + '">' + obraz(x.zdjecie, x.podpis) + (x.podpis ? '<span class="podpis">' + esc(x.podpis) + "</span>" : "") + "</button>";
+    }).join("") + "</div>");
+  }
+  if (sekWidoczna("czesci")) {
+    var s = sek("czesci");
+    h += '<section class="sekcja sekcja--ciemna" id="sek-czesci" data-sek="czesci" aria-labelledby="h-czesci"><div class="wrap dwie"><div class="naglowek-sekcji" style="margin:0"><span class="etykieta">' + esc(s.nadtytul) + '</span><h2 id="h-czesci">' + fmtLinia(s.tytul) + "</h2><p>" + fmtLinia(s.wstep) + '</p></div><ul class="lista-check">' +
+      widoczne(S.czesci).map(function (c) { return "<li>" + ico("check") + "<span>" + fmtLinia(c.tekst) + "</span></li>"; }).join("") + "</ul></div></section>";
+  }
+  if (sekWidoczna("opinie")) {
+    var op = widoczne(S.opinie), link = S.kontakt.googleOpinie;
+    var btn = '<a class="btn btn--ciemny" href="' + (link ? esc(link) : "#kontakt") + '"' + (link ? ' target="_blank" rel="noopener"' : "") + ">" + ico("gwiazda") + "Opinie w Google</a>";
+    var tresc;
+    if (op.length) {
+      var sr = op.reduce(function (a, b) { return a + (+b.ocena || 5); }, 0) / op.length;
+      tresc = '<div class="oceny"><span class="oceny__srednia">' + sr.toFixed(1).replace(".", ",") + "</span><div>" + gwiazdki(Math.round(sr)) + '<div style="color:var(--tekst-2);font-size:.92rem">' + op.length + " " + (op.length === 1 ? "opinia" : op.length < 5 ? "opinie" : "opinii") + " na stronie</div></div>" + btn + '</div><div class="opinie">' +
+        op.map(function (x) { return '<blockquote class="opinia opinia--prawdziwa odslon">' + gwiazdki(+x.ocena || 5) + fmt(x.tresc) + "<footer>" + esc(x.autor) + (x.usluga ? " · " + esc(x.usluga) : "") + "</footer></blockquote>"; }).join("") + "</div>";
+    } else {
+      tresc = '<div class="brak-opinii"><p>Opinie naszych klientów zbieramy w wizytówce Google. Zapraszamy do przeczytania i podzielenia się swoją opinią po wizycie.</p>' + btn + "</div>";
+    }
+    h += sekcja("opinie", "", naglowek("opinie") + tresc);
+  }
+  return h + htmlPasCta();
+}
+function widokKontakt() {
+  var k = S.kontakt, st = stanOtwarcia(), h = podhero("Kontakt i dojazd", "kontakt");
+  if (sekWidoczna("kontakt")) h += '<section class="sekcja" id="sek-kontakt" data-sek="kontakt" aria-label="Kontakt i godziny"><div class="wrap"><div class="kontakt-siatka">' +
+    '<div class="kafel kafel--ciemny"><h3>Telefon – umówienie wizyty</h3><a class="duzy-numer" href="' + telHref() + '">' + esc(k.telefon) + '</a><div class="akcje"><a class="btn btn--glowny" href="' + telHref() + '">' + ico("tel") + 'Zadzwoń</a><a class="btn btn--obrys" href="' + smsHref() + '">' + ico("sms") + "SMS</a></div>" +
+    '<p style="color:var(--na-ciemnym-2)">E-mail: <a href="mailto:' + esc(k.email) + '" style="color:var(--bialy)">' + esc(k.email) + "</a></p></div>" +
+    '<div class="kafel"><h3>Godziny otwarcia</h3><span class="status-duzy" data-status data-stan="' + st.stan + '"><i></i><span>' + st.tekst + "</span></span>" + tabelaGodzin() + htmlZmiany() + "</div></div></div></section>";
+  if (sekWidoczna("dojazd")) {
+    var s = sek("dojazd");
+    h += '<section class="sekcja sekcja--stal" id="sek-dojazd" data-sek="dojazd" aria-labelledby="h-dojazd"><div class="wrap dwie"><div style="display:grid;gap:1.2rem"><span class="etykieta">' + esc(s.nadtytul) + '</span><h2 id="h-dojazd">' + (s.tytul ? fmtLinia(s.tytul) : esc(adresPelny())) + "</h2>" + (s.wstep ? "<p>" + fmtLinia(s.wstep) + "</p>" : "") + (k.dzielnica ? "<p>Dzielnica: " + esc(k.dzielnica) + "</p>" : "") +
+      '<ul class="lista-check"><li>' + ico("parking") + "<span><strong>Parking:</strong> " + fmtLinia(S.info.parking) + "</span></li><li>" + ico("pin") + "<span><strong>Komunikacja miejska:</strong> " + fmtLinia(S.info.komunikacja) + "</span></li><li>" + ico("dostep") + "<span><strong>Dostępność:</strong> " + fmtLinia(S.info.dostepnosc) + "</span></li><li>" + ico("zegar") + "<span><strong>Odbiór auta:</strong> " + fmtLinia(S.info.odbior) + "</span></li></ul>" +
+      '<div class="centr"><a class="btn btn--ciemny" href="' + mapaLink() + '" target="_blank" rel="noopener">' + ico("pin") + "Wyznacz trasę w Google Maps</a></div></div>" +
+      '<div class="mapa"><svg class="trasa" viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#2E323B" stroke-width="10" fill="none"><path d="M-10 90H420M-10 250H420M120 -10V350M300 -10V350M-10 30 420 330"/></g>' +
+      '<path class="trasa-anim" d="M-10 250H200A40 40 0 0 0 200 170H170A40 40 0 0 1 170 90H300" stroke="#C9A35B" stroke-width="4" fill="none" stroke-linecap="round"/><g class="pinezka"><path d="M300 90c0-14-22-14-22 0 0 10 11 22 11 22s11-12 11-22z" transform="translate(11 -24)" fill="#C9A35B"/></g></svg>' +
+      '<div class="mapa__info"><strong>' + esc(S.firma.nazwa) + "</strong><span>" + esc(adresPelny()) + '</span><button class="btn btn--glowny" type="button" data-pokaz-mape>' + ico("pin") + 'Pokaż mapę Google</button><small style="color:var(--na-ciemnym-2)">Mapa ładuje się po kliknięciu.</small></div></div></div></section>';
+  }
+  if (sekWidoczna("wycena")) {
+    var s2 = sek("wycena");
+    var opcje = widoczne(S.uslugi).map(function (u) { return '<option value="' + esc(u.nazwa) + '"' + (preselectUsluga === u.id ? " selected" : "") + ">" + esc(u.nazwa) + "</option>"; }).join("") + "<option>Inna / nie wiem</option>";
+    h += '<section class="sekcja" id="sek-wycena" data-sek="wycena" aria-labelledby="h-wycena"><div class="wrap dwie"><div style="display:grid;gap:1rem"><span class="etykieta">' + esc(s2.nadtytul) + '</span><h2 id="h-wycena">' + fmtLinia(s2.tytul) + '</h2><p style="color:var(--tekst-2)">' + fmtLinia(s2.wstep) + '</p><p style="color:var(--tekst-2)">Najszybciej: telefon <a href="' + telHref() + '">' + esc(k.telefon) + "</a>.</p></div>" +
+      '<form class="formularz" id="form-wycena" novalidate><div class="pola"><div class="pole"><label for="w-marka">Marka *</label><input id="w-marka" required placeholder="np. BMW"></div><div class="pole"><label for="w-model">Model *</label><input id="w-model" required placeholder="np. 320d F30"></div>' +
+      '<div class="pole"><label for="w-rok">Rok produkcji</label><input id="w-rok" inputmode="numeric" pattern="[0-9]{4}" placeholder="np. 2017"></div><div class="pole"><label for="w-usluga">Usługa</label><select id="w-usluga">' + opcje + "</select></div></div>" +
+      '<div class="pole"><label for="w-opis">Opis problemu</label><textarea id="w-opis" placeholder="Co się dzieje z autem? Od kiedy?"></textarea></div><div class="pola"><div class="pole"><label for="w-imie">Imię *</label><input id="w-imie" required autocomplete="given-name"></div><div class="pole"><label for="w-tel">Telefon *</label><input id="w-tel" type="tel" required autocomplete="tel"></div></div>' +
+      '<fieldset class="pole" style="border:0;padding:0;margin:0"><legend style="font-weight:700;margin-bottom:.35rem">Wyślij jako</legend><div class="akcje"><label class="zgoda" style="color:var(--tekst)"><input type="radio" name="kanal" value="sms" id="k-sms" checked><span>SMS</span></label><label class="zgoda" style="color:var(--tekst)"><input type="radio" name="kanal" value="email" id="k-mail"><span>E-mail</span></label></div></fieldset>' +
+      '<label class="zgoda" for="w-zgoda"><input type="checkbox" id="w-zgoda" required><span>Zgadzam się na kontakt w sprawie wyceny.</span></label><button class="btn btn--ciemny" type="submit">Przygotuj wiadomość ' + ico("strzalka") + '</button><p class="komunikat" id="w-wynik" role="status" hidden></p></form></div></section>';
+  }
+  return h;
+}
+
+/* ---------- render główny + zachowania ---------- */
+var WIDOKI_FN = { start: widokStart, uslugi: widokUslugi, cennik: widokCennik, "o-nas": widokONas, kontakt: widokKontakt };
+function render(opcje) {
+  opcje = opcje || {};
+  var app = document.getElementById("app"), y = window.scrollY;
+  app.innerHTML = htmlTopbar() + htmlHeader() + '<main id="tresc" class="' + (opcje.animuj ? "widok-wejscie" : "") + '">' + WIDOKI_FN[WIDOK]() + "</main>" + htmlStopka();
+  document.title = S.firma.nazwa + " – " + (WIDOK === "start" ? "warsztat samochodowy " + S.kontakt.miasto + " | BMW, Audi, Toyota" : WIDOKI.filter(function (w) { return w[0] === WIDOK; })[0][1] + " | warsztat " + S.kontakt.miasto);
+  if (opcje.zachowajScroll) window.scrollTo(0, y);
+  poRenderze();
+}
+function trasa(hash, przewin) {
+  var h = (hash || "").replace(/^#/, "") || "start", cel = null;
+  if (WIDOKI_FN[h]) { WIDOK = h; }
+  else {
+    var s = S.sekcje.filter(function (x) { return x.id === h; })[0];
+    if (s) { WIDOK = s.widok; cel = "sek-" + h; }
+    else if (h.indexOf("usluga-") === 0) { WIDOK = "uslugi"; cel = h; }
+    else if (h === "tresc") { return; }
+  }
+  render({ animuj: true });
+  var el = cel && document.getElementById(cel);
+  if (el) { setTimeout(function () { el.scrollIntoView({ behavior: przewin === false ? "auto" : "smooth", block: "start" }); }, 30); }
+  else window.scrollTo(0, 0);
+}
+
+var licznikPaska = 0, slajdNr = 0;
+function poRenderze() {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("nawigacja");
+  if (btn) btn.addEventListener("click", function () { var o = nav.classList.toggle("otwarte"); btn.setAttribute("aria-expanded", o ? "true" : "false"); });
+  document.querySelectorAll('#app a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var h = a.getAttribute("href"); if (h === "#") return;
+      e.preventDefault();
+      if (a.dataset.usluga) preselectUsluga = a.dataset.usluga;
+      if (location.hash !== h) history.pushState(null, "", h);
+      trasa(h);
+    });
+  });
+  // slider
+  slajdNr = 0;
+  document.querySelectorAll(".kropki button").forEach(function (b) { b.addEventListener("click", function () { pokazSlajd(+b.dataset.slajd); }); });
+  // galeria
+  document.querySelectorAll(".filtr").forEach(function (f) {
+    f.addEventListener("click", function () {
+      document.querySelectorAll(".filtr").forEach(function (x) { x.setAttribute("aria-pressed", x === f ? "true" : "false"); });
+      var k = f.dataset.filtr;
+      document.querySelectorAll(".galeria [data-kat]").forEach(function (el) { el.hidden = !!k && el.dataset.kat !== k; });
+      var pierwszy = document.querySelector(".galeria [data-kat]:not([hidden])");
+      document.querySelectorAll(".galeria [data-kat]").forEach(function (el) { el.classList.toggle("foto--duze", el === pierwszy); });
+    });
+  });
+  document.querySelectorAll("[data-lb]").forEach(function (b) { b.addEventListener("click", function () { otworzLightbox(b); }); });
+  // mapa
+  var mb = document.querySelector("[data-pokaz-mape]");
+  if (mb) mb.addEventListener("click", function () {
+    var f = document.createElement("iframe");
+    f.src = "https://www.google.com/maps?q=" + encodeURIComponent(S.kontakt.adres + ", " + S.kontakt.miasto) + "&output=embed";
+    f.title = "Mapa dojazdu"; f.loading = "lazy"; mb.closest(".mapa").appendChild(f);
+  });
+  // formularze
+  var form = document.getElementById("form-wycena");
+  if (form) form.addEventListener("submit", function (e) {
+    e.preventDefault(); if (!form.reportValidity()) return;
+    var v = function (id) { return (document.getElementById(id).value || "").trim(); };
+    var tresc = "Zapytanie o wycenę – " + v("w-marka") + " " + v("w-model") + (v("w-rok") ? " (" + v("w-rok") + ")" : "") + ". Usługa: " + v("w-usluga") + ". " + v("w-opis") + " Kontakt: " + v("w-imie") + ", tel. " + v("w-tel");
+    var out = document.getElementById("w-wynik"); out.hidden = false;
+    out.textContent = "Przygotowaliśmy wiadomość z Pana/Pani zapytaniem – wystarczy ją wysłać. Oddzwonimy z wyceną w godzinach pracy warsztatu.";
+    var email = form.querySelector("[name=kanal]:checked").value === "email";
+    window.location.href = email ? "mailto:" + S.kontakt.email + "?subject=" + encodeURIComponent("Wycena: " + v("w-marka") + " " + v("w-model")) + "&body=" + encodeURIComponent(tresc) : smsHref(tresc);
+  });
+  document.querySelectorAll("[data-newsletter]").forEach(function (f) {
+    f.addEventListener("submit", function (e) { e.preventDefault(); if (!f.reportValidity()) return; var k = f.querySelector(".komunikat"); k.hidden = false; k.textContent = "Dziękujemy za zapis. Raz w miesiącu wyślemy przypomnienia sezonowe i promocje."; f.reset(); });
+  });
+  document.querySelectorAll("[data-cms-otworz]").forEach(function (b) { b.addEventListener("click", function () { cmsWejdz(b); }); });
+  // odsłanianie przy przewijaniu (treść widoczna od początku – przesuwa się tylko o kilka pikseli)
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var io = new IntersectionObserver(function (wpisy) { wpisy.forEach(function (w) { if (w.isIntersecting) { w.target.classList.remove("czeka"); io.unobserve(w.target); } }); }, { rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".odslon, .kroki").forEach(function (el) { if (el.getBoundingClientRect().top > innerHeight) el.classList.add("czeka"); else el.classList.remove("czeka"); io.observe(el); });
+  } else document.querySelectorAll(".czeka").forEach(function (el) { el.classList.remove("czeka"); });
+  licznikPaska = 0;
+}
+function pokazSlajd(n) {
+  var sl = document.querySelectorAll(".slajd"); if (sl.length < 2) return;
+  slajdNr = (n + sl.length) % sl.length;
+  sl.forEach(function (s, i) { s.classList.toggle("on", i === slajdNr); });
+  document.querySelectorAll(".kropki button").forEach(function (b, i) { b.setAttribute("aria-current", i === slajdNr ? "true" : "false"); });
+}
+function odswiezStatus() {
+  var st = stanOtwarcia();
+  document.querySelectorAll("[data-status]").forEach(function (el) { el.setAttribute("data-stan", st.stan); el.querySelector("span").textContent = st.tekst; });
+  document.querySelectorAll("[data-odliczanie]").forEach(function (el) { el.textContent = pozostalo(el.getAttribute("data-odliczanie")); });
+}
+var ruchOgr = matchMedia("(prefers-reduced-motion: reduce)");
+setInterval(function () {
+  var el = document.querySelectorAll(".ticker__el"); if (el.length < 2 || document.hidden) return;
+  var stary = licznikPaska % el.length; licznikPaska++; var nowy = licznikPaska % el.length;
+  el[stary].classList.remove("on"); el[stary].classList.add("off");
+  el[nowy].classList.remove("off"); el[nowy].classList.add("on");
+  setTimeout(function () { el[stary] && el[stary].classList.remove("off"); }, 600);
+  var l = document.querySelector("[data-ticker-licz]"); if (l) l.textContent = (nowy + 1) + "/" + el.length;
+}, 5000);
+setInterval(function () { if (!document.hidden && !ruchOgr.matches && !document.querySelector(".slider:hover")) pokazSlajd(slajdNr + 1); }, 6000);
+setInterval(odswiezStatus, 60000);
+
+/* Sygnał diagnostyczny (canvas) – delikatne przebiegi w tle sekcji „Specjalizacja” */
+(function petla() {
+  var t0 = performance.now();
+  function klatka(t) {
+    var c = document.querySelector(".sygnal");
+    if (c && !ruchOgr.matches && !document.hidden) {
+      var r = c.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) {
+        var dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+        if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+        var x = c.getContext("2d"), s = (t - t0) / 1000;
+        x.clearRect(0, 0, w, h);
+        [[0.62, "rgba(201,163,91,.55)", 1.6, 0], [0.7, "rgba(163,169,179,.25)", 1, 2.1]].forEach(function (cfg) {
+          x.beginPath(); x.lineWidth = cfg[2] * dpr; x.strokeStyle = cfg[1];
+          for (var px = 0; px <= w; px += 4 * dpr) {
+            var u = px / w * 18 + s * 1.3 + cfg[3];
+            var y = h * cfg[0] + Math.sin(u) * 18 * dpr + Math.sin(u * 3.1) * 6 * dpr * (Math.sin(u / 4) > .6 ? 1 : .2);
+            px === 0 ? x.moveTo(px, y) : x.lineTo(px, y);
+          }
+          x.stroke();
+        });
+      }
+    }
+    requestAnimationFrame(klatka);
+  }
+  requestAnimationFrame(klatka);
+})();
+
+/* Lightbox galerii */
+var lbLista = [], lbNr = 0, lbPowrot = null;
+function otworzLightbox(btn) {
+  lbPowrot = btn;
+  var wid = Array.prototype.slice.call(document.querySelectorAll(".galeria [data-lb]:not([hidden])"));
+  lbLista = wid.map(function (b) { return widoczne(S.galeria)[+b.dataset.lb]; });
+  lbNr = wid.indexOf(btn);
+  var d = document.createElement("div");
+  d.className = "lightbox"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-label", "Powiększone zdjęcie");
+  d.innerHTML = '<div class="lightbox__gora"><span data-lb-licz></span><button type="button" class="lightbox__x" aria-label="Zamknij">×</button></div><div class="lightbox__obraz" data-lb-obraz></div><div class="lightbox__dol" data-lb-podpis></div>';
+  document.body.appendChild(d);
+  d.querySelector(".lightbox__x").addEventListener("click", zamknijLightbox);
+  d.addEventListener("click", function (e) { if (e.target === d || e.target.hasAttribute("data-lb-obraz")) zamknijLightbox(); });
+  rysujLightbox(); d.querySelector(".lightbox__x").focus();
+  document.addEventListener("keydown", klawiszeLightbox);
+}
+function rysujLightbox() {
+  var d = document.querySelector(".lightbox"), x = lbLista[lbNr]; if (!d || !x) return;
+  d.querySelector("[data-lb-obraz]").innerHTML = (lbLista.length > 1 ? '<button type="button" class="lightbox__nav lightbox__nav--l" aria-label="Poprzednie">' + ico("strzalka") + "</button>" : "") + (String(x.zdjecie).indexOf("bp:") === 0 ? grafika(x.zdjecie.slice(3), "anim") : obraz(x.zdjecie, x.podpis)) + (lbLista.length > 1 ? '<button type="button" class="lightbox__nav lightbox__nav--p" aria-label="Następne">' + ico("strzalka") + "</button>" : "");
+  d.querySelector("[data-lb-licz]").textContent = (lbNr + 1) + "/" + lbLista.length;
+  d.querySelector("[data-lb-podpis]").textContent = x.podpis || "";
+  var l = d.querySelector(".lightbox__nav--l"), p = d.querySelector(".lightbox__nav--p");
+  if (l) l.addEventListener("click", function (e) { e.stopPropagation(); lbNr = (lbNr - 1 + lbLista.length) % lbLista.length; rysujLightbox(); });
+  if (p) p.addEventListener("click", function (e) { e.stopPropagation(); lbNr = (lbNr + 1) % lbLista.length; rysujLightbox(); });
+}
+function klawiszeLightbox(e) {
+  if (e.key === "Escape") zamknijLightbox();
+  else if (e.key === "ArrowRight") { lbNr = (lbNr + 1) % lbLista.length; rysujLightbox(); }
+  else if (e.key === "ArrowLeft") { lbNr = (lbNr - 1 + lbLista.length) % lbLista.length; rysujLightbox(); }
+  else if (e.key === "Tab") { var f = document.querySelectorAll(".lightbox button"); if (f.length) { var i = Array.prototype.indexOf.call(f, document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus(); } }
+}
+function zamknijLightbox() { var d = document.querySelector(".lightbox"); if (d) d.remove(); document.removeEventListener("keydown", klawiszeLightbox); if (lbPowrot) lbPowrot.focus(); }
+
+window.addEventListener("popstate", function () { trasa(location.hash, false); });
+document.addEventListener("keydown", function (e) {
+  var nav = document.getElementById("nawigacja"), b = document.querySelector(".menu-btn");
+  if (e.key === "Escape" && nav && nav.classList.contains("otwarte")) { nav.classList.remove("otwarte"); b.setAttribute("aria-expanded", "false"); b.focus(); }
+});
+/* =====================================================================
+   ZAPIS DANYCH: IndexedDB (awaryjnie localStorage) – tylko ta przeglądarka
+   ===================================================================== */
+var DB_NAZWA = "szalone-auto-cms", DB_MAGAZYN = "dane", DB_KLUCZ = "stan", LS_KLUCZ = "szalone-auto-cms-stan";
+function idbOtworz() {
+  return new Promise(function (ok, blad) {
+    try {
+      var r = indexedDB.open(DB_NAZWA, 1);
+      r.onupgradeneeded = function () { r.result.createObjectStore(DB_MAGAZYN); };
+      r.onsuccess = function () { ok(r.result); };
+      r.onerror = function () { blad(r.error); };
+    } catch (e) { blad(e); }
+  });
+}
+function idbCzytaj() {
+  return idbOtworz().then(function (db) {
+    return new Promise(function (ok, blad) { var t = db.transaction(DB_MAGAZYN, "readonly").objectStore(DB_MAGAZYN).get(DB_KLUCZ); t.onsuccess = function () { ok(t.result || null); }; t.onerror = function () { blad(t.error); }; });
+  });
+}
+function idbZapisz(dane) {
+  return idbOtworz().then(function (db) {
+    return new Promise(function (ok, blad) { var tx = db.transaction(DB_MAGAZYN, "readwrite"); tx.objectStore(DB_MAGAZYN).put(dane, DB_KLUCZ); tx.oncomplete = function () { ok(); }; tx.onerror = function () { blad(tx.error); }; });
+  });
+}
+function wczytajZapis() {
+  return idbCzytaj().catch(function () { return null; }).then(function (d) {
+    if (d) return d;
+    try { var s = localStorage.getItem(LS_KLUCZ); return s ? JSON.parse(s) : null; } catch (e) { return null; }
+  });
+}
+/* Scalanie: zapis ma pierwszeństwo, ale nowe pola z kodu (dane początkowe) nie znikają */
+function scal(d, s) {
+  if (s === undefined || s === null) return d;
+  if (Array.isArray(d)) return Array.isArray(s) ? s : d;
+  if (d && typeof d === "object") {
+    if (typeof s !== "object" || Array.isArray(s)) return d;
+    var o = {}, k;
+    for (k in d) o[k] = (k in s) ? scal(d[k], s[k]) : d[k];
+    for (k in s) if (!(k in o)) o[k] = s[k];
+    return o;
+  }
+  return typeof s === typeof d ? s : d;
+}
+function scalStan(zapis) {
+  var d = daneStartowe(), w = scal(d, zapis || {});
+  var poId = {}; (zapis && Array.isArray(zapis.sekcje) ? zapis.sekcje : []).forEach(function (s) { poId[s.id] = s; });
+  w.sekcje = SEKCJE_DOMYSLNE.map(function (s) { return Object.assign({}, s, poId[s.id] || {}, { widok: s.widok, nazwa: s.nazwa }); });
+  if (!Array.isArray(w.godziny) || w.godziny.length !== 7) w.godziny = d.godziny;
+  w.godziny = w.godziny.map(function (g, i) { return Object.assign({}, d.godziny[i], g); });
+  w._app = APP_ID; w._v = APP_WERSJA;
+  return w;
+}
+var zapisTimer = null;
+function zapisz() {
+  ustawWskaznik("trwa");
+  clearTimeout(zapisTimer);
+  zapisTimer = setTimeout(function () {
+    var dane = JSON.parse(JSON.stringify(S));
+    idbZapisz(dane).then(function () { ustawWskaznik("ok"); }).catch(function () {
+      try { localStorage.setItem(LS_KLUCZ, JSON.stringify(dane)); ustawWskaznik("ok"); }
+      catch (e) { ustawWskaznik("blad"); }
+    });
+  }, 350);
+}
+function ustawWskaznik(stan) {
+  var el = document.querySelector(".cmsp-zapis"); if (!el) return;
+  el.setAttribute("data-stan", stan);
+  var t = new Date();
+  el.querySelector("span").textContent = stan === "trwa" ? "Zapisywanie…" : stan === "blad" ? "Błąd zapisu – za mało miejsca w przeglądarce" : "Zapisano " + t.getHours() + ":" + String(t.getMinutes()).padStart(2, "0");
+}
+/* =====================================================================
+   3) PANEL ADMINISTRATORA (CMS)
+   ===================================================================== */
+var CMS = { strona: "pulpit", filtry: { promocje: "wszystkie", aktualnosci: "wszystkie" }, powrot: null, otwarteSekcje: {} };
+var ZNAK_SVG = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="12" fill="#22252C"/><g transform="translate(8 8) scale(.75)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"><path d="M8 52H38A11 11 0 0 0 38 30H26A11 11 0 0 1 26 8H40" stroke="#fff"/><path d="M50 8H56" stroke="#C9A35B"/></g></svg>';
+
+function zalogowany() { try { return sessionStorage.getItem("cmsp-sesja") === "1"; } catch (e) { return !!window.__cmsSesja; } }
+function ustawSesje(v) { try { v ? sessionStorage.setItem("cmsp-sesja", "1") : sessionStorage.removeItem("cmsp-sesja"); } catch (e) { } window.__cmsSesja = v; }
+function odswiezKlodke() {
+  var k = document.getElementById("cms-klodka"); if (!k) return;
+  k.innerHTML = ico("klodka") + (zalogowany() ? "<span>Panel</span>" : '<span class="sr">Panel administratora – zaloguj</span>');
+  k.setAttribute("aria-label", zalogowany() ? "Otwórz panel administratora" : "Panel administratora – zaloguj się");
+}
+function cmsWejdz(wyzwalacz) { CMS.powrot = wyzwalacz || document.activeElement; zalogowany() ? otworzPanel() : pokazLogowanie(); }
+
+/* ---------- logowanie ---------- */
+function pokazLogowanie() {
+  var d = document.createElement("div");
+  d.className = "cmsp-login"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "cmsp-login-t");
+  d.innerHTML = '<form novalidate><div class="cmsp-login__znak">' + ZNAK_SVG + '<div><h2 id="cmsp-login-t">Panel administratora</h2><small style="color:#565C66">' + esc(S.firma.nazwa) + '</small></div></div>' +
+    '<label>Login<input type="text" id="cmsp-l" autocomplete="username" required></label><label>Hasło<input type="password" id="cmsp-h" autocomplete="current-password" required></label>' +
+    '<p class="cmsp-blad" role="alert" hidden>Nieprawidłowy login lub hasło.</p><div class="cmsp-btny"><button type="button" class="cmsp-btn" data-anuluj>Anuluj</button><button type="submit" class="cmsp-btn cmsp-btn--ciem">Zaloguj</button></div>' +
+    '<p class="cmsp-podp">Wersja demonstracyjna · login <b>' + CMS_LOGIN + "</b>, hasło <b>" + CMS_HASLO + "</b></p></form>";
+  document.body.appendChild(d);
+  var f = d.querySelector("form"), zamknij = function () { d.remove(); document.removeEventListener("keydown", esc1); if (CMS.powrot && CMS.powrot.focus) CMS.powrot.focus(); };
+  var esc1 = function (e) { if (e.key === "Escape") zamknij(); };
+  document.addEventListener("keydown", esc1);
+  d.querySelector("[data-anuluj]").addEventListener("click", zamknij);
+  d.addEventListener("click", function (e) { if (e.target === d) zamknij(); });
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (d.querySelector("#cmsp-l").value.trim() === CMS_LOGIN && d.querySelector("#cmsp-h").value === CMS_HASLO) {
+      ustawSesje(true); d.remove(); document.removeEventListener("keydown", esc1); odswiezKlodke(); otworzPanel(); toast("Zalogowano. Zmiany zapisują się automatycznie.");
+    } else { var b = d.querySelector(".cmsp-blad"); b.hidden = false; d.querySelector("#cmsp-h").select(); }
+  });
+  setTimeout(function () { d.querySelector("#cmsp-l").focus(); }, 20);
+}
+function wyloguj() { ustawSesje(false); zamknijPanel(); odswiezKlodke(); toast("Wylogowano."); }
+
+/* ---------- toasty ---------- */
+function toast(t, blad) {
+  var w = document.querySelector(".cmsp-toasty");
+  if (!w) { w = document.createElement("div"); w.className = "cmsp-toasty"; w.setAttribute("role", "status"); w.setAttribute("aria-live", "polite"); document.body.appendChild(w); }
+  var el = document.createElement("div"); el.className = "cmsp-toast" + (blad ? " cmsp-toast--blad" : ""); el.textContent = t;
+  w.appendChild(el); setTimeout(function () { el.remove(); }, 3200);
+}
+
+/* ---------- ścieżki danych ---------- */
+function pobierz(sc) { return sc.split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, S); }
+function ustaw(sc, v) { var p = sc.split("."), o = S; for (var i = 0; i < p.length - 1; i++) o = o[p[i]]; o[p[p.length - 1]] = v; }
+
+/* ---------- konfiguracja kolekcji ---------- */
+function opcjeKategorii() { return S.kategorie.map(function (k) { return [k.id, k.nazwa]; }); }
+function opcjeUslug() { return [["", "– brak –"]].concat(S.uslugi.map(function (u) { return [u.id, u.nazwa]; })); }
+function nazwaKat(id) { var k = S.kategorie.filter(function (x) { return x.id === id; })[0]; return k ? k.nazwa : "bez kategorii"; }
+function nazwaUslugi(id) { var u = S.uslugi.filter(function (x) { return x.id === id; })[0]; return u ? u.nazwa : ""; }
+function zakres(it) { return (it.od ? dataKrotko(it.od) : "od zawsze") + " – " + (it.do ? dataKrotko(it.do) + "." + it.do.slice(0, 4) : "bez końca"); }
+var POLA_CZASOWE = [{ k: "od", l: "Pokazuj od", t: "date" }, { k: "do", l: "Pokazuj do", t: "date", pomoc: "Puste = bez końca" }, { k: "naPasku", l: "Pokaż też na górnym pasku komunikatów", t: "check" }, { k: "wstrzymana", l: "Wstrzymaj (nie pokazuj na stronie)", t: "check" }];
+var KOL = {
+  promocje: { t: "Promocje", j: "promocję", sek: "promocje", czasowa: true, mini: "zdjecie",
+    pola: [{ k: "tytul", l: "Tytuł", t: "text", wym: true, pelne: true }, { k: "opis", l: "Opis", t: "textarea", fmt: true, pelne: true }, { k: "plakietka", l: "Plakietka", t: "text", pomoc: "np. −15%, od 199 zł, Gratis" }, { k: "usluga", l: "Powiązana usługa", t: "select", opcje: opcjeUslug, pomoc: "Na karcie tej usługi pojawi się plakietka promocji" }, { k: "zdjecie", l: "Zdjęcie", t: "image", pelne: true }].concat(POLA_CZASOWE),
+    pods: function (x) { return zakres(x) + (x.plakietka ? " · " + x.plakietka : "") + (x.usluga ? " · " + nazwaUslugi(x.usluga) : ""); } },
+  aktualnosci: { t: "Aktualności", j: "aktualność", sek: "aktualnosci", czasowa: true, mini: "zdjecie",
+    pola: [{ k: "tytul", l: "Tytuł", t: "text", wym: true, pelne: true }, { k: "tresc", l: "Treść", t: "textarea", fmt: true, pelne: true }, { k: "data", l: "Data wpisu", t: "date" }, { k: "zdjecie", l: "Zdjęcie", t: "image", pelne: true }].concat(POLA_CZASOWE),
+    pods: function (x) { return (x.data ? dataKrotko(x.data) + " · " : "") + "widoczna " + zakres(x); } },
+  uslugi: { t: "Usługi", j: "usługę", sek: "uslugi", mini: "ikona",
+    pola: [{ k: "nazwa", l: "Nazwa usługi", t: "text", wym: true, pelne: true }, { k: "kategoria", l: "Kategoria", t: "select", opcje: opcjeKategorii }, { k: "ikona", l: "Ikona", t: "select", opcje: function () { return IKONY_USLUG; } }, { k: "opis", l: "Krótki opis", t: "textarea", fmt: true, pelne: true }, { k: "czas", l: "Czas", t: "text", pomoc: "np. ok. 1 h" }, { k: "cena", l: "Cena (przedział)", t: "text", pomoc: "np. 120–280 zł" }, { k: "plakietka", l: "Własna plakietka", t: "text", pomoc: "np. Polecane" }, { k: "przycisk", l: "Przycisk na karcie", t: "select", opcje: function () { return [["zadzwon", "Zadzwoń i umów"], ["wycena", "Zapytaj o wycenę (formularz)"]]; } }, { k: "nowosc", l: "Oznacz jako „Nowość”", t: "check" }, { k: "glowna", l: "Pokaż na stronie głównej", t: "check" }, { k: "zdjecie", l: "Zdjęcie (opcjonalnie)", t: "image", pelne: true }],
+    pods: function (x) { return nazwaKat(x.kategoria) + " · " + (x.czas ? x.czas + " · " : "") + x.cena + (x.glowna ? " · na stronie głównej" : ""); } },
+  kategorie: { t: "Kategorie usług", j: "kategorię", sek: "uslugi", pola: [{ k: "nazwa", l: "Nazwa", t: "text", wym: true, pelne: true }, { k: "opis", l: "Opis", t: "textarea", pelne: true }],
+    pods: function (x) { var n = S.uslugi.filter(function (u) { return u.kategoria === x.id; }).length, c = S.cennik.filter(function (u) { return u.kategoria === x.id; }).length; return n + " usł. · " + c + " poz. cennika"; } },
+  cennik: { t: "Cennik", j: "pozycję cennika", sek: "cennik", pola: [{ k: "kategoria", l: "Kategoria (osobna tabela na stronie)", t: "select", opcje: opcjeKategorii, pelne: true }, { k: "nazwa", l: "Nazwa", t: "text", wym: true, pelne: true }, { k: "dopisek", l: "Dopisek", t: "text" }, { k: "czas", l: "Czas", t: "text" }, { k: "cena", l: "Cena", t: "text", pomoc: "np. 120–160 zł albo od 300 zł" }],
+    pods: function (x) { return nazwaKat(x.kategoria) + (x.czas ? " · " + x.czas : "") + " · " + x.cena; } },
+  pakiety: { t: "Pakiety", j: "pakiet", sek: "pakiety", pola: [{ k: "nazwa", l: "Nazwa", t: "text", wym: true }, { k: "cena", l: "Cena", t: "text" }, { k: "dopisek", l: "Dopisek przy cenie", t: "text", pomoc: "np. brutto / sezon" }, { k: "wyrozniony", l: "Wyróżnij (ciemna karta)", t: "check" }, { k: "opis", l: "Opis", t: "textarea", pelne: true }, { k: "punkty", l: "Co zawiera", t: "textarea", pelne: true, pomoc: "Jeden punkt w jednej linii" }],
+    pods: function (x) { return x.cena + " " + x.dopisek + (x.wyrozniony ? " · wyróżniony" : ""); } },
+  slider: { t: "Zdjęcia slidera", j: "zdjęcie", sek: "hero", mini: "zdjecie", pola: [{ k: "zdjecie", l: "Zdjęcie", t: "image", wym: true, pelne: true }, { k: "podpis", l: "Podpis", t: "text", pelne: true }], pods: function (x) { return x.podpis; } },
+  atuty: { t: "Atuty pod przyciskami", j: "atut", sek: "hero", mini: "ikona", pola: [{ k: "tekst", l: "Tekst", t: "text", wym: true }, { k: "ikona", l: "Ikona", t: "select", opcje: function () { return IKONY_USLUG; } }], pods: function () { return ""; }, tytulK: "tekst" },
+  wyrozniki: { t: "Wyróżniki – „Dlaczego my”", j: "wyróżnik", sek: "wyrozniki", mini: "ikona", pola: [{ k: "tytul", l: "Tytuł", t: "text", wym: true }, { k: "ikona", l: "Ikona", t: "select", opcje: function () { return IKONY_USLUG; } }, { k: "opis", l: "Opis", t: "textarea", fmt: true, pelne: true }], pods: function (x) { return x.opis; } },
+  kroki: { t: "Kroki wizyty", j: "krok", sek: "kroki", pola: [{ k: "tytul", l: "Tytuł", t: "text", wym: true, pelne: true }, { k: "opis", l: "Opis", t: "textarea", fmt: true, pelne: true }], pods: function (x) { return x.opis; } },
+  marki: { t: "Specjalizacja – marki", j: "markę", sek: "marki", pola: [{ k: "nazwa", l: "Marka", t: "text", wym: true }, { k: "opis", l: "W czym się specjalizujemy", t: "text" }], pods: function (x) { return x.opis; } },
+  galeria: { t: "Galeria", j: "zdjęcie", sek: "galeria", mini: "zdjecie", pola: [{ k: "zdjecie", l: "Zdjęcie", t: "image", wym: true, pelne: true }, { k: "podpis", l: "Podpis", t: "text" }, { k: "kategoria", l: "Kategoria (filtr nad galerią)", t: "text", lista: function () { var a = []; S.galeria.forEach(function (g) { if (g.kategoria && a.indexOf(g.kategoria) < 0) a.push(g.kategoria); }); return a; } }],
+    pods: function (x) { return (x.kategoria || "bez kategorii") + (x.podpis ? " · " + x.podpis : ""); }, tytulK: "podpis" },
+  opinie: { t: "Opinie klientów", j: "opinię", sek: "opinie", pola: [{ k: "autor", l: "Autor", t: "text", wym: true }, { k: "ocena", l: "Ocena", t: "select", opcje: function () { return [["5", "★★★★★ 5"], ["4", "★★★★ 4"], ["3", "★★★ 3"]]; } }, { k: "usluga", l: "Usługa / auto", t: "text", pomoc: "np. Serwis klimatyzacji, Audi A4" }, { k: "tresc", l: "Treść opinii", t: "textarea", pelne: true, pomoc: "Wpisuj tylko prawdziwe opinie – np. skopiowane z Google za zgodą autora." }],
+    pods: function (x) { return "★ " + (x.ocena || 5) + (x.usluga ? " · " + x.usluga : ""); }, tytulK: "autor" },
+  faq: { t: "Najczęstsze pytania (FAQ)", j: "pytanie", sek: "faq", pola: [{ k: "pytanie", l: "Pytanie", t: "text", wym: true, pelne: true }, { k: "odpowiedz", l: "Odpowiedź", t: "textarea", fmt: true, pelne: true }], pods: function (x) { return x.odpowiedz; }, tytulK: "pytanie" },
+  czesci: { t: "Części i produkty", j: "punkt", sek: "czesci", pola: [{ k: "tekst", l: "Tekst punktu", t: "text", wym: true, pelne: true, fmt: true }], pods: function () { return ""; }, tytulK: "tekst" },
+  zespol: { t: "Zespół", j: "osobę", sek: "zespol", mini: "zdjecie", pola: [{ k: "imie", l: "Imię i nazwisko", t: "text", wym: true }, { k: "rola", l: "Rola", t: "text" }, { k: "opis", l: "Opis", t: "textarea", pelne: true }, { k: "zdjecie", l: "Zdjęcie (portret)", t: "image", pelne: true, pomoc: "Bez zdjęcia na stronie pojawi się monogram z inicjałów." }],
+    pods: function (x) { return x.rola; }, tytulK: "imie" },
+  dniSpecjalne: { t: "Dni specjalne", j: "dzień specjalny", sek: "kontakt", sortowana: true, pola: [{ k: "data", l: "Data", t: "date", wym: true }, { k: "opis", l: "Opis", t: "text", pomoc: "np. Wigilia" }, { k: "nieczynne", l: "Warsztat nieczynny", t: "check", pelne: true }, { k: "od", l: "Godzina od", t: "time" }, { k: "do", l: "Godzina do", t: "time" }],
+    pods: function (x) { return (x.nieczynne ? "nieczynne" : godz(x.od) + "–" + godz(x.do)) + (x.data < dzisISO() ? " · minął" : ""); }, tytulF: function (x) { return dataSlownie(x.data) + (x.opis ? " – " + x.opis : ""); } }
+};
+function tytulEl(kol, x) { var c = KOL[kol]; if (c.tytulF) return c.tytulF(x); return x[c.tytulK || ["tytul", "nazwa"].filter(function (k) { return k in x; })[0] || "tytul"] || "(bez tytułu)"; }
+
+/* ---------- menu panelu ---------- */
+var MENU = [
+  ["Przegląd", [["pulpit", "Pulpit"]]],
+  ["Treści czasowe", [["promocje", "Promocje"], ["aktualnosci", "Aktualności"]]],
+  ["Oferta", [["uslugi", "Usługi"], ["kategorie", "Kategorie usług"], ["cennik", "Cennik"], ["pakiety", "Pakiety"]]],
+  ["Wizerunek", [["glowna", "Strona główna"], ["wyrozniki", "Wyróżniki"], ["kroki", "Kroki wizyty"], ["marki", "Specjalizacja – marki"], ["galeria", "Galeria"]]],
+  ["Zaufanie", [["opinie", "Opinie"], ["faq", "FAQ"], ["czesci", "Części i produkty"]]],
+  ["Warsztat", [["onas", "O firmie"], ["zespol", "Zespół"], ["godziny", "Godziny otwarcia"], ["kontakt", "Dane kontaktowe"], ["info", "Informacje praktyczne"]]],
+  ["Ustawienia", [["sekcje", "Sekcje strony"], ["kopia", "Kopia zapasowa"]]]
+];
+var STRONY_SEK = { pulpit: null, glowna: "hero", onas: "onas", godziny: "kontakt", kontakt: "kontakt", info: "dojazd", sekcje: null, kopia: null };
+function sekcjaStrony(s) { return s in STRONY_SEK ? STRONY_SEK[s] : (KOL[s] ? KOL[s].sek : null); }
+
+function otworzPanel(strona) {
+  if (strona) CMS.strona = strona;
+  var p = document.querySelector(".cmsp");
+  if (!p) {
+    p = document.createElement("div"); p.className = "cmsp"; p.setAttribute("role", "dialog"); p.setAttribute("aria-modal", "true"); p.setAttribute("aria-label", "Panel administratora");
+    p.innerHTML = '<header class="cmsp-top"><div class="cmsp-marka">' + ZNAK_SVG + "<div><strong>" + esc(S.firma.nazwa) + '</strong><span>Panel administratora</span></div></div><span class="cmsp-zapis" data-stan="ok" aria-live="polite"><i></i><span>Zmiany zapisują się automatycznie</span></span>' +
+      '<button type="button" class="cmsp-btn cmsp-btn--duch" data-akcja="zamknij">Zobacz stronę</button><button type="button" class="cmsp-btn cmsp-btn--duch" data-akcja="wyloguj">Wyloguj</button></header>' +
+      '<div class="cmsp-cialo"><nav class="cmsp-nav" aria-label="Sekcje panelu"></nav><main class="cmsp-main" tabindex="-1"></main></div>';
+    document.body.appendChild(p);
+    p.addEventListener("click", klikPanel);
+    p.addEventListener("input", wpisPanel);
+    p.addEventListener("change", zmianaPanel);
+    document.documentElement.style.overflow = "hidden";
+  }
+  rysujNav(); rysujStrone();
+  var akt = p.querySelector('.cmsp-nav [aria-current="page"]'); if (akt) akt.focus();
+}
+function zamknijPanel(doSekcji) {
+  var p = document.querySelector(".cmsp"); if (p) p.remove();
+  document.documentElement.style.overflow = "";
+  if (doSekcji) {
+    var s = sek(doSekcji);
+    if (s.widoczna === false) toast("Ta sekcja jest wyłączona w „Sekcje strony” – na stronie jej nie widać.", true);
+    if (location.hash !== "#" + doSekcji) history.pushState(null, "", "#" + doSekcji);
+    trasa("#" + doSekcji);
+    setTimeout(function () { if (!document.getElementById("sek-" + doSekcji) && s.widoczna !== false) toast("Sekcja jest teraz pusta, więc chowa się na stronie.", true); }, 60);
+  } else if (CMS.powrot && CMS.powrot.focus && document.contains(CMS.powrot)) CMS.powrot.focus();
+  else { var k = document.getElementById("cms-klodka"); if (k) k.focus(); }
+}
+function liczAktywne(kol) { return widoczne(S[kol]).filter(function (x) { return statusCzasowy(x) === "aktywna"; }).length; }
+function rysujNav() {
+  var n = document.querySelector(".cmsp-nav"); if (!n) return;
+  n.innerHTML = MENU.map(function (g) {
+    return "<h3>" + g[0] + "</h3>" + g[1].map(function (it) {
+      var licz = "";
+      if (KOL[it[0]]) licz = KOL[it[0]].czasowa ? '<span class="cmsp-liczniki"><span class="cmsp-licz cmsp-licz--ok" title="Aktywne">' + liczAktywne(it[0]) + '</span><span class="cmsp-licz" title="Wszystkie">' + S[it[0]].length + "</span></span>" : '<span class="cmsp-licz">' + S[it[0]].length + "</span>";
+      if (it[0] === "godziny") licz = '<span class="cmsp-licz">' + S.dniSpecjalne.length + "</span>";
+      return '<button type="button" data-akcja="idz" data-strona="' + it[0] + '"' + (CMS.strona === it[0] ? ' aria-current="page"' : "") + "><span>" + it[1] + "</span>" + licz + "</button>";
+    }).join("");
+  }).join("");
+}
+function glowa(tytul, opis, sekId, extra) {
+  return '<div class="cmsp-glowa"><div><h1>' + tytul + "</h1>" + (opis ? "<p>" + opis + "</p>" : "") + '</div><div class="cmsp-szybkie">' + (extra || "") + (sekId ? '<button type="button" class="cmsp-btn" data-akcja="zobacz" data-sek="' + sekId + '">Zobacz na stronie ' + ico("strzalka") + "</button>" : "") + "</div></div>";
+}
+function rysujStrone() {
+  var m = document.querySelector(".cmsp-main"); if (!m) return;
+  var s = CMS.strona, h;
+  if (s === "pulpit") h = stronaPulpit();
+  else if (s === "glowna") h = stronaGlowna();
+  else if (s === "onas") h = stronaONas();
+  else if (s === "kontakt") h = stronaKontakt();
+  else if (s === "info") h = stronaInfo();
+  else if (s === "godziny") h = stronaGodziny();
+  else if (s === "sekcje") h = stronaSekcje();
+  else if (s === "kopia") h = stronaKopia();
+  else h = stronaKolekcji(s);
+  m.innerHTML = h;
+  podlaczZdjecia(m);
+}
+
+/* ---------- pola formularzy ---------- */
+var licznikPol = 0;
+function htmlPola(f, w, opt) {
+  opt = opt || {};
+  var id = "cmsp-f" + (++licznikPol), atr = opt.sciezka ? ' data-sciezka="' + opt.sciezka + '"' : ' data-k="' + f.k + '"';
+  var pomoc = f.pomoc ? "<small>" + esc(f.pomoc) + "</small>" : "";
+  var fmtPomoc = f.fmt ? '<span class="cmsp-pomoc-fmt">Formatowanie: <code>*kursywa*</code> (kolor akcentu), <code>**pogrubienie**</code>, pusta linia = nowy akapit.</span>' : "";
+  var wrap = function (wn, bezEt) { return '<div class="cmsp-pole' + (f.pelne || f.t === "textarea" ? " cmsp-pole--pelne" : "") + '">' + (bezEt ? "" : '<label for="' + id + '">' + esc(f.l) + (f.wym ? " *" : "") + ' <span class="cmsp-jezyk">PL</span></label>') + wn + pomoc + fmtPomoc + "</div>"; };
+  w = w == null ? "" : w;
+  if (f.t === "textarea") return wrap('<textarea id="' + id + '"' + atr + ' data-typ="text">' + esc(w) + "</textarea>");
+  if (f.t === "check") return wrap('<label class="cmsp-check" for="' + id + '"><input type="checkbox" id="' + id + '"' + atr + ' data-typ="check"' + (w ? " checked" : "") + ">" + esc(f.l) + "</label>", true);
+  if (f.t === "select") { var op = (typeof f.opcje === "function" ? f.opcje() : f.opcje).map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(o[0]) === String(w) ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join(""); return wrap('<select id="' + id + '"' + atr + ' data-typ="text">' + op + "</select>"); }
+  if (f.t === "image") {
+    var bp = Object.keys(GRAFIKI).map(function (k) { return '<option value="bp:' + k + '"' + (w === "bp:" + k ? " selected" : "") + ">" + GRAFIKI[k] + "</option>"; }).join("");
+    return '<div class="cmsp-pole cmsp-pole--pelne"><span class="cmsp-et">' + esc(f.l) + (f.wym ? " *" : "") + '</span><div class="cmsp-foto"><div class="cmsp-foto__podglad" data-podglad>' + (w ? obraz(w, "") : "brak zdjęcia") + "</div>" +
+      '<div class="cmsp-foto__akcje"><div><span class="cmsp-btn cmsp-btn--mini cmsp-plik">Wgraj z dysku<input type="file" accept="image/*" data-wgraj aria-label="Wgraj zdjęcie z dysku"></span><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="usun-foto">Usuń zdjęcie</button></div>' +
+      '<label class="sr" for="' + id + '">Adres URL zdjęcia</label><input type="text" id="' + id + '"' + atr + ' data-typ="text" data-foto value="' + esc(String(w).indexOf("data:") === 0 ? "" : w) + '" placeholder="Adres URL zdjęcia, np. img/hero.jpg">' +
+      (String(w).indexOf("data:") === 0 ? '<input type="hidden" data-foto-dane value="' + esc(w) + '">' : '<input type="hidden" data-foto-dane value="">') +
+      '<select aria-label="Grafika wbudowana" data-bp><option value="">Grafika wbudowana (zamiast zdjęcia)…</option>' + bp + "</select></div></div>" + pomoc + "</div>";
+  }
+  var typ = { date: "date", time: "time", number: "number", email: "email", tel: "tel", url: "url" }[f.t] || "text";
+  var dl = f.lista ? ' list="' + id + '-l"' : "";
+  return wrap('<input type="' + typ + '" id="' + id + '"' + atr + ' data-typ="text" value="' + esc(w) + '"' + dl + ">" + (f.lista ? '<datalist id="' + id + '-l">' + f.lista().map(function (v) { return '<option value="' + esc(v) + '">'; }).join("") + "</datalist>" : ""));
+}
+function wartoscZdjecia(blok) {
+  var dane = blok.querySelector("[data-foto-dane]").value, url = blok.querySelector("[data-foto]").value.trim();
+  return dane || url;
+}
+function zmniejsz(plik, max, gotowe) {
+  var r = new FileReader();
+  r.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      var s = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement("canvas");
+      c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
+      c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+      gotowe(c.toDataURL("image/jpeg", 0.82));
+    };
+    im.onerror = function () { toast("Nie udało się odczytać pliku. Proszę wybrać zdjęcie JPG lub PNG.", true); };
+    im.src = r.result;
+  };
+  r.readAsDataURL(plik);
+}
+
+/* ---------- listy (kolekcje) ---------- */
+function htmlListy(kol) {
+  var c = KOL[kol], lista = S[kol], D = dzisISO(), filtr = CMS.filtry[kol] || "wszystkie";
+  var pasek = "";
+  if (c.czasowa) {
+    var licz = { wszystkie: lista.length, aktywna: 0, zaplanowana: 0, zakonczona: 0, wstrzymana: 0 };
+    lista.forEach(function (x) { licz[statusCzasowy(x, D)]++; });
+    pasek = '<div class="cmsp-filtry" role="group" aria-label="Filtruj według statusu">' + [["wszystkie", "Wszystkie"], ["aktywna", "Aktywne"], ["zaplanowana", "Zaplanowane"], ["zakonczona", "Zakończone"], ["wstrzymana", "Wstrzymane"]].map(function (f) {
+      return '<button type="button" data-akcja="filtr" data-kol="' + kol + '" data-filtr="' + f[0] + '" aria-pressed="' + (filtr === f[0]) + '">' + f[1] + " <span>" + licz[f[0]] + "</span></button>";
+    }).join("") + "</div>";
+  }
+  var wiersze = lista.map(function (x, i) {
+    if (c.czasowa && filtr !== "wszystkie" && statusCzasowy(x, D) !== filtr) return "";
+    var st = c.czasowa ? statusCzasowy(x, D) : (x.ukryta ? "ukryta" : "widoczna");
+    var plak = x.ukryta ? '<span class="cmsp-plak cmsp-plak--ukryta">Ukryta</span>' : '<span class="cmsp-plak cmsp-plak--' + st + '">' + (c.czasowa ? STATUS_NAZWY[st] : "Widoczna") + "</span>";
+    var mini = c.mini === "zdjecie" ? (x.zdjecie ? obraz(x.zdjecie, "") : (kol === "zespol" ? esc(x.imie.split(" ").map(function (s) { return s[0]; }).join("").slice(0, 2)) : String(i + 1))) : c.mini === "ikona" ? ico(x.ikona) : String(i + 1);
+    var strz = c.sortowana ? '<div class="cmsp-strzalki" aria-hidden="true"></div>' : '<div class="cmsp-strzalki"><button type="button" data-akcja="gora" data-kol="' + kol + '" data-id="' + x.id + '" aria-label="Przesuń wyżej"' + (i === 0 ? " disabled" : "") + '>▲</button><button type="button" data-akcja="dol" data-kol="' + kol + '" data-id="' + x.id + '" aria-label="Przesuń niżej"' + (i === lista.length - 1 ? " disabled" : "") + ">▼</button></div>";
+    var tyt = tytulEl(kol, x);
+    return '<div class="cmsp-wiersz' + (x.ukryta ? " cmsp-ukryta" : "") + '" data-wiersz="' + x.id + '">' + strz + '<div class="cmsp-mini">' + mini + '</div><div class="cmsp-wiersz__tekst"><strong>' + esc(tyt) + "</strong><span>" + esc(c.pods(x) || "") + "</span></div>" + plak +
+      '<div class="cmsp-akcje"><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="ukryj" data-kol="' + kol + '" data-id="' + x.id + '">' + (x.ukryta ? "Pokaż" : "Ukryj") + '</button><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="duplikuj" data-kol="' + kol + '" data-id="' + x.id + '">Duplikuj</button><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="edytuj" data-kol="' + kol + '" data-id="' + x.id + '">Edytuj</button><button type="button" class="cmsp-btn cmsp-btn--mini cmsp-btn--usun" data-akcja="usun" data-kol="' + kol + '" data-id="' + x.id + '" aria-label="Usuń: ' + esc(tyt) + '">Usuń</button></div></div>';
+  }).join("");
+  if (!wiersze) wiersze = '<div class="cmsp-pusto">' + (lista.length ? "Brak pozycji w tym filtrze." : "Brak pozycji. Kliknij „+ Dodaj " + c.j + "”.") + "</div>";
+  return '<div class="cmsp-pasek-listy">' + pasek + '<button type="button" class="cmsp-btn cmsp-btn--gl" data-akcja="dodaj" data-kol="' + kol + '">+ Dodaj ' + c.j + '</button></div><div class="cmsp-lista" data-lista="' + kol + '">' + wiersze + "</div>";
+}
+var OPISY_KOL = {
+  promocje: "Promocje pokazują się na stronie tylko w terminie „Pokazuj od – do”. Po terminie znikają same i zostają tu jako archiwum.",
+  aktualnosci: "Komunikaty dla klientów: zmiany, nowości, przypomnienia sezonowe. Pokazują się tylko w ustawionym terminie.",
+  uslugi: "Karty usług na podstronie „Usługi” (w kategoriach) i – po zaznaczeniu – na stronie głównej.",
+  kategorie: "Kategorie grupują usługi i tworzą osobne tabele cennika.",
+  cennik: "Każda kategoria to osobna tabela na stronie „Cennik”. Uwagę pod cennikiem edytuje się niżej.",
+  pakiety: "Pakiety kilku usług w jednej cenie – podstrona „Usługi”.",
+  wyrozniki: "Cztery powody, dla których warto wybrać warsztat – strona główna.",
+  kroki: "Kolejne etapy wizyty – strona główna.",
+  marki: "Marki, w których warsztat się specjalizuje – ciemna sekcja na stronie głównej.",
+  galeria: "Zdjęcia warsztatu. Kategorie tworzą filtry nad galerią; zdjęcie powiększa się po kliknięciu.",
+  opinie: "Prawdziwe opinie klientów. Gdy lista jest pusta, na stronie widać tylko przycisk do opinii w Google.",
+  faq: "Pytania i odpowiedzi na podstronie „Cennik”.",
+  czesci: "Punkty w sekcji „Z czym pracujemy” na podstronie „O nas”.",
+  zespol: "Osoby na podstronie „O nas”."
+};
+function stronaKolekcji(kol) {
+  var c = KOL[kol];
+  var h = glowa(c.t, OPISY_KOL[kol] || "", c.sek) + '<div class="cmsp-karta">' + htmlListy(kol) + "</div>";
+  if (kol === "cennik") h += '<div class="cmsp-karta"><h2>Uwaga pod cennikiem</h2>' + htmlPola({ k: "cennikUwaga", l: "Treść uwagi", t: "textarea", fmt: true }, S.cennikUwaga, { sciezka: "cennikUwaga" }) + "</div>";
+  return h;
+}
+
+/* ---------- okno edycji ---------- */
+function otworzEdycje(kol, id) {
+  var c = KOL[kol], nowy = !id, D = dzisISO();
+  var x = nowy ? { id: uid(), ukryta: false } : JSON.parse(JSON.stringify(S[kol].filter(function (e) { return e.id === id; })[0]));
+  if (nowy) {
+    c.pola.forEach(function (f) { if (!(f.k in x)) x[f.k] = f.t === "check" ? false : ""; });
+    if (c.czasowa) { x.od = D; x.do = dodajDni(D, 14); }
+    if (kol === "aktualnosci") x.data = D;
+    if (kol === "uslugi") { x.kategoria = S.kategorie[0] && S.kategorie[0].id; x.ikona = "check"; x.przycisk = "zadzwon"; }
+    if (kol === "cennik") x.kategoria = S.kategorie[0] && S.kategorie[0].id;
+    if (kol === "opinie") x.ocena = "5";
+    if (kol === "dniSpecjalne") { x.data = dodajDni(D, 7); x.nieczynne = true; x.od = "09:00"; x.do = "13:00"; }
+    if (kol === "atuty" || kol === "wyrozniki") x.ikona = "check";
+  }
+  var tlo = document.createElement("div"); tlo.className = "cmsp-modal-tlo";
+  tlo.innerHTML = '<div class="cmsp-modal" role="dialog" aria-modal="true" aria-labelledby="cmsp-m-t"><div class="cmsp-modal__glowa"><h2 id="cmsp-m-t">' + (nowy ? "Dodaj " + c.j : "Edytuj " + c.j) + '</h2><button type="button" class="cmsp-x" data-m="anuluj" aria-label="Zamknij">×</button></div>' +
+    '<form class="cmsp-modal__cialo" novalidate><p class="cmsp-blad" role="alert" hidden></p><div class="cmsp-pola">' + c.pola.map(function (f) { return htmlPola(f, x[f.k]); }).join("") + "</div></form>" +
+    '<div class="cmsp-modal__stopka">' + (nowy ? "" : '<button type="button" class="cmsp-btn cmsp-btn--usun" data-m="usun">Usuń</button>') + '<button type="button" class="cmsp-btn" data-m="anuluj">Anuluj</button><button type="button" class="cmsp-btn cmsp-btn--ciem" data-m="zapisz">' + (nowy ? "Dodaj" : "Zapisz zmiany") + "</button></div></div>";
+  document.body.appendChild(tlo);
+  var powrot = document.activeElement, form = tlo.querySelector("form");
+  var zamknij = function () { tlo.remove(); document.removeEventListener("keydown", klaw); if (powrot && document.contains(powrot)) powrot.focus(); else { var m = document.querySelector(".cmsp-main"); if (m) m.focus(); } };
+  var klaw = function (e) {
+    if (e.key === "Escape") { e.stopPropagation(); zamknij(); }
+    if (e.key === "Tab") { var f = tlo.querySelectorAll("button, input:not([type=hidden]), select, textarea"); var a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+  };
+  document.addEventListener("keydown", klaw);
+  var syncGodz = function () { var n = form.querySelector('[data-k="nieczynne"]'); if (n) form.querySelectorAll('[data-k="od"],[data-k="do"]').forEach(function (i) { i.disabled = n.checked; }); };
+  if (kol === "dniSpecjalne") { syncGodz(); form.addEventListener("change", syncGodz); }
+  podlaczZdjecia(tlo);
+  tlo.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-m]"); if (!b) return;
+    if (b.dataset.m === "anuluj") zamknij();
+    if (b.dataset.m === "usun") potwierdz(b, function () { S[kol] = S[kol].filter(function (e) { return e.id !== x.id; }); zamknij(); poZmianie("Usunięto."); });
+    if (b.dataset.m === "zapisz") {
+      c.pola.forEach(function (f) {
+        if (f.t === "image") { var bl = form.querySelector('[data-k="' + f.k + '"]').closest(".cmsp-pole"); x[f.k] = wartoscZdjecia(bl); }
+        else { var el = form.querySelector('[data-k="' + f.k + '"]'); if (el) x[f.k] = f.t === "check" ? el.checked : el.value.trim(); }
+      });
+      var blad = waliduj(kol, x);
+      var bl2 = form.querySelector(".cmsp-blad");
+      if (blad) { bl2.textContent = blad; bl2.hidden = false; bl2.scrollIntoView({ block: "nearest" }); return; }
+      if (nowy) { c.czasowa ? S[kol].unshift(x) : S[kol].push(x); }
+      else S[kol] = S[kol].map(function (e) { return e.id === x.id ? x : e; });
+      if (c.sortowana) S[kol].sort(function (a, b) { return a.data < b.data ? -1 : 1; });
+      zamknij();
+      var msg = nowy ? "Dodano. Zmiana jest już na stronie." : "Zapisano zmiany.";
+      if (c.czasowa) { var st = statusCzasowy(x); if (st === "zaplanowana") msg = (nowy ? "Dodano" : "Zapisano") + ". Pojawi się na stronie " + dataSlownie(x.od) + "."; else if (st !== "aktywna") msg = (nowy ? "Dodano" : "Zapisano") + " – status: " + STATUS_NAZWY[st].toLowerCase() + ", na stronie niewidoczna."; }
+      if (x.ukryta) msg = "Zapisano. Pozycja jest ukryta na stronie.";
+      poZmianie(msg);
+    }
+  });
+  setTimeout(function () { var f = form.querySelector("input:not([type=hidden]):not([type=file]), textarea, select"); if (f) f.focus(); }, 20);
+}
+function waliduj(kol, x) {
+  var c = KOL[kol];
+  for (var i = 0; i < c.pola.length; i++) { var f = c.pola[i]; if (f.wym && !x[f.k]) return f.t === "image" ? "Proszę dodać zdjęcie – w tej sekcji jest wymagane." : "Proszę uzupełnić pole „" + f.l + "”."; }
+  if (c.czasowa && x.od && x.do && x.do < x.od) return "Data „Pokazuj do” nie może być wcześniejsza niż „Pokazuj od”.";
+  if (kol === "dniSpecjalne" && !x.nieczynne) {
+    if (!x.od || !x.do) return "Proszę podać godziny otwarcia albo zaznaczyć „Warsztat nieczynny”.";
+    if (minuty(x.do) <= minuty(x.od)) return "Godzina zamknięcia musi być późniejsza niż otwarcia.";
+  }
+  return "";
+}
+function podlaczZdjecia(kontener) {
+  kontener.querySelectorAll(".cmsp-foto").forEach(function (bl) {
+    var pole = bl.closest(".cmsp-pole"), podglad = bl.querySelector("[data-podglad]"), url = bl.querySelector("[data-foto]"), dane = bl.querySelector("[data-foto-dane]"), bp = bl.querySelector("[data-bp]");
+    var odswiez = function () { var w = wartoscZdjecia(pole); podglad.innerHTML = w ? obraz(w, "") : "brak zdjęcia"; if (url.dataset.sciezka) { ustaw(url.dataset.sciezka, w); poZmianie(null, true); } };
+    bl.querySelector("[data-wgraj]").addEventListener("change", function (e) {
+      var p = e.target.files[0]; if (!p) return;
+      zmniejsz(p, 1400, function (d) { dane.value = d; url.value = ""; bp.value = ""; odswiez(); toast("Zdjęcie wgrane i zmniejszone do " + 1400 + " px."); });
+    });
+    url.addEventListener("input", function (e) { e.stopPropagation(); dane.value = ""; bp.value = ""; odswiez(); });
+    bp.addEventListener("change", function (e) { e.stopPropagation(); if (bp.value) { url.value = bp.value; dane.value = ""; odswiez(); } });
+    bl.querySelector('[data-akcja="usun-foto"]').addEventListener("click", function (e) { e.stopPropagation(); url.value = ""; dane.value = ""; bp.value = ""; odswiez(); });
+  });
+}
+function potwierdz(btn, wykonaj) {
+  if (btn.classList.contains("cmsp-potw")) { wykonaj(); return; }
+  var t = btn.textContent; btn.classList.add("cmsp-potw"); btn.textContent = "Na pewno?";
+  setTimeout(function () { if (document.contains(btn)) { btn.classList.remove("cmsp-potw"); btn.textContent = t; } }, 3500);
+}
+var renderTimer = null;
+function poZmianie(komunikat, bezRysowaniaStrony) {
+  zapisz();
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(function () { render({ zachowajScroll: true }); }, bezRysowaniaStrony ? 250 : 0);
+  rysujNav();
+  if (!bezRysowaniaStrony) {
+    var m = document.querySelector(".cmsp-main"), y = m ? m.scrollTop : 0;
+    rysujStrone(); if (m) m.scrollTop = y;
+  }
+  if (komunikat) toast(komunikat);
+}
+
+/* ---------- zdarzenia panelu ---------- */
+function klikPanel(e) {
+  var b = e.target.closest("[data-akcja]"); if (!b) return;
+  var a = b.dataset.akcja, kol = b.dataset.kol, id = b.dataset.id;
+  var idx = kol ? S[kol].findIndex(function (x) { return x.id === id; }) : -1;
+  if (a === "zamknij") zamknijPanel();
+  else if (a === "wyloguj") wyloguj();
+  else if (a === "idz") { CMS.strona = b.dataset.strona; rysujNav(); rysujStrone(); document.querySelector(".cmsp-main").scrollTop = 0; var nb = document.querySelector('.cmsp-nav [aria-current="page"]'); if (nb && nb.scrollIntoView) nb.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+  else if (a === "zobacz") zamknijPanel(b.dataset.sek);
+  else if (a === "dodaj") otworzEdycje(kol);
+  else if (a === "szybko") { CMS.strona = b.dataset.kol; rysujNav(); rysujStrone(); otworzEdycje(b.dataset.kol); }
+  else if (a === "edytuj") otworzEdycje(kol, id);
+  else if (a === "filtr") { CMS.filtry[kol] = b.dataset.filtr; rysujStrone(); }
+  else if (a === "gora" || a === "dol") {
+    var j = a === "gora" ? idx - 1 : idx + 1; if (j < 0 || j >= S[kol].length) return;
+    var t = S[kol][idx]; S[kol][idx] = S[kol][j]; S[kol][j] = t;
+    poZmianie("Zmieniono kolejność.");
+    var nb2 = document.querySelector('[data-wiersz="' + id + '"] [data-akcja="' + a + '"]'); if (nb2 && !nb2.disabled) nb2.focus();
+  }
+  else if (a === "ukryj") { S[kol][idx].ukryta = !S[kol][idx].ukryta; poZmianie(S[kol][idx].ukryta ? "Ukryto – pozycja nie jest widoczna na stronie." : "Pokazano na stronie."); }
+  else if (a === "duplikuj") { var k = JSON.parse(JSON.stringify(S[kol][idx])); k.id = uid(); var tk = KOL[kol].tytulK || (k.tytul != null ? "tytul" : k.nazwa != null ? "nazwa" : null); if (tk && k[tk] != null && !KOL[kol].tytulF) k[tk] += " (kopia)"; S[kol].splice(idx + 1, 0, k); poZmianie("Zduplikowano."); }
+  else if (a === "usun") potwierdz(b, function () { S[kol].splice(idx, 1); poZmianie("Usunięto."); });
+  else if (a === "kopiuj-pn") {
+    var pn = S.godziny[0], do_ = b.dataset.zakres === "tydzien" ? 7 : 5;
+    for (var i = 1; i < do_; i++) S.godziny[i] = { otwarte: pn.otwarte, od: pn.od, do: pn.do };
+    poZmianie(do_ === 7 ? "Skopiowano poniedziałek na cały tydzień." : "Skopiowano poniedziałek na wtorek–piątek.");
+  }
+  else if (a === "sekcja-rozwin") { CMS.otwarteSekcje[b.dataset.sek] = !CMS.otwarteSekcje[b.dataset.sek]; rysujStrone(); var r = document.querySelector('[data-akcja="sekcja-rozwin"][data-sek="' + b.dataset.sek + '"]'); if (r) r.focus(); }
+  else if (a === "eksport-kopiuj") {
+    var ta = document.getElementById("cmsp-eksport");
+    var ok = function () { toast("Skopiowano do schowka."); }, recznie = function () { ta.focus(); ta.select(); toast("Zaznaczono dane – proszę skopiować skrótem Ctrl+C."); };
+    try { navigator.clipboard.writeText(ta.value).then(ok, recznie); } catch (er) { recznie(); }
+  }
+  else if (a === "eksport-pobierz") {
+    var blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" }), u = URL.createObjectURL(blob), l = document.createElement("a");
+    l.href = u; l.download = "szalone-auto-kopia-" + dzisISO() + ".json"; document.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 2000);
+    toast("Pobieranie pliku kopii…");
+  }
+  else if (a === "import") importuj(document.getElementById("cmsp-import").value);
+  else if (a === "reset-1") { document.getElementById("cmsp-reset-krok2").hidden = false; document.getElementById("cmsp-reset-zgoda").focus(); }
+  else if (a === "reset-2") {
+    if (!document.getElementById("cmsp-reset-zgoda").checked) return;
+    S = scalStan(null); CMS.strona = "pulpit"; poZmianie("Przywrócono treści początkowe.");
+  }
+}
+function wpisPanel(e) {
+  var el = e.target; if (!el.dataset.sciezka || el.dataset.foto !== undefined) return;
+  if (el.dataset.typ === "check") return;
+  ustaw(el.dataset.sciezka, el.value);
+  poZmianie(null, true);
+}
+function zmianaPanel(e) {
+  var el = e.target;
+  if (el.id === "cmsp-import-plik") { var p = el.files[0]; if (!p) return; var r = new FileReader(); r.onload = function () { document.getElementById("cmsp-import").value = r.result; toast("Wczytano plik. Kliknij „Importuj”."); }; r.readAsText(p); return; }
+  if (el.id === "cmsp-reset-zgoda") { document.querySelector('[data-akcja="reset-2"]').disabled = !el.checked; return; }
+  if (!el.dataset.sciezka || el.dataset.foto !== undefined) return;
+  if (el.dataset.typ === "check") { ustaw(el.dataset.sciezka, el.checked); poZmianie(el.dataset.sciezka.indexOf("sekcje.") === 0 ? (el.checked ? "Sekcja jest widoczna na stronie." : "Sekcja ukryta na stronie.") : "Zapisano zmiany."); return; }
+  ustaw(el.dataset.sciezka, el.value);
+  if (/^godziny\./.test(el.dataset.sciezka)) { poZmianie("Zapisano godziny."); return; }
+  zapisz(); toast("Zapisano zmiany.");
+}
+function importuj(tekst) {
+  var d;
+  try { d = JSON.parse(tekst); } catch (e) { toast("To nie jest poprawny plik kopii (błąd formatu JSON).", true); return; }
+  if (!d || d._app !== APP_ID) { toast("Ta kopia nie pochodzi z tego panelu – import przerwany.", true); return; }
+  S = scalStan(d); poZmianie("Zaimportowano kopię zapasową.");
+}
+
+/* ---------- strony singletonów ---------- */
+function polaSingl(prefiks, defs) { return '<div class="cmsp-pola">' + defs.map(function (f) { return htmlPola(f, pobierz(prefiks + "." + f.k), { sciezka: prefiks + "." + f.k }); }).join("") + "</div>"; }
+function stronaGlowna() {
+  return glowa("Strona główna", "Nagłówek strony, zdjęcia slidera i atuty pod przyciskami. Hasło firmy pokazuje się w stopce.", "hero") +
+    '<div class="cmsp-karta"><h2>Nagłówek</h2>' + polaSingl("start", [{ k: "nadtytul", l: "Nadtytuł", t: "text", pelne: true }, { k: "tytul", l: "Tytuł główny", t: "text", pelne: true, fmt: true }, { k: "wstep", l: "Wprowadzenie", t: "textarea", fmt: true }, { k: "kartaTytul", l: "Karteczka na zdjęciu – tytuł", t: "text" }, { k: "kartaOpis", l: "Karteczka na zdjęciu – opis", t: "text" }]) + "</div>" +
+    '<div class="cmsp-karta"><h2>Firma i hasło</h2>' + polaSingl("firma", [{ k: "nazwa", l: "Nazwa firmy (logo, tytuły)", t: "text" }, { k: "podpis", l: "Podpis w logo", t: "text" }, { k: "haslo", l: "Hasło w stopce", t: "text", pelne: true, fmt: true }]) + "</div>" +
+    '<div class="cmsp-karta"><h2>Zdjęcia slidera</h2><p class="cmsp-op">Zmieniają się co 6 sekund z delikatnym zbliżeniem. Najlepiej zdjęcia poziome, ok. 1400 px.</p>' + htmlListy("slider") + "</div>" +
+    '<div class="cmsp-karta"><h2>Atuty pod przyciskami</h2>' + htmlListy("atuty") + "</div>";
+}
+function stronaONas() {
+  return glowa("O firmie", "Tekst o warsztacie na podstronie „O nas” i dwa zdjęcia obok.", "onas") +
+    '<div class="cmsp-karta">' + polaSingl("onas", [{ k: "nadtytul", l: "Nadtytuł", t: "text" }, { k: "tytul", l: "Tytuł podstrony", t: "text", fmt: true }, { k: "wstep", l: "Wprowadzenie", t: "textarea" }, { k: "naglowek", l: "Nagłówek nad tekstem", t: "text", pelne: true }, { k: "tekst", l: "Tekst o firmie", t: "textarea", fmt: true }, { k: "zdjecie1", l: "Zdjęcie 1", t: "image" }, { k: "zdjecie2", l: "Zdjęcie 2", t: "image" }]) + "</div>";
+}
+function stronaKontakt() {
+  return glowa("Dane kontaktowe", "Zmiany od razu aktualizują wszystkie przyciski „Zadzwoń”, SMS, stopkę i link do Map Google.", "kontakt") +
+    '<div class="cmsp-karta">' + polaSingl("kontakt", [{ k: "telefon", l: "Telefon", t: "tel" }, { k: "sms", l: "Numer do SMS", t: "tel" }, { k: "email", l: "E-mail", t: "email" }, { k: "adres", l: "Ulica i numer", t: "text" }, { k: "kod", l: "Kod pocztowy", t: "text" }, { k: "miasto", l: "Miasto", t: "text" }, { k: "dzielnica", l: "Dzielnica", t: "text" }, { k: "googleOpinie", l: "Link do opinii w Google", t: "url" }, { k: "facebook", l: "Facebook", t: "url" }, { k: "instagram", l: "Instagram", t: "url" }]) +
+    '<p class="cmsp-pomoc-fmt">Mapa i przycisk „Wyznacz trasę” budują się automatycznie z adresu: <a href="' + mapaLink() + '" target="_blank" rel="noopener">sprawdź w Google Maps</a>.</p></div>';
+}
+function stronaInfo() {
+  return glowa("Informacje praktyczne", "Parking, dojazd, płatności, gwarancja i dostępność – podstrony „Kontakt” i „Cennik”.", "dojazd") +
+    '<div class="cmsp-karta">' + polaSingl("info", [{ k: "parking", l: "Parking", t: "textarea", fmt: true }, { k: "komunikacja", l: "Komunikacja miejska", t: "textarea", fmt: true }, { k: "platnosci", l: "Płatności", t: "textarea", fmt: true }, { k: "gwarancja", l: "Gwarancja", t: "textarea", fmt: true }, { k: "dostepnosc", l: "Dostępność", t: "textarea", fmt: true }, { k: "odbior", l: "Odbiór auta", t: "textarea", fmt: true }]) + "</div>";
+}
+function stronaGodziny() {
+  var st = stanOtwarcia();
+  var wiersze = S.godziny.map(function (g, i) {
+    var ostrz = g.otwarte && minuty(g.do) <= minuty(g.od) ? '<span class="cmsp-ostrz" role="alert">Godzina zamknięcia musi być późniejsza niż otwarcia.</span>' : "";
+    return '<div class="cmsp-godz"><strong>' + DNI[i] + '</strong><label class="cmsp-check"><input type="checkbox" data-sciezka="godziny.' + i + '.otwarte" data-typ="check"' + (g.otwarte ? " checked" : "") + ">" + (g.otwarte ? "Otwarte" : "Nieczynne") + "</label>" +
+      '<label class="sr" for="g-od-' + i + '">' + DNI[i] + ' – od</label><input type="time" id="g-od-' + i + '" data-sciezka="godziny.' + i + '.od" data-typ="text" value="' + g.od + '"' + (g.otwarte ? "" : " disabled") + ">" +
+      '<label class="sr" for="g-do-' + i + '">' + DNI[i] + ' – do</label><input type="time" id="g-do-' + i + '" data-sciezka="godziny.' + i + '.do" data-typ="text" value="' + g.do + '"' + (g.otwarte ? "" : " disabled") + ">" + ostrz + "</div>";
+  }).join("");
+  return glowa("Godziny otwarcia", "Godziny tygodniowe i dni specjalne (święta, skrócone dni). Dni specjalne mają pierwszeństwo i pokazują się na stronie 60 dni wcześniej jako „Zmiany w godzinach”.", "kontakt") +
+    '<div class="cmsp-karta"><div class="cmsp-pasek-listy"><span class="cmsp-podglad-stan" data-stan="' + st.stan + '"><i></i>' + st.tekst + '</span><div class="cmsp-szybkie"><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="kopiuj-pn" data-zakres="pt">Kopiuj poniedziałek na wt–pt</button><button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="kopiuj-pn" data-zakres="tydzien">Kopiuj poniedziałek na cały tydzień</button></div></div><div class="cmsp-godziny">' + wiersze + "</div></div>" +
+    '<div class="cmsp-karta"><h2>Dni specjalne</h2><p class="cmsp-op">Sortują się automatycznie według daty.</p>' + htmlListy("dniSpecjalne") + "</div>";
+}
+function stronaSekcje() {
+  var h = glowa("Sekcje strony", "Włączanie i wyłączanie sekcji oraz ich tytuły. Wyłączona sekcja znika ze strony, ale jej treści zostają w panelu.", null);
+  WIDOKI.forEach(function (w) {
+    h += '<p class="cmsp-widok-et">Podstrona: ' + w[1] + '</p><div class="cmsp-sekcje">';
+    S.sekcje.forEach(function (s, i) {
+      if (s.widok !== w[0]) return;
+      var bezPol = s.id === "hero" || s.id === "onas";
+      h += '<div class="cmsp-sekcja"><div class="cmsp-sekcja__wiersz"><span class="cmsp-przel"><input type="checkbox" id="sk-' + s.id + '" data-sciezka="sekcje.' + i + '.widoczna" data-typ="check"' + (s.widoczna !== false ? " checked" : "") + ' aria-label="Pokazuj sekcję: ' + esc(s.nazwa) + '"><span></span></span><label for="sk-' + s.id + '"><strong>' + esc(s.nazwa) + "</strong></label>" +
+        '<span class="cmsp-plak cmsp-plak--' + (s.widoczna !== false ? "widoczna" : "ukryta") + '">' + (s.widoczna !== false ? "Widoczna" : "Ukryta") + "</span>" +
+        (bezPol ? '<span class="cmsp-pomoc-fmt">treść: ' + (s.id === "hero" ? "Strona główna" : "O firmie") + "</span>" : '<button type="button" class="cmsp-btn cmsp-btn--mini" data-akcja="sekcja-rozwin" data-sek="' + s.id + '" aria-expanded="' + !!CMS.otwarteSekcje[s.id] + '">' + (CMS.otwarteSekcje[s.id] ? "Zwiń" : "Tytuł i wstęp") + "</button>") + "</div>" +
+        (CMS.otwarteSekcje[s.id] && !bezPol ? '<div class="cmsp-sekcja__pola">' + polaSingl("sekcje." + i, [{ k: "nadtytul", l: "Nadtytuł", t: "text" }, { k: "tytul", l: "Tytuł sekcji", t: "text", fmt: true }, { k: "wstep", l: "Wprowadzenie", t: "textarea" }]) + "</div>" : "") + "</div>";
+    });
+    h += "</div>";
+  });
+  return h;
+}
+function stronaKopia() {
+  return glowa("Kopia zapasowa", "Dane panelu zapisują się w tej przeglądarce. Warto co jakiś czas pobrać kopię – pozwala przenieść treści na inny komputer.", null) +
+    '<div class="cmsp-karta"><h2>Eksport</h2><label class="sr" for="cmsp-eksport">Dane w formacie JSON</label><textarea class="cmsp-json" id="cmsp-eksport" rows="6" readonly>' + esc(JSON.stringify(S)) + '</textarea><div class="cmsp-szybkie"><button type="button" class="cmsp-btn" data-akcja="eksport-kopiuj">Kopiuj do schowka</button><button type="button" class="cmsp-btn cmsp-btn--ciem" data-akcja="eksport-pobierz">Pobierz plik .json</button></div></div>' +
+    '<div class="cmsp-karta"><h2>Import</h2><p class="cmsp-op">Wklej dane kopii albo wybierz plik .json pobrany z tego panelu. Import zastępuje obecne treści.</p><label class="sr" for="cmsp-import">Dane kopii do importu</label><textarea class="cmsp-json" id="cmsp-import" rows="5" placeholder="Wklej tutaj zawartość pliku kopii…"></textarea><div class="cmsp-szybkie"><span class="cmsp-btn cmsp-plik">Wybierz plik…<input type="file" id="cmsp-import-plik" accept=".json,application/json" aria-label="Wybierz plik kopii"></span><button type="button" class="cmsp-btn cmsp-btn--ciem" data-akcja="import">Importuj</button></div></div>' +
+    '<div class="cmsp-karta"><h2>Treści początkowe</h2><p class="cmsp-op">Usuwa wszystkie zmiany wprowadzone w panelu i przywraca treści z projektu.</p><div><button type="button" class="cmsp-btn cmsp-btn--usun" data-akcja="reset-1">Przywróć treści początkowe</button></div>' +
+    '<div id="cmsp-reset-krok2" hidden style="display:grid;gap:.6rem"><label class="cmsp-check"><input type="checkbox" id="cmsp-reset-zgoda">Rozumiem, że wszystkie zmiany zostaną bezpowrotnie usunięte.</label><div><button type="button" class="cmsp-btn cmsp-btn--usun cmsp-potw" data-akcja="reset-2" disabled>Tak, przywróć treści początkowe</button></div></div></div>';
+}
+
+/* ---------- pulpit ---------- */
+function stronaPulpit() {
+  var D = dzisISO(), st = stanOtwarcia();
+  var prA = liczAktywne("promocje"), prZ = widoczne(S.promocje).filter(function (x) { return statusCzasowy(x) === "zaplanowana"; }).length;
+  var akA = liczAktywne("aktualnosci");
+  var kafel = function (str, et, wart, dop, cls, stan) { return '<button type="button" class="cmsp-kafel ' + (cls || "") + '" data-akcja="idz" data-strona="' + str + '"' + (stan ? ' data-stan="' + stan + '"' : "") + "><span>" + et + "</span><strong>" + wart + "</strong><small>" + dop + "</small></button>"; };
+  var stanTxt = st.tekst.split(" · ");
+  return '<div class="cmsp-glowa"><div><h1>Dzień dobry!</h1><p>' + dataSlownie(D) + " · " + esc(S.firma.nazwa) + '</p></div><div class="cmsp-szybkie"><button type="button" class="cmsp-btn cmsp-btn--gl" data-akcja="szybko" data-kol="promocje">+ Promocja</button><button type="button" class="cmsp-btn cmsp-btn--gl" data-akcja="szybko" data-kol="aktualnosci">+ Aktualność</button><button type="button" class="cmsp-btn" data-akcja="idz" data-strona="godziny">' + ico("zegar") + "Godziny</button></div></div>" +
+    '<div class="cmsp-kafle">' +
+    kafel("godziny", "Warsztat teraz", "<i></i>" + (st.stan === "zamkniete" ? "Zamknięte" : "Otwarte"), stanTxt[1] || stanTxt[0], "cmsp-kafel--stan", st.stan) +
+    kafel("promocje", "Aktywne promocje", prA, prZ ? "zaplanowane: " + prZ : "brak zaplanowanych") +
+    kafel("aktualnosci", "Aktualności na stronie", akA, "wszystkich: " + S.aktualnosci.length) +
+    kafel("uslugi", "Usługi", widoczne(S.uslugi).length, "w " + widoczne(S.kategorie).length + " kategoriach") +
+    kafel("galeria", "Zdjęcia w galerii", widoczne(S.galeria).length, "ukryte: " + S.galeria.filter(function (x) { return x.ukryta; }).length) +
+    kafel("opinie", "Opinie", widoczne(S.opinie).length, widoczne(S.opinie).length ? "średnia " + (widoczne(S.opinie).reduce(function (a, b) { return a + (+b.ocena || 5); }, 0) / widoczne(S.opinie).length).toFixed(1).replace(".", ",") : "dodaj prawdziwe opinie") +
+    "</div>" +
+    '<div class="cmsp-karta" style="margin-top:1rem"><h2>Harmonogram promocji i aktualności</h2><p class="cmsp-op">30 dni wstecz i 90 dni naprzód. Kliknij pasek, żeby edytować wpis.</p>' + htmlGantt() +
+    '<div class="cmsp-legenda"><span><i style="background:#2F8F5B"></i>Aktywne</span><span><i style="background:#D9A21B"></i>Zaplanowane</span><span><i style="background:#A3A9B3"></i>Zakończone / wstrzymane</span><span><i style="background:#B3261E;width:2px;height:14px"></i>Dzisiaj</span></div></div>' +
+    '<div class="cmsp-karta"><h2>Najbliższe 45 dni</h2>' + htmlTerminy() + "</div>";
+}
+function htmlGantt() {
+  var D = dzisISO(), start = dodajDni(D, -30), koniec = dodajDni(D, 90), DNI_Z = 120;
+  var wiersze = [];
+  ["promocje", "aktualnosci"].forEach(function (kol) {
+    widoczne(S[kol]).forEach(function (x) {
+      var od = x.od || start, do_ = x.do || koniec;
+      if (do_ < start || od > koniec) return;
+      wiersze.push({ kol: kol, x: x, od: od, do: do_ });
+    });
+  });
+  if (!wiersze.length) return '<div class="cmsp-pusto">Brak promocji i aktualności w tym okresie.</div>';
+  wiersze.sort(function (a, b) { return a.od < b.od ? -1 : 1; });
+  var W = 1000, L = 240, P = 12, G = 36, RH = 32, H = G + wiersze.length * RH + 8;
+  var dzien = function (iso) { return Math.round((zISO(iso) - zISO(start)) / 864e5); };
+  var X = function (n) { return L + n / DNI_Z * (W - L - P); };
+  var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Harmonogram: ' + wiersze.length + ' wpisów">';
+  for (var i = 0; i <= DNI_Z; i++) {
+    var d = dodajDni(start, i);
+    if (d.slice(8) === "01") s += '<line x1="' + X(i) + '" y1="' + (G - 8) + '" x2="' + X(i) + '" y2="' + H + '" stroke="#E3E6EA"/><text x="' + (X(i) + 4) + '" y="' + (G - 14) + '" font-size="12" fill="#565C66">' + MIESIACE_K[+d.slice(5, 7) - 1] + "</text>";
+  }
+  wiersze.forEach(function (w, n) {
+    var y = G + n * RH, st = statusCzasowy(w.x), kolor = st === "aktywna" ? "#2F8F5B" : st === "zaplanowana" ? "#D9A21B" : "#A3A9B3";
+    var a = Math.max(0, dzien(w.od)), b = Math.min(DNI_Z, dzien(w.do) + 1);
+    var t = w.x.tytul.length > 30 ? w.x.tytul.slice(0, 29) + "…" : w.x.tytul;
+    s += '<g data-akcja="edytuj" data-kol="' + w.kol + '" data-id="' + w.x.id + '" style="cursor:pointer"><title>' + esc(w.x.tytul) + " · " + STATUS_NAZWY[st] + " · " + zakres(w.x) + "</title>" +
+      '<rect x="0" y="' + y + '" width="' + W + '" height="' + RH + '" fill="' + (n % 2 ? "#FAFBFC" : "#FFFFFF") + '"/>' +
+      '<text x="8" y="' + (y + 20) + '" font-size="13" fill="#15171C"><tspan fill="#8A909A" font-size="11">' + (w.kol === "promocje" ? "PROMO " : "INFO ") + "</tspan>" + esc(t) + "</text>" +
+      '<rect x="' + X(a) + '" y="' + (y + 8) + '" width="' + Math.max(4, X(b) - X(a) - 2) + '" height="16" rx="4" fill="' + kolor + '"/>' +
+      (!w.x.do ? '<path d="M' + (X(b) - 10) + " " + (y + 10) + "l8 6-8 6" + '" stroke="#fff" stroke-width="2" fill="none"/>' : "") + "</g>";
+  });
+  var xd = X(30);
+  s += '<line x1="' + xd + '" y1="' + (G - 8) + '" x2="' + xd + '" y2="' + H + '" stroke="#B3261E" stroke-width="2"/><text x="' + (xd + 4) + '" y="12" font-size="12" font-weight="700" fill="#B3261E">dzisiaj</text></svg>';
+  return '<div class="cmsp-gantt">' + s + "</div>";
+}
+function htmlTerminy() {
+  var D = dzisISO(), K = dodajDni(D, 45), z = [];
+  [["promocje", "Promocja"], ["aktualnosci", "Aktualność"]].forEach(function (p) {
+    widoczne(S[p[0]]).forEach(function (x) {
+      if (x.wstrzymana) return;
+      if (x.od && x.od > D && x.od <= K) z.push({ d: x.od, plak: "zaplanowana", et: "Pojawi się", t: p[1] + ": " + x.tytul });
+      if (x.do && x.do >= D && x.do <= K && (!x.od || x.od <= x.do)) z.push({ d: dodajDni(x.do, 1), plak: "zakonczona", et: "Zniknie", t: p[1] + ": " + x.tytul + " (ostatni dzień " + dataKrotko(x.do) + ")" });
+    });
+  });
+  widoczne(S.dniSpecjalne).forEach(function (x) { if (x.data >= D && x.data <= K) z.push({ d: x.data, plak: "wstrzymana", et: "Godziny", t: (x.nieczynne ? "warsztat nieczynny" : "otwarte " + godz(x.od) + "–" + godz(x.do)) + (x.opis ? " (" + x.opis + ")" : "") }); });
+  if (!z.length) return '<div class="cmsp-pusto">W najbliższych 45 dniach nic się nie zmienia.</div>';
+  z.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+  return '<ul class="cmsp-terminy">' + z.map(function (e) { return '<li><time datetime="' + e.d + '">' + dataKrotko(e.d) + "." + e.d.slice(2, 4) + '</time><span class="cmsp-plak cmsp-plak--' + e.plak + '">' + e.et + "</span><span>" + esc(e.t) + "</span></li>"; }).join("") + "</ul>";
+}
+
+/* ---------- start ---------- */
+function start() {
+  var k = document.getElementById("cms-klodka");
+  k.addEventListener("click", function () { cmsWejdz(k); });
+  odswiezKlodke();
+  wczytajZapis().then(function (z) {
+    if (z && z._app === APP_ID) S = scalStan(z);
+    trasa(location.hash, false);
+  });
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+
+</script>
+</body>
+</html>
