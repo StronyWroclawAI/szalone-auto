@@ -12,7 +12,9 @@ Projekt do portfolio **Strony AI Wrocław**. Firma i część danych są przykł
 ## Panel administratora
 
 Kłódka w lewym dolnym rogu strony lub link „Panel administratora” w stopce.
-Wersja demo: login `admin`, hasło `warsztat`. Zmiany zapisują się tylko w przeglądarce osoby edytującej (IndexedDB).
+Dane logowania nie są zapisane w kodzie – w pliku jest tylko ich skrót SHA-256 (`CMS_SKROT`). Po 5 nieudanych próbach logowanie blokuje się na 30 s.
+Zmiana danych: w konsoli przeglądarki na stronie wpisz `sha256("szalone-auto-cms|LOGIN|HASLO")` i wklej wynik do `CMS_SKROT` w `public/index.html`.
+Zmiany zapisują się tylko w przeglądarce osoby edytującej (wersja demonstracyjna – sprawdzanie hasła odbywa się w przeglądarce).
 
 ## Wdrożenie na Cloudflare Pages
 

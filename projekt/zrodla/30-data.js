@@ -5,16 +5,40 @@
    - wszystkie treści są w obiekcie STATE (wartości początkowe poniżej),
    - zmiany z panelu zapisują się WYŁĄCZNIE w przeglądarce osoby edytującej
      (IndexedDB, awaryjnie localStorage) – inni odwiedzający ich nie widzą,
-   - login i hasło panelu są wpisane w kod (CMS_LOGIN / CMS_HASLO) –
-     to nie jest zabezpieczenie produkcyjne.
+   - dane logowania NIE są zapisane w kodzie jawnie – przechowywany jest
+     tylko skrót SHA-256 (CMS_SKROT). Sprawdzanie odbywa się w przeglądarce,
+     więc to wciąż nie jest zabezpieczenie produkcyjne.
    Wersja produkcyjna: zapis danych na serwerze (np. Cloudflare Workers + KV)
    i prawdziwe logowanie.
    Kolejność kodu: 1) dane początkowe, 2) renderowanie strony, 3) panel.
    ===================================================================== */
 "use strict";
 
-var CMS_LOGIN = "admin";
-var CMS_HASLO = "warsztat";          // demo – hasło jawne w kodzie
+/* Skrót SHA-256 z: "szalone-auto-cms|" + login + "|" + hasło.
+   Zmiana danych logowania: wygeneruj nowy skrót, np. w konsoli przeglądarki:
+   sha256("szalone-auto-cms|LOGIN|HASLO") i wklej go poniżej. */
+var CMS_SKROT = "a229ec0f5a7b794174bea7165be9fa2ef6bb783d05235ae58f056c3c5b0af602";
+/* SHA-256 w czystym JS (działa także bez HTTPS) */
+function sha256(tekst) {
+  var b = unescape(encodeURIComponent(tekst)), i, j, K = [], H0 = [], p = 2, n = 0;
+  function frac(x) { return (x - Math.floor(x)) * 4294967296 | 0; }
+  while (n < 64) { for (j = 2; j * j <= p; j++) if (p % j === 0) break; if (j * j > p) { if (n < 8) H0[n] = frac(Math.pow(p, 1 / 2)); K[n++] = frac(Math.pow(p, 1 / 3)); } p++; }
+  var w = [], l = b.length * 8; b += "\x80"; while (b.length % 64 !== 56) b += "\x00";
+  for (i = 0; i < b.length; i++) w[i >> 2] |= b.charCodeAt(i) << (24 - (i % 4) * 8);
+  w[w.length] = (l / 4294967296) | 0; w[w.length] = l | 0;
+  var h = H0.slice(), r = function (x, s) { return (x >>> s) | (x << (32 - s)); };
+  for (i = 0; i < w.length; i += 16) {
+    var W = w.slice(i, i + 16), a = h.slice();
+    for (j = 0; j < 64; j++) {
+      if (j >= 16) { var s0 = r(W[j - 15], 7) ^ r(W[j - 15], 18) ^ (W[j - 15] >>> 3), s1 = r(W[j - 2], 17) ^ r(W[j - 2], 19) ^ (W[j - 2] >>> 10); W[j] = (W[j - 16] + s0 + W[j - 7] + s1) | 0; }
+      var t1 = (a[7] + (r(a[4], 6) ^ r(a[4], 11) ^ r(a[4], 25)) + ((a[4] & a[5]) ^ (~a[4] & a[6])) + K[j] + W[j]) | 0;
+      var t2 = ((r(a[0], 2) ^ r(a[0], 13) ^ r(a[0], 22)) + ((a[0] & a[1]) ^ (a[0] & a[2]) ^ (a[1] & a[2]))) | 0;
+      a = [(t1 + t2) | 0, a[0], a[1], a[2], (a[3] + t1) | 0, a[4], a[5], a[6]];
+    }
+    for (j = 0; j < 8; j++) h[j] = (h[j] + a[j]) | 0;
+  }
+  return h.map(function (x) { return ("00000000" + (x >>> 0).toString(16)).slice(-8); }).join("");
+}
 var APP_ID = "szalone-auto-cms";
 var APP_WERSJA = 1;
 

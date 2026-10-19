@@ -804,16 +804,40 @@ td.czas { white-space: nowrap; color: var(--tekst-2); font-size: .92rem; }
    - wszystkie treści są w obiekcie STATE (wartości początkowe poniżej),
    - zmiany z panelu zapisują się WYŁĄCZNIE w przeglądarce osoby edytującej
      (IndexedDB, awaryjnie localStorage) – inni odwiedzający ich nie widzą,
-   - login i hasło panelu są wpisane w kod (CMS_LOGIN / CMS_HASLO) –
-     to nie jest zabezpieczenie produkcyjne.
+   - dane logowania NIE są zapisane w kodzie jawnie – przechowywany jest
+     tylko skrót SHA-256 (CMS_SKROT). Sprawdzanie odbywa się w przeglądarce,
+     więc to wciąż nie jest zabezpieczenie produkcyjne.
    Wersja produkcyjna: zapis danych na serwerze (np. Cloudflare Workers + KV)
    i prawdziwe logowanie.
    Kolejność kodu: 1) dane początkowe, 2) renderowanie strony, 3) panel.
    ===================================================================== */
 "use strict";
 
-var CMS_LOGIN = "admin";
-var CMS_HASLO = "warsztat";          // demo – hasło jawne w kodzie
+/* Skrót SHA-256 z: "szalone-auto-cms|" + login + "|" + hasło.
+   Zmiana danych logowania: wygeneruj nowy skrót, np. w konsoli przeglądarki:
+   sha256("szalone-auto-cms|LOGIN|HASLO") i wklej go poniżej. */
+var CMS_SKROT = "a229ec0f5a7b794174bea7165be9fa2ef6bb783d05235ae58f056c3c5b0af602";
+/* SHA-256 w czystym JS (działa także bez HTTPS) */
+function sha256(tekst) {
+  var b = unescape(encodeURIComponent(tekst)), i, j, K = [], H0 = [], p = 2, n = 0;
+  function frac(x) { return (x - Math.floor(x)) * 4294967296 | 0; }
+  while (n < 64) { for (j = 2; j * j <= p; j++) if (p % j === 0) break; if (j * j > p) { if (n < 8) H0[n] = frac(Math.pow(p, 1 / 2)); K[n++] = frac(Math.pow(p, 1 / 3)); } p++; }
+  var w = [], l = b.length * 8; b += "\x80"; while (b.length % 64 !== 56) b += "\x00";
+  for (i = 0; i < b.length; i++) w[i >> 2] |= b.charCodeAt(i) << (24 - (i % 4) * 8);
+  w[w.length] = (l / 4294967296) | 0; w[w.length] = l | 0;
+  var h = H0.slice(), r = function (x, s) { return (x >>> s) | (x << (32 - s)); };
+  for (i = 0; i < w.length; i += 16) {
+    var W = w.slice(i, i + 16), a = h.slice();
+    for (j = 0; j < 64; j++) {
+      if (j >= 16) { var s0 = r(W[j - 15], 7) ^ r(W[j - 15], 18) ^ (W[j - 15] >>> 3), s1 = r(W[j - 2], 17) ^ r(W[j - 2], 19) ^ (W[j - 2] >>> 10); W[j] = (W[j - 16] + s0 + W[j - 7] + s1) | 0; }
+      var t1 = (a[7] + (r(a[4], 6) ^ r(a[4], 11) ^ r(a[4], 25)) + ((a[4] & a[5]) ^ (~a[4] & a[6])) + K[j] + W[j]) | 0;
+      var t2 = ((r(a[0], 2) ^ r(a[0], 13) ^ r(a[0], 22)) + ((a[0] & a[1]) ^ (a[0] & a[2]) ^ (a[1] & a[2]))) | 0;
+      a = [(t1 + t2) | 0, a[0], a[1], a[2], (a[3] + t1) | 0, a[4], a[5], a[6]];
+    }
+    for (j = 0; j < 8; j++) h[j] = (h[j] + a[j]) | 0;
+  }
+  return h.map(function (x) { return ("00000000" + (x >>> 0).toString(16)).slice(-8); }).join("");
+}
 var APP_ID = "szalone-auto-cms";
 var APP_WERSJA = 1;
 
@@ -1693,8 +1717,8 @@ function pokazLogowanie() {
   d.className = "cmsp-login"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "cmsp-login-t");
   d.innerHTML = '<form novalidate><div class="cmsp-login__znak">' + ZNAK_SVG + '<div><h2 id="cmsp-login-t">Panel administratora</h2><small style="color:#565C66">' + esc(S.firma.nazwa) + '</small></div></div>' +
     '<label>Login<input type="text" id="cmsp-l" autocomplete="username" required></label><label>Hasło<input type="password" id="cmsp-h" autocomplete="current-password" required></label>' +
-    '<p class="cmsp-blad" role="alert" hidden>Nieprawidłowy login lub hasło.</p><div class="cmsp-btny"><button type="button" class="cmsp-btn" data-anuluj>Anuluj</button><button type="submit" class="cmsp-btn cmsp-btn--ciem">Zaloguj</button></div>' +
-    '<p class="cmsp-podp">Wersja demonstracyjna · login <b>' + CMS_LOGIN + "</b>, hasło <b>" + CMS_HASLO + "</b></p></form>";
+    '<p class="cmsp-blad" role="alert" hidden></p><div class="cmsp-btny"><button type="button" class="cmsp-btn" data-anuluj>Anuluj</button><button type="submit" class="cmsp-btn cmsp-btn--ciem">Zaloguj</button></div>' +
+    '<p class="cmsp-podp">Dostęp tylko dla właściciela strony.</p></form>';
   document.body.appendChild(d);
   var f = d.querySelector("form"), zamknij = function () { d.remove(); document.removeEventListener("keydown", esc1); if (CMS.powrot && CMS.powrot.focus) CMS.powrot.focus(); };
   var esc1 = function (e) { if (e.key === "Escape") zamknij(); };
@@ -1703,9 +1727,17 @@ function pokazLogowanie() {
   d.addEventListener("click", function (e) { if (e.target === d) zamknij(); });
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (d.querySelector("#cmsp-l").value.trim() === CMS_LOGIN && d.querySelector("#cmsp-h").value === CMS_HASLO) {
+    var b0 = d.querySelector(".cmsp-blad"), teraz = Date.now();
+    if (CMS.blokadaDo && teraz < CMS.blokadaDo) { b0.textContent = "Zbyt wiele prób. Spróbuj ponownie za " + Math.ceil((CMS.blokadaDo - teraz) / 1000) + " s."; b0.hidden = false; return; }
+    if (sha256(APP_ID + "|" + d.querySelector("#cmsp-l").value.trim() + "|" + d.querySelector("#cmsp-h").value) === CMS_SKROT) {
+      CMS.proby = 0;
       ustawSesje(true); d.remove(); document.removeEventListener("keydown", esc1); odswiezKlodke(); otworzPanel(); toast("Zalogowano. Zmiany zapisują się automatycznie.");
-    } else { var b = d.querySelector(".cmsp-blad"); b.hidden = false; d.querySelector("#cmsp-h").select(); }
+    } else {
+      CMS.proby = (CMS.proby || 0) + 1;
+      if (CMS.proby >= 5) { CMS.blokadaDo = teraz + 30000; CMS.proby = 0; b0.textContent = "Zbyt wiele nieudanych prób. Logowanie zablokowane na 30 s."; }
+      else b0.textContent = "Nieprawidłowy login lub hasło.";
+      b0.hidden = false; d.querySelector("#cmsp-h").value = ""; d.querySelector("#cmsp-h").focus();
+    }
   });
   setTimeout(function () { d.querySelector("#cmsp-l").focus(); }, 20);
 }

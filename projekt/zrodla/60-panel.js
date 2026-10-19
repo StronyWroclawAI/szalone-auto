@@ -19,8 +19,8 @@ function pokazLogowanie() {
   d.className = "cmsp-login"; d.setAttribute("role", "dialog"); d.setAttribute("aria-modal", "true"); d.setAttribute("aria-labelledby", "cmsp-login-t");
   d.innerHTML = '<form novalidate><div class="cmsp-login__znak">' + ZNAK_SVG + '<div><h2 id="cmsp-login-t">Panel administratora</h2><small style="color:#565C66">' + esc(S.firma.nazwa) + '</small></div></div>' +
     '<label>Login<input type="text" id="cmsp-l" autocomplete="username" required></label><label>Hasło<input type="password" id="cmsp-h" autocomplete="current-password" required></label>' +
-    '<p class="cmsp-blad" role="alert" hidden>Nieprawidłowy login lub hasło.</p><div class="cmsp-btny"><button type="button" class="cmsp-btn" data-anuluj>Anuluj</button><button type="submit" class="cmsp-btn cmsp-btn--ciem">Zaloguj</button></div>' +
-    '<p class="cmsp-podp">Wersja demonstracyjna · login <b>' + CMS_LOGIN + "</b>, hasło <b>" + CMS_HASLO + "</b></p></form>";
+    '<p class="cmsp-blad" role="alert" hidden></p><div class="cmsp-btny"><button type="button" class="cmsp-btn" data-anuluj>Anuluj</button><button type="submit" class="cmsp-btn cmsp-btn--ciem">Zaloguj</button></div>' +
+    '<p class="cmsp-podp">Dostęp tylko dla właściciela strony.</p></form>';
   document.body.appendChild(d);
   var f = d.querySelector("form"), zamknij = function () { d.remove(); document.removeEventListener("keydown", esc1); if (CMS.powrot && CMS.powrot.focus) CMS.powrot.focus(); };
   var esc1 = function (e) { if (e.key === "Escape") zamknij(); };
@@ -29,9 +29,17 @@ function pokazLogowanie() {
   d.addEventListener("click", function (e) { if (e.target === d) zamknij(); });
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (d.querySelector("#cmsp-l").value.trim() === CMS_LOGIN && d.querySelector("#cmsp-h").value === CMS_HASLO) {
+    var b0 = d.querySelector(".cmsp-blad"), teraz = Date.now();
+    if (CMS.blokadaDo && teraz < CMS.blokadaDo) { b0.textContent = "Zbyt wiele prób. Spróbuj ponownie za " + Math.ceil((CMS.blokadaDo - teraz) / 1000) + " s."; b0.hidden = false; return; }
+    if (sha256(APP_ID + "|" + d.querySelector("#cmsp-l").value.trim() + "|" + d.querySelector("#cmsp-h").value) === CMS_SKROT) {
+      CMS.proby = 0;
       ustawSesje(true); d.remove(); document.removeEventListener("keydown", esc1); odswiezKlodke(); otworzPanel(); toast("Zalogowano. Zmiany zapisują się automatycznie.");
-    } else { var b = d.querySelector(".cmsp-blad"); b.hidden = false; d.querySelector("#cmsp-h").select(); }
+    } else {
+      CMS.proby = (CMS.proby || 0) + 1;
+      if (CMS.proby >= 5) { CMS.blokadaDo = teraz + 30000; CMS.proby = 0; b0.textContent = "Zbyt wiele nieudanych prób. Logowanie zablokowane na 30 s."; }
+      else b0.textContent = "Nieprawidłowy login lub hasło.";
+      b0.hidden = false; d.querySelector("#cmsp-h").value = ""; d.querySelector("#cmsp-h").focus();
+    }
   });
   setTimeout(function () { d.querySelector("#cmsp-l").focus(); }, 20);
 }
